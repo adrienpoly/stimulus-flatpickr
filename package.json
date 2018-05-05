@@ -1,0 +1,23 @@
+{
+  "name": "stimulus-flatpickr",
+  "version": "0.1.0",
+  "description": "A Stimulus Wrapper for Flatpickr library",
+  "main": "dist/flatpickr_controller.js",
+  "source": "src/flatpickr_controller.js",
+  "umd:main": "dist/flatpickr_controller.umd.js",
+  "module": "dist/flatpickr_controller.m.js",
+  "author": "@adrienpoly",
+  "license": "MIT",
+  "external": "stimulus, flatpickr",
+  "scripts": {
+    "build": "microbundle --external all",
+    "dev": "microbundle watch"
+  },
+  "dependencies": {
+    "stimulus": "^1.0.1",
+    "flatpickr": "^4.4.6"
+  },
+  "devDependencies": {
+    "microbundle": "^0.4.4"
+  }
+}
