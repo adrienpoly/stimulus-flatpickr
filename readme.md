@@ -90,3 +90,11 @@ coming...
 ### Localize
 
 coming...
+
+### Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/adrienpoly/stimulus-flatpickr. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
+
+### License
+This package is available as open source under the terms of the MIT License.
+
