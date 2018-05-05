@@ -16,7 +16,7 @@ or
 
 `$ npm i stimulus-flatpickr`
 
-### Basic usage
+### Standard usage
 
 If you only need to convert an input field in a DateTime picker you just need to register a standard Stimulus controller and add some markup to you input field.
 
@@ -83,7 +83,7 @@ will output this HTML:
 
 If you are not using Rails or simply wants to markup your HTML directly, simply add a `html data-controller="flatpickr"` to your input field and some options `html data-flatpickr-some-option="value"` options must be converted from `camelCase` to `kebab-case`
 
-### Advanced
+### Advanced Usage
 
 coming...
 
@@ -96,5 +96,5 @@ coming...
 Bug reports and pull requests are welcome on GitHub at https://github.com/adrienpoly/stimulus-flatpickr. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
 
 ### License
-This package is available as open source under the terms of the MIT License.
 
+This package is available as open source under the terms of the MIT License.
