@@ -1,6 +1,6 @@
 {
   "name": "stimulus-flatpickr",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A Stimulus Wrapper for Flatpickr library",
   "main": "dist/flatpickr_controller.js",
   "source": "src/flatpickr_controller.js",
