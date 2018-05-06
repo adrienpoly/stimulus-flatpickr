@@ -2,7 +2,7 @@
 
 ### A modest wrapper of Flatpickr for Stimulus
 
-This in an experimental wrapper on Flatpickr for using Stimulus.js. all configurations for the datetime picker can be set directly from the `data-attributes` of the HTML. This can be handly when working as an example with a Rails backend so that all settings for the DateTime picker can be set by the backend when generating the view.
+This is an experimental wrapper on Flatpickr for using Stimulus.js. All configurations for the DateTime picker can be set directly from the `data-attributes` of the HTML. This can be handy when working as an example with a Rails backend so that all settings for the DateTime picker can be set by the backend when generating the view.
 
 ### Install
 
@@ -18,7 +18,7 @@ or
 
 ### Standard usage
 
-If you only need to convert an input field in a DateTime picker you just need to register a standard Stimulus controller and add some markup to you input field.
+If you only need to convert an input field in a DateTime picker you just need to register a standard Stimulus controller and add some markup to your input field.
 
 ##### Register Flatpickr Controller
 
@@ -41,7 +41,7 @@ application.register("flatpickr", Flatpickr);
 
 ##### Using in Rails
 
-You can now create forms and input fields easily by adding a `data-controller="flatpickr"` attribute to the input fields.
+You can now create forms and input fields easily by adding a `data-controller="flatpickr"` attribute to the input fields. A pass [options](https://flatpickr.js.org/options/) with the Stimulus Controller states : `data-flatpick-the-option`.
 
 ```html+erb
 <%= form_with model: Appointement.new, authenticity_token: true do |f| %>
@@ -62,7 +62,7 @@ Will generate:
 
 All options for Flatpickr can be found [here](https://flatpickr.js.org/options/).
 
-All options are in `camelCase` (JS) and must be converted to `lower_snake_case` in the `data-attribute`. `lower_snake_case` are automaticcally converted to `kebab-case` when rails renders the html.
+All options are in `camelCase` (JS) and must be converted to `lower_snake_case` in the `data-attribute`. `lower_snake_case` is automatically converted to `kebab-case` when rails render the HTML.
 
 ```erb
 <%= f.text_field :start_time,
