@@ -1,6 +1,6 @@
 import { Controller } from "stimulus";
 import flatpickr from "flatpickr";
-import { kebabCase } from "./utils";
+import { kebabCase, capitalize } from "./utils";
 import {
   booleanOptions,
   stringOptions,
@@ -8,6 +8,7 @@ import {
   arrayOptions,
   dateOptions
 } from "./config_options";
+import { events } from "./events";
 
 class Flatpickr extends Controller {
   connect() {
@@ -17,6 +18,8 @@ class Flatpickr extends Controller {
     this.initializeArrays();
     this.initializeDates();
 
+    this.initializeEvents();
+
     this.fp = flatpickr(this.element, {
       ...this.config
     });
@@ -24,6 +27,13 @@ class Flatpickr extends Controller {
 
   initialize() {
     this.config = {};
+  }
+
+  initializeEvents() {
+    events.forEach(event => {
+      const hook = `on${capitalize(event)}`;
+      this.config[hook] = this[event];
+    });
   }
 
   initializeBooleans() {
