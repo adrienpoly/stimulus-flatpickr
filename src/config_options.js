@@ -1,4 +1,4 @@
-export const booleanOptions = [
+const booleanOptions = [
   "altInput",
   "allowInput",
   "clickOpens",
@@ -14,7 +14,7 @@ export const booleanOptions = [
   "wrap"
 ];
 
-export const stringOptions = [
+const stringOptions = [
   "altFormat",
   "altInputClass",
   "ariaDateFormat",
@@ -25,14 +25,21 @@ export const stringOptions = [
   "prevArrow"
 ];
 
-export const numberOptions = [
+const numberOptions = [
   "defaultHour",
   "defaultMinute",
   "hourIncrement",
   "minuteIncrement"
 ];
 
-export const arrayOptions = ["disable", "enable"];
+const arrayOptions = ["disable", "enable"];
 
-export const dateOptions = ["maxDate", "minDate"];
+const dateOptions = ["maxDate", "minDate"];
 
+export const options = {
+  string: stringOptions,
+  boolean: booleanOptions,
+  date: dateOptions,
+  array: arrayOptions,
+  number: numberOptions
+};

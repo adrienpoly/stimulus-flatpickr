@@ -1,23 +1,16 @@
 import { Controller } from "stimulus";
 import flatpickr from "flatpickr";
 import { kebabCase, capitalize } from "./utils";
-import {
-  booleanOptions,
-  stringOptions,
-  numberOptions,
-  arrayOptions,
-  dateOptions
-} from "./config_options";
+import { options } from "./config_options";
 import { events } from "./events";
 
 class Flatpickr extends Controller {
-  connect() {
-    this.initializeBooleans();
-    this.initializeStrings();
-    this.initializeNumbers();
-    this.initializeArrays();
-    this.initializeDates();
+  initialize() {
+    this.config = {};
+  }
 
+  connect() {
+    this.initializeOptions();
     this.initializeEvents();
 
     this.fp = flatpickr(this.element, {
@@ -25,8 +18,8 @@ class Flatpickr extends Controller {
     });
   }
 
-  initialize() {
-    this.config = {};
+  disconnect() {
+    this.fp.destroy();
   }
 
   initializeEvents() {
@@ -36,49 +29,36 @@ class Flatpickr extends Controller {
     });
   }
 
-  initializeBooleans() {
-    booleanOptions.forEach(option => {
-      const optionKebab = kebabCase(option);
-      if (this.data.has(optionKebab)) {
-        this.config[option] = this.data.get(optionKebab) === "true";
-      }
+  initializeOptions() {
+    Object.keys(options).forEach(optionType => {
+      const optionsCamelCase = options[optionType];
+      optionsCamelCase.forEach(option => {
+        const optionKebab = kebabCase(option);
+        if (this.data.has(optionKebab)) {
+          this.config[option] = this[optionType](optionKebab);
+        }
+      });
     });
   }
 
-  initializeStrings() {
-    stringOptions.forEach(option => {
-      const optionKebab = kebabCase(option);
-      if (this.data.has(optionKebab)) {
-        this.config[option] = this.data.get(optionKebab);
-      }
-    });
+  string(option) {
+    return this.data.get(option);
   }
 
-  initializeNumbers() {
-    numberOptions.forEach(option => {
-      const optionKebab = kebabCase(option);
-      if (this.data.has(optionKebab)) {
-        this.config[option] = parseInt(this.data.get(optionKebab));
-      }
-    });
+  date(option) {
+    return this.data.get(option);
   }
 
-  initializeArrays() {
-    arrayOptions.forEach(option => {
-      const optionKebab = kebabCase(option);
-      if (this.data.has(optionKebab)) {
-        this.config[option] = JSON.parse(this.data.get(optionKebab));
-      }
-    });
+  boolean(option) {
+    return this.data.get(option) === "true";
   }
 
-  initializeDates() {
-    dateOptions.forEach(option => {
-      const optionKebab = kebabCase(option);
-      if (this.data.has(optionKebab)) {
-        this.config[option] = this.data.get(optionKebab);
-      }
-    });
+  array(option) {
+    return JSON.parse(this.data.get(option));
+  }
+
+  number(option) {
+    return parseInt(this.data.get(option));
   }
 }
 
