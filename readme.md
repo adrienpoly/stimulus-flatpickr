@@ -2,7 +2,7 @@
 
 ### A modest wrapper of Flatpickr for Stimulus
 
-This is an experimental wrapper on Flatpickr for using Stimulus.js. All configurations for the DateTime picker can be set directly from the `data-attributes` of the HTML. This can be handy when working as an example with a Rails backend so that all settings for the DateTime picker can be set by the backend when generating the view.
+This is an experimental wrapper of [Flatpickr](http://flatpickr.js.org/) for Stimulus.js. All configurations for the DateTime picker can be set directly from the `data-attributes` of the HTML. This can be handy when working as an example with a Rails backend. All settings for the DateTime picker can be set by the backend when generating the view.
 
 ## Install
 
