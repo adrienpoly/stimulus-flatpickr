@@ -3,6 +3,7 @@ import flatpickr from "flatpickr";
 import { kebabCase, capitalize } from "./utils";
 import { options } from "./config_options";
 import { events } from "./events";
+import { elements } from "./elements";
 
 class Flatpickr extends Controller {
   initialize() {
@@ -10,12 +11,14 @@ class Flatpickr extends Controller {
   }
 
   connect() {
-    this.initializeOptions();
     this.initializeEvents();
+    this.initializeOptions();
 
     this.fp = flatpickr(this.element, {
       ...this.config
     });
+
+    this.initializeElements();
   }
 
   disconnect() {
@@ -25,7 +28,7 @@ class Flatpickr extends Controller {
   initializeEvents() {
     events.forEach(event => {
       const hook = `on${capitalize(event)}`;
-      this.config[hook] = this[event];
+      this.config[hook] = this[event].bind(this);
     });
   }
 
@@ -40,6 +43,28 @@ class Flatpickr extends Controller {
       });
     });
   }
+
+  initializeElements() {
+    elements.forEach(element => {
+      this[`${element}Target`] = this.fp[element];
+    });
+  }
+
+  change() {}
+
+  open() {}
+
+  close() {}
+
+  monthChange() {}
+
+  yearChange() {}
+
+  ready() {}
+
+  valueUpdate() {}
+
+  dayCreate() {}
 
   string(option) {
     return this.data.get(option);

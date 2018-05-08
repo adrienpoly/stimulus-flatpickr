@@ -163,7 +163,27 @@ Just add the function to your Stimulus Controller in `camelCase` without `on`.
 
 ### Getters
 
-... coming
+#### Elements
+
+In your controller you can access the Flapickr [elements](https://flatpickr.js.org/instance-methods-properties-elements/#elements) using some Stimulus like targets.
+
+`this.inputTarget` : The text input element associated with flatpickr.
+
+`this.calendarContainerTarget` : Self-explanatory. This is the div.flatpickr-calendar element.
+
+`this.prevMonthNavTarget` : The “left arrow” element responsible for decrementing the current month.
+
+`this.nextMonthNavTarget` : The “right arrow” element responsible for incrementing the current month.
+
+`this.currentMonthElementTarget`: The span holding the current month’s name.
+
+`this.currentYearElementTarget`: The input holding the current year.
+
+`this.daysTarget` : The container for all the day elements.
+
+#### Properties
+
+....
 
 ## CSS
 
