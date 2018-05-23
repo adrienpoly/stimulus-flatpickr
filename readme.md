@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/stimulus-flatpickr.svg)](https://www.npmjs.com/package/stimulus-flatpickr)
+
 # Stimulus Flatpickr
 
 ### A modest wrapper of Flatpickr for Stimulus
