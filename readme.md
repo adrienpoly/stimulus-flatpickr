@@ -23,8 +23,6 @@ here is a simple example:
 
 ![datetime picker result](./images/datetime-picker.png)
 
-
-
 ## Install
 
 This assumes that you have [Stimulus](https://stimulusjs.org/handbook/installing) already installed.
@@ -204,7 +202,20 @@ In your controller you can access the Flapickr [elements](https://flatpickr.js.o
 
 #### Properties
 
-....
+Coming ....
+
+## Overiding connect & disconnect
+
+if you need to overide the connect function in the extended controller, you need to call `super`
+
+```js
+connect(){
+  super.connect();
+  // ...
+  // Your connect code
+  // ...
+}
+```
 
 ## CSS
 
