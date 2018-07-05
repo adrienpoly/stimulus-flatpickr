@@ -180,6 +180,18 @@ Just add the function to your Stimulus Controller in `camelCase` without `on`.
 
 `onChange` -> `change(){}`
 
+### Instance and its methods
+
+You can access the flatpickr instance from your stimulus controller by calling `this.fp`. Also, the instance methods are available through this instance call.
+
+```javascript
+yourFunction () {
+  // ...
+  this.fp.clear()
+  this.fp.close()
+}
+```
+
 ### Getters
 
 #### Elements
