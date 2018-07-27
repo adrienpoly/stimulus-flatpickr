@@ -14,6 +14,7 @@ class Flatpickr extends Controller {
   connect() {
     this.initializeEvents();
     this.initializeOptions();
+    this.initializeDateFormats();
 
     this.fp = flatpickr(this.element, {
       ...this.config
@@ -43,6 +44,20 @@ class Flatpickr extends Controller {
         }
       });
     });
+  }
+
+  initializeDateFormats() {
+    if (this.data.has("date-format")) {
+      this.config.dateFormat = convertDateFormat(this.data.get("date-format"));
+    }
+    if (this.data.has("alt-format")) {
+      this.config.altFormat = convertDateFormat(this.data.get("alt-format"));
+    }
+    if (this.data.has("aria-date-format")) {
+      this.config.ariaDateFormat = convertDateFormat(
+        this.data.get("aria-date-format")
+      );
+    }
   }
 
   initializeElements() {
