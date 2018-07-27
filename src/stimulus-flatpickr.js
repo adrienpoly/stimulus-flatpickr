@@ -4,6 +4,7 @@ import { kebabCase, capitalize } from "./utils";
 import { options } from "./config_options";
 import { events } from "./events";
 import { elements } from "./elements";
+import { convertDateFormat } from "./strftime_mapping";
 
 class Flatpickr extends Controller {
   initialize() {
@@ -48,6 +49,14 @@ class Flatpickr extends Controller {
     elements.forEach(element => {
       this[`${element}Target`] = this.fp[element];
     });
+  }
+
+  get altInputTarget() {
+    if (this.element.querySelector(".flatpickr-input")) {
+      return this.element.querySelector(".flatpickr-input");
+    } else {
+      return this.element;
+    }
   }
 
   change() {}
