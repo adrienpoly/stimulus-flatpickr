@@ -2,7 +2,10 @@
 
 ### A modest wrapper of Flatpickr for Stimulus
 
-This is an experimental wrapper of [Flatpickr](http://flatpickr.js.org/) for Stimulus.js. All configurations for the DateTime picker can be set directly from the `data-attributes` of the HTML. This can be handy when working as an example with a Rails backend. All settings for the DateTime picker can be set by the backend when generating the view.
+This is a wrapper of [Flatpickr](http://flatpickr.js.org/) for Stimulus.js. All configurations for the DateTime picker can be set directly from the `data-attributes` of the HTML. This makes it very handy to pass information from the backend to the datepicker.
+
+An example of a Rails app showcasing a localized date picker with availabilities is available here :
+[Rails Stimulus Flatpickr]()
 
 ## Install
 
@@ -52,10 +55,8 @@ You can now create forms and input fields easily by adding a `data-controller="f
   <%= f.text_field :start_time,
     data: {
       controller: "flatpickr",
-      flatpickr_enable_time: true,
-      flatpickr_format: "Y-m-d H:i",
-      flatpickr_minute_increment: 30,
-      flatpickr_max_date: Time.zone.now + 3.days
+      flatpickr_format: "Y-m-d",
+      flatpickr_min_date: Time.zone.now
     } %>
 <% end %>
 ```
@@ -91,11 +92,11 @@ If you are not using Rails or simply wants to markup your HTML directly, simply 
 
 ## Advanced Usage
 
-If you need more than just displaying the standard DateTime picker, then you can extend the `stimulus-flatpickr`wrapper controller. This is necessary when you need to:
+If you need more than just displaying the standard DateTime picker, then you can extend the `stimulus-flatpickr` wrapper controller. This is necessary when you need to:
 
-* set a custom language
-* create customs callbacks
-* perform JS business logic
+- set a custom language
+- create customs callbacks
+- perform JS business logic
 
 **Skip basics installation steps from above!**
 
@@ -141,10 +142,8 @@ Then in the same way as above you can now create forms and input fields easily b
   <%= f.text_field :start_time,
     data: {
       controller: "flatpickr",
-      flatpickr_enable_time: true,
-      flatpickr_format: "Y-m-d H:i",
-      flatpickr_minute_increment: 30,
-      flatpickr_max_date: Time.zone.now + 3.days
+      flatpickr_format: "Y-m-d",
+      flatpickr_min_date: Time.zone.now
     } %>
 <% end %>
 ```
@@ -152,6 +151,30 @@ Then in the same way as above you can now create forms and input fields easily b
 👇👇👇👇👇👇
 
 ![datetime picker result](./images/datetime-picker-black-fr.png)
+
+### Date and Time formats
+
+Flatpickr has custom [formatting tokens](https://flatpickr.js.org/formatting/). in Rails (and other backends) formats are based on `strftime` standard.
+
+This package automatically converts `strftime`datetime formats to the nearest Flatpickr format.
+
+With this solution it become handy to localize your date formats.
+
+```erb
+<%= form_with model: appointment do |f| %>
+  <%= f.text_field :start_at,
+      data: {
+        controller: "flatpickr",
+        flatpickr_alt_format: t("date.formats.long"),
+        flatpickr_alt_input: true,
+        flatpickr_min_date: Time.zone.now,
+      } %>
+<% end %>
+```
+
+👇👇👇👇👇👇
+
+![datetime picker result](./images/datetime-picker-formats.png)
 
 ### Callbacks
 

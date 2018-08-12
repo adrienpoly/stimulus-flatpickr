@@ -41,5 +41,3 @@ const mapping = {
   "%a": "D",
   "%w": "w"
 };
-
-// export default convertDateFormat;
