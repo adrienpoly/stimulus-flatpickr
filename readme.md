@@ -1,8 +1,27 @@
+[![npm version](https://badge.fury.io/js/stimulus-flatpickr.svg)](https://www.npmjs.com/package/stimulus-flatpickr)
+
 # Stimulus Flatpickr
 
 ### A modest wrapper of Flatpickr for Stimulus
 
 This is a wrapper of [Flatpickr](http://flatpickr.js.org/) for Stimulus.js. All configurations for the DateTime picker can be set directly from the `data-attributes` of the HTML. This makes it very handy to pass information from the backend to the datepicker.
+
+here is a simple example:
+
+```html+erb
+<%= form_with model: Appointement.new, authenticity_token: true do |f| %>
+  <%= f.text_field :start_time,
+    data: {
+      controller: "flatpickr",
+      flatpickr_enable_time: true,
+      flatpickr_max_date: Time.zone.now + 3.days
+    } %>
+<% end %>
+```
+
+👇👇👇👇👇👇
+
+![datetime picker result](./images/datetime-picker.png)
 
 An example of a Rails app showcasing a localized date picker with availabilities is available here :
 [Rails Stimulus Flatpickr]()
@@ -184,6 +203,18 @@ Just add the function to your Stimulus Controller in `camelCase` without `on`.
 
 `onChange` -> `change(){}`
 
+### Instance and its methods
+
+You can access the flatpickr instance from your stimulus controller by calling `this.fp`. Also, the instance methods are available through this instance call.
+
+```javascript
+yourFunction () {
+  // ...
+  this.fp.clear()
+  this.fp.close()
+}
+```
+
 ### Getters
 
 #### Elements
@@ -206,7 +237,20 @@ In your controller you can access the Flapickr [elements](https://flatpickr.js.o
 
 #### Properties
 
-....
+Coming ....
+
+## Overiding connect & disconnect
+
+if you need to overide the connect function in the extended controller, you need to call `super`
+
+```js
+connect(){
+  super.connect();
+  // ...
+  // Your connect code
+  // ...
+}
+```
 
 ## CSS
 
