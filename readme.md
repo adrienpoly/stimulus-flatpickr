@@ -2,7 +2,7 @@
 
 # Stimulus Flatpickr
 
-### A modest wrapper of Flatpickr for Stimulus
+## A modest wrapper of Flatpickr for Stimulus
 
 This is a wrapper of [Flatpickr](http://flatpickr.js.org/) for Stimulus.js. All configurations for the DateTime picker can be set directly from the `data-attributes` of the HTML. This makes it very handy to pass information from the backend to the datepicker.
 
@@ -30,7 +30,7 @@ An example of a Rails app showcasing a localized date picker with availabilities
 
 This assumes that you have [Stimulus](https://stimulusjs.org/handbook/installing) already installed.
 
-In your project add the `stimulus-flatpickr`and `flatpickr` module.
+In your project add the `stimulus-flatpickr` and `flatpickr` module.
 
 ```bash
 $ yarn add stimulus-flatpickr flatpickr
@@ -46,7 +46,7 @@ $ npm i stimulus-flatpickr flatpickr
 
 If you only need to convert an input field in a DateTime picker, you just need to register a standard Stimulus controller and add some markup to your input field.
 
-#### Register a Flatpickr Controller
+### Register a Flatpickr Controller
 
 manually register a new stimulus controller in your main js entry point.
 
@@ -65,7 +65,7 @@ application.load(definitionsFromContext(context));
 application.register("flatpickr", Flatpickr);
 ```
 
-#### Using it with Rails
+### Using it with Rails
 
 You can now create forms and input fields easily by adding a `data-controller="flatpickr"` attribute to the input fields and pass [options](https://flatpickr.js.org/options/) with the Stimulus Controller states : `data-flatpickr-the-option`.
 
@@ -84,7 +84,7 @@ You can now create forms and input fields easily by adding a `data-controller="f
 
 ![datetime picker result](./images/datetime-picker.png)
 
-#### Options & conventions
+### Options & conventions
 
 All options for Flatpickr can be found [here](https://flatpickr.js.org/options/).
 
@@ -105,7 +105,7 @@ will output this HTML:
 <input data-controller="flatpickr" data-flatpickr-enable-time="true" type="text" name="appointement[start_time]" >
 ```
 
-#### HTML markup
+### HTML markup
 
 If you are not using Rails or simply wants to markup your HTML directly, simply add a `html data-controller="flatpickr"` to your input field and some options `html data-flatpickr-some-option="value"` options must be converted from `camelCase` to `kebab-case`
 
@@ -175,9 +175,9 @@ Then in the same way as above you can now create forms and input fields easily b
 
 Flatpickr has custom [formatting tokens](https://flatpickr.js.org/formatting/). in Rails (and other backends) formats are based on `strftime` standard.
 
-This package automatically converts `strftime`datetime formats to the nearest Flatpickr format.
+This package automatically converts `strftime` datetime formats to the nearest Flatpickr format.
 
-With this solution it become handy to localize your date formats.
+With this solution, it becomes handy to localize your date formats.
 
 ```erb
 <%= form_with model: appointment do |f| %>
@@ -239,9 +239,9 @@ In your controller you can access the Flapickr [elements](https://flatpickr.js.o
 
 Coming ....
 
-## Overiding connect & disconnect
+## Overriding connect & disconnect
 
-if you need to overide the connect function in the extended controller, you need to call `super`
+if you need to override the connect function in the extended controller, you need to call `super`
 
 ```js
 connect(){
