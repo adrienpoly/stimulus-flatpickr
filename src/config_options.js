@@ -1,10 +1,12 @@
 const booleanOptions = [
-  "altInput",
   "allowInput",
+  "altInput",
+  "animate",
   "clickOpens",
+  "closeOnSelect",
   "disableMobile",
-  "enableTime",
   "enableSeconds",
+  "enableTime",
   "inline",
   "noCalendar",
   "shorthandCurrentMonth",
@@ -18,23 +20,27 @@ const stringOptions = [
   "altFormat",
   "altInputClass",
   "ariaDateFormat",
+  "conjunction",
   "dateFormat",
   "defaultDate",
   "mode",
   "nextArrow",
+  "position",
   "prevArrow"
 ];
 
 const numberOptions = [
   "defaultHour",
   "defaultMinute",
+  "defaultSeconds",
   "hourIncrement",
-  "minuteIncrement"
+  "minuteIncrement",
+  "showMonths"
 ];
 
 const arrayOptions = ["disable", "enable"];
 
-const dateOptions = ["maxDate", "minDate"];
+const dateOptions = ["maxDate", "minDate", "maxTime", "minTime", "now"];
 
 export const options = {
   string: stringOptions,
