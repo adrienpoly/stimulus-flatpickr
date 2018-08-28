@@ -11,8 +11,18 @@ function findFlatpickr() {
   return document.querySelector(".flatpickr-calendar");
 }
 
+function addFlatpickrOption(option, value, controller) {
+  fixture.el.querySelector("#datepicker").dataset[`flatpickr${option}`] = value;
+  controller.connect();
+}
+
 function fixtureQuerySelector(name) {
   return fixture.el.querySelector(`${name}`);
 }
 
-export { registerApplication, fixtureQuerySelector, findFlatpickr };
+export {
+  registerApplication,
+  fixtureQuerySelector,
+  findFlatpickr,
+  addFlatpickrOption
+};
