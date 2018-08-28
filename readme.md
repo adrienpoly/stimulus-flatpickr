@@ -185,6 +185,19 @@ In your controller you can access the Flapickr [elements](https://flatpickr.js.o
 
 ....
 
+## Overiding connect & disconnect
+
+if you need to overide the connect function in the extended controller, you need to call `super`
+
+```js
+connect(){
+  super.connect();
+  // ...
+  // Your connect code
+  // ...
+}
+```
+
 ## CSS
 
 This wrapper does not include any CSS. Flatpickr CSS should be loaded separately from the main Flatpickr package as you would normally do.
