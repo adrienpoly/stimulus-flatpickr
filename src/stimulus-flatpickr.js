@@ -12,6 +12,7 @@ class Flatpickr extends Controller {
   }
 
   connect() {
+    console.log("test3");
     this.initializeEvents();
     this.initializeOptions();
     this.initializeDateFormats();
