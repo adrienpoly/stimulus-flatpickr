@@ -113,9 +113,9 @@ If you are not using Rails or simply wants to markup your HTML directly, simply 
 
 If you need more than just displaying the standard DateTime picker, then you can extend the `stimulus-flatpickr` wrapper controller. This is necessary when you need to:
 
-- set a custom language
-- create customs callbacks
-- perform JS business logic
+* set a custom language
+* create customs callbacks
+* perform JS business logic
 
 **Skip basics installation steps from above!**
 
@@ -150,6 +150,26 @@ export default class extends Flatpickr {
     console.log("and the flatpickr instance", instance);
   }
 }
+```
+
+### Global settings for all datepickers
+
+As we have seen just above you can easily from your rails `erb` code pass the flatpickr options. This is great for passing dynamic options that might change (ie enableDate, dateFormat etc).
+
+If all your datepickers share some global settings you can define them in your `connect()` function.
+
+```js
+connect() {
+   //global options
+    this.config = {
+      ...this.config, //spread options in case some where defined in initialize
+      enableTime: true,
+      time_24hr: true
+    };
+
+    //always call super.connect()
+    super.connect();
+  }
 ```
 
 ### HTML markup
@@ -245,9 +265,15 @@ if you need to override the connect function in the extended controller, you nee
 
 ```js
 connect(){
-  super.connect();
   // ...
-  // Your connect code
+  // define global settings as explained in the global settings section before super
+  // ...
+
+  // always call super.connect()
+  super.connect();
+
+  // ...
+  // Your code can access this.fp flatpick instance
   // ...
 }
 ```
