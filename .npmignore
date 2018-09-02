@@ -4,3 +4,4 @@
 .yarn.lock
 /.git
 /node_modules
+/playground
