@@ -37,24 +37,7 @@ module.exports = function(config) {
           {
             test: /\.js$/,
             exclude: [/node_modules/],
-            use: [
-              {
-                loader: "babel-loader",
-                options: {
-                  plugins: [
-                    [
-                      "transform-runtime",
-                      {
-                        polyfill: false,
-                        regenerator: true
-                      }
-                    ],
-                    "transform-object-rest-spread",
-                    "transform-class-properties"
-                  ]
-                }
-              }
-            ]
+            use: ["babel-loader"]
           },
           {
             test: /\.css$/,

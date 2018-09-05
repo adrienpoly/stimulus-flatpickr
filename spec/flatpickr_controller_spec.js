@@ -23,6 +23,7 @@ describe("Flatpickr Controller tests", function() {
     resetDataAttributes(controller);
     controller.disconnect();
   });
+
   describe("Initial state", function() {
     it('can find an input with the class "flatpickr-input"', function() {
       expect(fixtureQuerySelector(".flatpickr-input")).to.exist;
@@ -41,6 +42,7 @@ describe("Flatpickr Controller tests", function() {
     it("Flatpickr has the open class", function() {
       const input = fixtureQuerySelector(".flatpickr-input");
       input.dispatchEvent(new Event("focus"));
+
       expect(findFlatpickr()).to.have.class("open");
     });
   });
@@ -49,6 +51,7 @@ describe("Flatpickr Controller tests", function() {
     it("Flatpickr does not have open class", function() {
       const otherInput = fixtureQuerySelector("#other-input");
       otherInput.dispatchEvent(new Event("focus"));
+
       expect(findFlatpickr()).not.to.have.class("open");
     });
   });
@@ -57,6 +60,7 @@ describe("Flatpickr Controller tests", function() {
     context("set enableTime false option", function() {
       it("cannot set time", async function() {
         await addFlatpickrOption("EnableTime", "false", controller);
+
         expect(findFlatpickr()).not.to.have.class("hasTime");
         expect(findFlatpickr()).not.to.contain(".flatpickr-time");
       });
@@ -68,7 +72,7 @@ describe("Flatpickr Controller tests", function() {
       });
       it("can set time", async function() {
         await addFlatpickrOption("EnableTime", "true", controller);
-        debugger;
+
         expect(findFlatpickr()).to.have.class("hasTime");
         expect(findFlatpickr()).to.contain(".flatpickr-time");
       });
@@ -77,8 +81,8 @@ describe("Flatpickr Controller tests", function() {
     context("add time_24hr true option", function() {
       it("am pm are not visible", async function() {
         await addFlatpickrOption("Time-24hr", "true", controller);
-        expect(findFlatpickr()).to.have.class("hasTime");
 
+        expect(findFlatpickr()).to.have.class("hasTime");
         expect(findFlatpickr()).not.to.contain(".flatpickr-am-pm");
       });
     });
@@ -86,6 +90,7 @@ describe("Flatpickr Controller tests", function() {
     context("add enableSeconds false option", function() {
       it("cannot set seconds", async function() {
         await addFlatpickrOption("EnableSeconds", "false", controller);
+
         expect(findFlatpickr()).not.to.contain(".flatpickr-second");
       });
     });
@@ -93,6 +98,7 @@ describe("Flatpickr Controller tests", function() {
     describe("add enableSeconds true option", function() {
       it("can set seconds", async function() {
         await addFlatpickrOption("EnableSeconds", "true", controller);
+
         expect(findFlatpickr()).to.contain(".flatpickr-time");
         expect(findFlatpickr()).to.contain(".flatpickr-second");
       });

@@ -6,7 +6,7 @@ async function registerApplication(id, controllerClass) {
   return new Promise(resolve =>
     setTimeout(() => {
       resolve(stimulusApp.controllers[0]);
-    }, 100)
+    })
   );
 }
 
@@ -34,9 +34,7 @@ async function resetDataAttributes(controller) {
   });
   controller.element.dataset.controller = "flatpickr";
   controller.connect();
-  return new Promise(resolve => {
-    resolve();
-  }, 10);
+  return Promise.resolve();
 }
 
 function beforeEachSuite(fn) {
