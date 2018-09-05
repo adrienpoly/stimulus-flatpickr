@@ -278,13 +278,52 @@ connect(){
 }
 ```
 
+## Overiding connect & disconnect
+
+if you need to overide the connect function in the extended controller, you need to call `super`
+
+```js
+connect(){
+  super.connect();
+  // ...
+  // Your connect code
+  // ...
+}
+```
+
 ## CSS
 
 This wrapper does not include any CSS. Flatpickr CSS should be loaded separately from the main Flatpickr package as you would normally do.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/adrienpoly/stimulus-flatpickr. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
+Bug reports and pull requests are welcome.
+
+**To contribute:**
+
+Fork the project.
+
+Install dependencies
+
+`$ yarn install`
+
+Start the test watcher
+
+`$ yarn test:watch`
+
+Running one-off test runs can be done with:
+
+`$ yarn test`
+
+You can test locally also the results with the playground project [./playground](./playground/readme.md)
+
+**Then :**
+
+👍 Write some tests
+
+💪 Add your feature
+
+🚀 Send a PR
 
 ## License
 
