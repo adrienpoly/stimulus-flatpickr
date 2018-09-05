@@ -1,9 +1,16 @@
+// Karma configuration
+// Generated on Mon Sep 03 2018 21:41:15 GMT+0200 (CEST)
+
 module.exports = function(config) {
   config.set({
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: "",
+
+    // frameworks to use
+    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ["mocha", "sinon-chai", "fixture"],
 
+    // list of files / patterns to load in the browser
     files: [
       { pattern: "spec/**/*_spec.js" },
       "spec/fixtures/*.html",
@@ -16,6 +23,13 @@ module.exports = function(config) {
     // list of files / patterns to exclude
     exclude: [],
 
+    // preprocess matching files before serving them to the browser
+    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+    preprocessors: {
+      "spec/*.js": ["webpack", "sourcemap"],
+      "spec/fixtures/*.html": ["html2js"]
+    },
+
     webpack: {
       mode: "development",
       module: {
@@ -23,12 +37,32 @@ module.exports = function(config) {
           {
             test: /\.js$/,
             exclude: [/node_modules/],
-            use: [{ loader: "babel-loader" }]
+            use: [
+              {
+                loader: "babel-loader",
+                options: {
+                  plugins: [
+                    [
+                      "transform-runtime",
+                      {
+                        polyfill: false,
+                        regenerator: true
+                      }
+                    ],
+                    "transform-object-rest-spread",
+                    "transform-class-properties"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            test: /\.css$/,
+            use: ["style-loader", "css-loader"]
           }
         ]
       }
     },
-
     client: {
       captureConsole: true,
       chai: {
@@ -36,21 +70,10 @@ module.exports = function(config) {
       }
     },
 
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      // "**/*.js": ["sourcemap"],
-      // "src/*": ["webpack", "sourcemap"],
-      // "spec/*.js": ["webpack", "sourcemap"]
-      "src/index.js": ["webpack", "sourcemap"],
-      "spec/*.js": ["webpack", "sourcemap"],
-      "spec/fixtures/*.html": ["html2js"]
-    },
-
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ["progress"],
+    reporters: ["mocha"],
 
     // web server port
     port: 9876,
@@ -60,27 +83,21 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_WARN,
+    logLevel: config.LOG_INFO,
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-
     browsers: ["ChromeHeadless"],
-    reporters: ["mocha"],
-    devtool: "inline-source-map",
+
+    // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true,
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity,
-
-    captureTimeout: 180000,
-    browserDisconnectTimeout: 180000,
-    browserDisconnectTolerance: 3,
-    browserNoActivityTimeout: 300000
+    concurrency: Infinity
   });
 };

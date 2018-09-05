@@ -1,6 +1,7 @@
 const path = require("path");
 const SizePlugin = require("size-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: "./src/stimulus-flatpickr.js",
@@ -32,9 +33,16 @@ module.exports = {
         exclude: [/node_modules/],
         use: [{ loader: "babel-loader" }]
       }
+      // {
+      //   test: /\.css$/,
+      //   use: ExtractTextPlugin.extract({
+      //     fallback: "style-loader",
+      //     use: ["css-loader"]
+      //   })
+      // }
     ]
   },
-  plugins: [new SizePlugin(), new UglifyJsPlugin()]
+  plugins: [new UglifyJsPlugin(), new SizePlugin()]
 };
 
 // entry: {

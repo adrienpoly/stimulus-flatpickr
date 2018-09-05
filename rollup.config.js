@@ -1,6 +1,6 @@
-import resolve from "rollup-plugin-node-resolve";
 import buble from "rollup-plugin-buble";
 import filesize from "rollup-plugin-filesize";
+import resolve from "rollup-plugin-node-resolve";
 
 export default {
   input: "src/stimulus-flatpickr.js",
@@ -9,11 +9,13 @@ export default {
     {
       file: "dist/stimulus-flatpickr.js",
       format: "cjs",
+      name: "StimulusFlatpickr",
       sourcemap: true
     },
     {
       file: "dist/stimulus-flatpickr.m.js",
       format: "es",
+      name: "StimulusFlatpickr",
       sourcemap: true
     },
     {
@@ -28,10 +30,10 @@ export default {
     }
   ],
   plugins: [
-    resolve({ module: true, browser: true }),
+    resolve(),
     buble({
       transforms: {
-        classes: false
+        classes: true
       },
       objectAssign: "Object.assign"
     }),

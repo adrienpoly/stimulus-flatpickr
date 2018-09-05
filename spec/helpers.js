@@ -1,10 +1,13 @@
 import { Application } from "stimulus";
 
-function registerApplication(id, controllerClass) {
-  fixture.load("index.html");
-  this._stimulusApp = Application.start();
-  this._stimulusApp.register(id, controllerClass);
-  this.controller = this._stimulusApp.controllers[0];
+async function registerApplication(id, controllerClass) {
+  const stimulusApp = Application.start();
+  stimulusApp.register(id, controllerClass);
+  return new Promise(resolve =>
+    setTimeout(() => {
+      resolve(stimulusApp.controllers[0]);
+    }, 100)
+  );
 }
 
 function findFlatpickr() {
@@ -12,17 +15,46 @@ function findFlatpickr() {
 }
 
 function addFlatpickrOption(option, value, controller) {
-  fixture.el.querySelector("#datepicker").dataset[`flatpickr${option}`] = value;
-  controller.connect();
+  return new Promise(resolve => {
+    const flatpickr = fixture.el.querySelector("#datepicker");
+    flatpickr.dataset[`flatpickr${option}`] = value;
+    controller.connect();
+    resolve(flatpickr);
+  });
 }
 
 function fixtureQuerySelector(name) {
   return fixture.el.querySelector(`${name}`);
 }
 
+async function resetDataAttributes(controller) {
+  const attributes = controller.element.dataset;
+  Object.keys(attributes).forEach(attribute => {
+    delete controller.element.dataset[attribute];
+  });
+  controller.element.dataset.controller = "flatpickr";
+  controller.connect();
+  return new Promise(resolve => {
+    resolve();
+  }, 10);
+}
+
+function beforeEachSuite(fn) {
+  before(function() {
+    const suites = this.test.parent.suites || [];
+    suites.forEach(s => {
+      s.beforeAll(fn);
+      const hook = s._beforeAll.pop();
+      s._beforeAll.unshift(hook);
+    });
+  });
+}
+
 export {
   registerApplication,
   fixtureQuerySelector,
   findFlatpickr,
-  addFlatpickrOption
+  addFlatpickrOption,
+  resetDataAttributes,
+  beforeEachSuite
 };
