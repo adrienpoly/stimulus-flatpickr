@@ -1,2 +1,261 @@
-!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e(require("stimulus"),require("flatpickr")):"function"==typeof define&&define.amd?define(["stimulus","flatpickr"],e):t.stimulusFlatpickr=e(t.stimulus,t.flatpickr)}(this,function(t,e){e=e&&e.hasOwnProperty("default")?e.default:e;var n={string:["altFormat","altInputClass","ariaDateFormat","conjunction","dateFormat","defaultDate","mode","nextArrow","position","prevArrow"],boolean:["allowInput","altInput","animate","clickOpens","closeOnSelect","disableMobile","enableSeconds","enableTime","inline","noCalendar","shorthandCurrentMonth","static","time_24hr","weekNumbers","wrap"],date:["maxDate","minDate","maxTime","minTime","now"],array:["disable","enable"],number:["defaultHour","defaultMinute","defaultSeconds","hourIncrement","minuteIncrement","showMonths"]},a=["change","open","close","monthChange","yearChange","ready","valueUpdate","dayCreate"],o=["input","calendarContainer","prevMonthNav","nextMonthNav","currentMonthElement","currentYearElement","days"],i=/\%[a-zA-Z]/,r=function(t){if(i.test(t)){var e=t;return Object.keys(p).forEach(function(t){e=e.replace(RegExp(t,"g"),p[t])}),e}return t},p={"%Y":"Y","%y":"y","%C":"Y","%m":"m","%-m":"n","%_m":"n","%B":"F","%^B":"F","%b":"M","%^b":"M","%h":"M","%^h":"M","%d":"d","%-d":"j","%e":"j","%H":"H","%k":"H","%I":"h","%l":"h","%P":"K","%p":"K","%M":"i","%S":"S","%A":"l","%a":"D","%w":"w"};return function(t){function i(){t.apply(this,arguments)}t&&(i.__proto__=t),(i.prototype=Object.create(t&&t.prototype)).constructor=i;var p={altInputTarget:{configurable:!0}};return i.prototype.initialize=function(){this.config={}},i.prototype.connect=function(){this.initializeEvents(),this.initializeOptions(),this.initializeDateFormats(),this.fp=e(this.element,Object.assign({},this.config)),this.initializeElements()},i.prototype.disconnect=function(){this.fp.destroy()},i.prototype.initializeEvents=function(){var t=this;a.forEach(function(e){var n,a="on"+((n=e).charAt(0).toUpperCase()+n.slice(1));t.config[a]=t[e].bind(t)})},i.prototype.initializeOptions=function(){var t=this;Object.keys(n).forEach(function(e){n[e].forEach(function(n){var a=n.replace(/([a-z])([A-Z])/g,"$1-$2").replace(/\s+/g,"-").toLowerCase();t.data.has(a)&&(t.config[n]=t[e](a))})})},i.prototype.initializeDateFormats=function(){this.data.has("date-format")&&(this.config.dateFormat=r(this.data.get("date-format"))),this.data.has("alt-format")&&(this.config.altFormat=r(this.data.get("alt-format"))),this.data.has("aria-date-format")&&(this.config.ariaDateFormat=r(this.data.get("aria-date-format")))},i.prototype.initializeElements=function(){var t=this;o.forEach(function(e){t[e+"Target"]=t.fp[e]})},p.altInputTarget.get=function(){return this.element.querySelector(".flatpickr-input")?this.element.querySelector(".flatpickr-input"):this.element},i.prototype.change=function(){},i.prototype.open=function(){},i.prototype.close=function(){},i.prototype.monthChange=function(){},i.prototype.yearChange=function(){},i.prototype.ready=function(){},i.prototype.valueUpdate=function(){},i.prototype.dayCreate=function(){},i.prototype.string=function(t){return this.data.get(t)},i.prototype.date=function(t){return this.data.get(t)},i.prototype.boolean=function(t){return"true"===this.data.get(t)},i.prototype.array=function(t){return JSON.parse(this.data.get(t))},i.prototype.number=function(t){return parseInt(this.data.get(t))},Object.defineProperties(i.prototype,p),i}(t.Controller)});
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('stimulus'), require('flatpickr')) :
+  typeof define === 'function' && define.amd ? define(['stimulus', 'flatpickr'], factory) :
+  (global.StimulusFlatpickr = factory(global.Stimulus,global.Flatpickr));
+}(this, (function (stimulus,flatpickr) { 'use strict';
+
+  flatpickr = flatpickr && flatpickr.hasOwnProperty('default') ? flatpickr['default'] : flatpickr;
+
+  var kebabCase = function (string) { return string
+      .replace(/([a-z])([A-Z])/g, "$1-$2")
+      .replace(/[\s_]+/g, "-")
+      .toLowerCase(); };
+
+  var capitalize = function (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+  var booleanOptions = [
+    "allowInput",
+    "altInput",
+    "animate",
+    "clickOpens",
+    "closeOnSelect",
+    "disableMobile",
+    "enableSeconds",
+    "enableTime",
+    "inline",
+    "noCalendar",
+    "shorthandCurrentMonth",
+    "static",
+    "time_24hr",
+    "weekNumbers",
+    "wrap"
+  ];
+
+  var stringOptions = [
+    "altFormat",
+    "altInputClass",
+    "ariaDateFormat",
+    "conjunction",
+    "dateFormat",
+    "defaultDate",
+    "mode",
+    "nextArrow",
+    "position",
+    "prevArrow"
+  ];
+
+  var numberOptions = [
+    "defaultHour",
+    "defaultMinute",
+    "defaultSeconds",
+    "hourIncrement",
+    "minuteIncrement",
+    "showMonths"
+  ];
+
+  var arrayOptions = ["disable", "enable"];
+
+  var dateOptions = ["maxDate", "minDate", "maxTime", "minTime", "now"];
+
+  var options = {
+    string: stringOptions,
+    boolean: booleanOptions,
+    date: dateOptions,
+    array: arrayOptions,
+    number: numberOptions
+  };
+
+  var events = [
+    "change",
+    "open",
+    "close",
+    "monthChange",
+    "yearChange",
+    "ready",
+    "valueUpdate",
+    "dayCreate"
+  ];
+
+  var elements = [
+    "input",
+    "calendarContainer",
+    "prevMonthNav",
+    "nextMonthNav",
+    "currentMonthElement",
+    "currentYearElement",
+    "days"
+  ];
+
+  var strftimeRegex = /\%[a-zA-Z]/;
+
+  var convertDateFormat = function (format) {
+    var isStrftime = strftimeRegex.test(format);
+    if (isStrftime) {
+      var newFormat = format;
+      Object.keys(mapping).forEach(function (token) {
+        newFormat = newFormat.replace(RegExp(token, "g"), mapping[token]);
+      });
+      return newFormat;
+    } else {
+      return format;
+    }
+  };
+
+  var mapping = {
+    "%Y": "Y",
+    "%y": "y",
+    "%C": "Y",
+    "%m": "m",
+    "%-m": "n",
+    "%_m": "n",
+    "%B": "F",
+    "%^B": "F",
+    "%b": "M",
+    "%^b": "M",
+    "%h": "M",
+    "%^h": "M",
+    "%d": "d",
+    "%-d": "j",
+    "%e": "j",
+    "%H": "H",
+    "%k": "H",
+    "%I": "h",
+    "%l": "h",
+    "%P": "K",
+    "%p": "K",
+    "%M": "i",
+    "%S": "S",
+    "%A": "l",
+    "%a": "D",
+    "%w": "w"
+  };
+
+  var Flatpickr = (function (Controller) {
+    function Flatpickr () {
+      Controller.apply(this, arguments);
+    }
+
+    if ( Controller ) Flatpickr.__proto__ = Controller;
+    Flatpickr.prototype = Object.create( Controller && Controller.prototype );
+    Flatpickr.prototype.constructor = Flatpickr;
+
+    var prototypeAccessors = { altInputTarget: { configurable: true } };
+
+    Flatpickr.prototype.initialize = function initialize () {
+      this.config = {};
+    };
+
+    Flatpickr.prototype.connect = function connect () {
+      this.initializeEvents();
+      this.initializeOptions();
+      this.initializeDateFormats();
+
+      this.fp = flatpickr(this.element, Object.assign({}, this.config));
+
+      this.initializeElements();
+    };
+
+    Flatpickr.prototype.disconnect = function disconnect () {
+      this.fp.destroy();
+    };
+
+    Flatpickr.prototype.initializeEvents = function initializeEvents () {
+      var this$1 = this;
+
+      events.forEach(function (event) {
+        var hook = "on" + (capitalize(event));
+        this$1.config[hook] = this$1[event].bind(this$1);
+      });
+    };
+
+    Flatpickr.prototype.initializeOptions = function initializeOptions () {
+      var this$1 = this;
+
+      Object.keys(options).forEach(function (optionType) {
+        var optionsCamelCase = options[optionType];
+        optionsCamelCase.forEach(function (option) {
+          var optionKebab = kebabCase(option);
+          if (this$1.data.has(optionKebab)) {
+            this$1.config[option] = this$1[optionType](optionKebab);
+          }
+        });
+      });
+    };
+
+    Flatpickr.prototype.initializeDateFormats = function initializeDateFormats () {
+      if (this.data.has("date-format")) {
+        this.config.dateFormat = convertDateFormat(this.data.get("date-format"));
+      }
+      if (this.data.has("alt-format")) {
+        this.config.altFormat = convertDateFormat(this.data.get("alt-format"));
+      }
+      if (this.data.has("aria-date-format")) {
+        this.config.ariaDateFormat = convertDateFormat(
+          this.data.get("aria-date-format")
+        );
+      }
+    };
+
+    Flatpickr.prototype.initializeElements = function initializeElements () {
+      var this$1 = this;
+
+      elements.forEach(function (element) {
+        this$1[(element + "Target")] = this$1.fp[element];
+      });
+    };
+
+    prototypeAccessors.altInputTarget.get = function () {
+      if (this.element.querySelector(".flatpickr-input")) {
+        return this.element.querySelector(".flatpickr-input");
+      } else {
+        return this.element;
+      }
+    };
+
+    Flatpickr.prototype.change = function change () {};
+
+    Flatpickr.prototype.open = function open () {};
+
+    Flatpickr.prototype.close = function close () {};
+
+    Flatpickr.prototype.monthChange = function monthChange () {};
+
+    Flatpickr.prototype.yearChange = function yearChange () {};
+
+    Flatpickr.prototype.ready = function ready () {};
+
+    Flatpickr.prototype.valueUpdate = function valueUpdate () {};
+
+    Flatpickr.prototype.dayCreate = function dayCreate () {};
+
+    Flatpickr.prototype.string = function string (option) {
+      return this.data.get(option);
+    };
+
+    Flatpickr.prototype.date = function date (option) {
+      return this.data.get(option);
+    };
+
+    Flatpickr.prototype.boolean = function boolean (option) {
+      return this.data.get(option) === "true";
+    };
+
+    Flatpickr.prototype.array = function array (option) {
+      return JSON.parse(this.data.get(option));
+    };
+
+    Flatpickr.prototype.number = function number (option) {
+      return parseInt(this.data.get(option));
+    };
+
+    Object.defineProperties( Flatpickr.prototype, prototypeAccessors );
+
+    return Flatpickr;
+  }(stimulus.Controller));
+
+  return Flatpickr;
+
+})));
 //# sourceMappingURL=stimulus-flatpickr.umd.js.map
