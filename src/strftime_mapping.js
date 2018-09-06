@@ -1,18 +1,5 @@
 const strftimeRegex = /\%[a-zA-Z]/;
 
-export const convertDateFormat = format => {
-  const isStrftime = strftimeRegex.test(format);
-  if (isStrftime) {
-    let newFormat = format;
-    Object.keys(mapping).forEach(token => {
-      newFormat = newFormat.replace(RegExp(token, "g"), mapping[token]);
-    });
-    return newFormat;
-  } else {
-    return format;
-  }
-};
-
 const mapping = {
   "%Y": "Y",
   "%y": "y",
@@ -40,4 +27,17 @@ const mapping = {
   "%A": "l",
   "%a": "D",
   "%w": "w"
+};
+
+export const convertDateFormat = format => {
+  const isStrftime = strftimeRegex.test(format);
+  if (isStrftime) {
+    let newFormat = format;
+    Object.keys(mapping).forEach(token => {
+      newFormat = newFormat.replace(RegExp(token, "g"), mapping[token]);
+    });
+    return newFormat;
+  } else {
+    return format;
+  }
 };
