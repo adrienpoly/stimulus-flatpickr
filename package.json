@@ -14,7 +14,8 @@
     "dev": "rollup -wc",
     "test": "karma start",
     "test:watch": "yarn test --auto-watch --no-single-run",
-    "test:browser": "yarn test:watch --browsers Chrome"
+    "test:browser": "yarn test:watch --browsers Chrome",
+    "codecov": "codecov"
   },
   "dependencies": {
     "flatpickr": "^4.4.6",
@@ -37,6 +38,7 @@
     "karma-babel-preprocessor": "6",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.2",
     "karma-fixture": "^0.2.6",
     "karma-html2js-preprocessor": "^1.1.0",
     "karma-mocha": "^1.3.0",
