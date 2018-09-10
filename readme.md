@@ -1,5 +1,6 @@
 [![npm version](https://badge.fury.io/js/stimulus-flatpickr.svg)](https://www.npmjs.com/package/stimulus-flatpickr)
 [![CircleCI](https://circleci.com/gh/adrienpoly/stimulus-flatpickr.svg?style=svg)](https://circleci.com/gh/adrienpoly/stimulus-flatpickr)
+[![codecov](https://codecov.io/gh/adrienpoly/stimulus-flatpickr/branch/master/graph/badge.svg)](https://codecov.io/gh/adrienpoly/stimulus-flatpickr)
 
 # Stimulus Flatpickr
 
