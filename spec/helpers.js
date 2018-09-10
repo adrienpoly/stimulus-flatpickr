@@ -17,8 +17,13 @@ function flatpickrCalendar() {
 function addFlatpickrOption(option, value, controller) {
   return new Promise(resolve => {
     const flatpickr = fixture.el.querySelector("#datepicker");
-    flatpickr.dataset[`flatpickr${option}`] = value;
+    flatpickr.dataset[`flatpickr${option}`] =
+      typeof value === "object" ? JSON.stringify(value) : value;
     controller.connect();
+
+    return setTimeout(() => {
+      resolve(flatpickr);
+    }, 100);
     resolve(flatpickr);
   });
 }

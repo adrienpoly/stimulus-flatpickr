@@ -76,7 +76,6 @@ describe("Flatpickr Controller tests", function() {
       });
       it("can set time", async function() {
         await addFlatpickrOption("EnableTime", "true", controller);
-
         expect(flatpickrCalendar()).to.have.class("hasTime");
         expect(flatpickrCalendar()).to.contain(".flatpickr-time");
       });
@@ -111,13 +110,12 @@ describe("Flatpickr Controller tests", function() {
 
   describe("Flatpickr options with time Disabled", function() {
     before(async function() {
-      // controller.fp.setDate("2018-10-15");
       await addFlatpickrOption("EnableTime", "false", controller);
     });
 
-    // after(function() {
-    //   resetDataAttributes(controller);
-    // });
+    after(async function() {
+      await resetDataAttributes(controller);
+    });
 
     context("add multiMonth 2 option", function() {
       it("can see two months", async function() {
@@ -146,6 +144,43 @@ describe("Flatpickr Controller tests", function() {
         expect(
           fixtureQuerySelector("input[type=hidden].flatpickr-input")
         ).to.have.value("October 15, 2018");
+      });
+    });
+
+    context("add range mode", function() {
+      it("calendar has the range class", async function() {
+        await addFlatpickrOption("Mode", "range", controller);
+        expect(flatpickrCalendar()).to.have.class("rangeMode");
+      });
+    });
+  });
+
+  describe("Flatpickr dates options", function() {
+    before(async function() {
+      await addFlatpickrOption("DateFormat", "Y-m-d", controller);
+    });
+
+    context("set min date", function() {
+      it("dates before min date are disabled", async function() {
+        await addFlatpickrOption("Now", "2018-10-15", controller);
+        await addFlatpickrOption("MinDate", "2018-10-14", controller);
+        expect(
+          document.querySelector('span[aria-label="October 6, 2018"]')
+        ).to.have.class("disabled");
+      });
+    });
+
+    context("disable dates", function() {
+      it("disabled dates are disabled", async function() {
+        await addFlatpickrOption(
+          "Disable",
+          ["2018-10-14", "2018-10-17"],
+          controller
+        );
+
+        expect(
+          document.querySelector('span[aria-label="October 14, 2018"]')
+        ).to.have.class("disabled");
       });
     });
   });
