@@ -1,22 +1,43 @@
-[![npm version](https://badge.fury.io/js/stimulus-flatpickr.svg)](https://www.npmjs.com/package/stimulus-flatpickr)
-[![CircleCI](https://circleci.com/gh/adrienpoly/stimulus-flatpickr.svg?style=svg)](https://circleci.com/gh/adrienpoly/stimulus-flatpickr)
-[![codecov](https://codecov.io/gh/adrienpoly/stimulus-flatpickr/branch/master/graph/badge.svg)](https://codecov.io/gh/adrienpoly/stimulus-flatpickr)
+<h1 align="center">Stimulus-Flatpickr wrapper</h1>
+<p align="center">
+  <a href="https://www.npmjs.com/package/stimulus-flatpickr" rel="nofollow">
+    <img src="https://badge.fury.io/js/stimulus-flatpickr.svg" alt="npm version">
+  </a>
+  <a href="https://circleci.com/gh/adrienpoly/stimulus-flatpickr" rel="nofollow">
+  <img src="https://circleci.com/gh/adrienpoly/stimulus-flatpickr.svg?style=svg" alt="CircleCi build status">
+  </a>
+  <a href="https://codecov.io/gh/adrienpoly/stimulus-flatpickr">
+    <img src="https://codecov.io/gh/adrienpoly/stimulus-flatpickr/branch/master/graph/badge.svg" />
+  </a>
+</p>
 
-# Stimulus Flatpickr
+<p align="center">
+  <b>Modest yet powerful wrapper of Flatpickr for stimulus</b></br>
+  <sub>Only ~1kb <sub>
+</p>
+
+<br />
+
+- **Simple**: create advanced datepickers with less code
+- **Backend Friendly**: easily pass backend information to the datepicker (locals, availabilities, date format etc)
+- **strftime friendly**: [converts automatically strftime](#date-and-time-formats) formats to flatpickr formating tokens
+- **Turbolinks**: make all your datepickers compatible with Turbolinks by design
+- **Getters**: all Flatpickr elements are available as [targets](#elements)
+- **Events/hooks**: all flatpickr [events/hooks](#callbacks) are directly available in your stimulus Controller.
+- **MIT Licensed**: free for personal and commercial use
 
 ## A modest wrapper of Flatpickr for Stimulus
 
-This is a wrapper of [Flatpickr](http://flatpickr.js.org/) for Stimulus.js. All configurations for the DateTime picker can be set directly from the `data-attributes` of the HTML. This makes it very handy to pass information from the backend to the datepicker.
+This is a wrapper of [Flatpickr](http://flatpickr.js.org/) for [Stimulus](https://stimulusjs.org/). All configurations for the DateTime picker can be set directly from the `data-attributes` of the HTML. This makes it very handy to pass information from the backend to the datepicker.
 
-here is a simple example:
+Here is a simple example:
 
 ```html+erb
 <%= form_with model: Appointement.new, authenticity_token: true do |f| %>
   <%= f.text_field :start_time,
     data: {
       controller: "flatpickr",
-      flatpickr_enable_time: true,
-      flatpickr_max_date: Time.zone.now + 3.days
+      flatpickr_min_date: Time.zone.now #disables past dates
     } %>
 <% end %>
 ```
@@ -25,8 +46,16 @@ here is a simple example:
 
 ![datetime picker result](./images/datetime-picker.png)
 
-An example of a Rails app showcasing a localized date picker with availabilities is available here :
-[Rails Stimulus Flatpickr]()
+## Example
+
+An example of a Rails app showcasing
+
+- localization of the datepicker 🌍
+- localization of the date formats 🌍
+- availabilities in the date picker 📅
+- Fully boosted with Turbolinks 🚀
+
+is available here : [Rails Stimulus Flatpickr](https://github.com/adrienpoly/rails_stimulus_flatpickr)
 
 ## Install
 
@@ -115,9 +144,9 @@ If you are not using Rails or simply wants to markup your HTML directly, simply 
 
 If you need more than just displaying the standard DateTime picker, then you can extend the `stimulus-flatpickr` wrapper controller. This is necessary when you need to:
 
-* set a custom language
-* create customs callbacks
-* perform JS business logic
+- set a custom language
+- create customs callbacks
+- perform JS business logic
 
 **Skip basics installation steps from above!**
 
