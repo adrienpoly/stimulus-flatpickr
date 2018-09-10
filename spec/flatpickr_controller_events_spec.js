@@ -22,6 +22,8 @@ describe("Flatpickr Controller EVENTS tests", function() {
     this.sandbox.stub(Flatpickr.prototype, "open");
     this.sandbox.stub(Flatpickr.prototype, "close");
     this.sandbox.stub(Flatpickr.prototype, "ready");
+    this.sandbox.stub(Flatpickr.prototype, "monthChange");
+    this.sandbox.stub(Flatpickr.prototype, "yearChange");
     this.spyDayCreate = this.sandbox.stub(Flatpickr.prototype, "dayCreate");
     this.spyValueUpdate = this.sandbox.stub(Flatpickr.prototype, "valueUpdate");
     this.spyChange = this.sandbox.stub(Flatpickr.prototype, "change");
@@ -64,6 +66,20 @@ describe("Flatpickr Controller EVENTS tests", function() {
       const otherInput = fixtureQuerySelector("#other-input");
       otherInput.dispatchEvent(new Event("focus"));
       expect(controller.close).has.been.calledOnce;
+    });
+  });
+
+  describe("When change month", function() {
+    it("Stimulus Flatpickr controller monthChange() function is called once", function() {
+      controller.fp.changeMonth(1);
+      expect(controller.monthChange).has.been.calledOnce;
+    });
+  });
+
+  describe("When change year", function() {
+    it("Stimulus Flatpickr controller yearChange() function is called once", function() {
+      controller.fp.changeYear(1);
+      expect(controller.yearChange).has.been.calledOnce;
     });
   });
 });
