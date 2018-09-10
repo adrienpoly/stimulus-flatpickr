@@ -8,7 +8,13 @@
       }
     ],
     "transform-object-rest-spread",
-    "transform-class-properties"
+    "transform-class-properties",
+    [
+      "istanbul",
+      {
+        "exclude": ["spec/**/*.js"]
+      }
+    ]
   ],
   "presets": ["env"]
 }
