@@ -33,11 +33,8 @@ var booleanOptions = [
 ];
 
 var stringOptions = [
-  "altFormat",
   "altInputClass",
-  "ariaDateFormat",
   "conjunction",
-  "dateFormat",
   "defaultDate",
   "mode",
   "nextArrow",
@@ -57,6 +54,8 @@ var numberOptions = [
 var arrayOptions = ["disable", "enable"];
 
 var dateOptions = ["maxDate", "minDate", "maxTime", "minTime", "now"];
+
+var dateFormats = ["altFormat", "ariaDateFormat", "dateFormat"];
 
 var options = {
   string: stringOptions,
@@ -87,21 +86,6 @@ var elements = [
   "days"
 ];
 
-var strftimeRegex = /\%[a-zA-Z]/;
-
-var convertDateFormat = function (format) {
-  var isStrftime = strftimeRegex.test(format);
-  if (isStrftime) {
-    var newFormat = format;
-    Object.keys(mapping).forEach(function (token) {
-      newFormat = newFormat.replace(RegExp(token, "g"), mapping[token]);
-    });
-    return newFormat;
-  } else {
-    return format;
-  }
-};
-
 var mapping = {
   "%Y": "Y",
   "%y": "y",
@@ -131,6 +115,19 @@ var mapping = {
   "%w": "w"
 };
 
+var strftimeRegex = new RegExp(
+  Object.keys(mapping)
+    .join("|")
+    .replace(new RegExp("\\^", "g"), "\\^"),
+  "g"
+);
+
+var convertDateFormat = function (format) {
+  return format.replace(strftimeRegex, function (match) {
+    return mapping[match];
+  });
+};
+
 var Flatpickr = (function (Controller) {
   function Flatpickr () {
     Controller.apply(this, arguments);
@@ -140,77 +137,22 @@ var Flatpickr = (function (Controller) {
   Flatpickr.prototype = Object.create( Controller && Controller.prototype );
   Flatpickr.prototype.constructor = Flatpickr;
 
-  var prototypeAccessors = { altInputTarget: { configurable: true } };
-
   Flatpickr.prototype.initialize = function initialize () {
     this.config = {};
   };
 
   Flatpickr.prototype.connect = function connect () {
-    this.initializeEvents();
-    this.initializeOptions();
-    this.initializeDateFormats();
+    this._initializeEvents();
+    this._initializeOptions();
+    this._initializeDateFormats();
 
     this.fp = flatpickr(this.element, Object.assign({}, this.config));
 
-    this.initializeElements();
+    this._initializeElements();
   };
 
   Flatpickr.prototype.disconnect = function disconnect () {
     this.fp.destroy();
-  };
-
-  Flatpickr.prototype.initializeEvents = function initializeEvents () {
-    var this$1 = this;
-
-    events.forEach(function (event) {
-      var hook = "on" + (capitalize(event));
-      this$1.config[hook] = this$1[event].bind(this$1);
-    });
-  };
-
-  Flatpickr.prototype.initializeOptions = function initializeOptions () {
-    var this$1 = this;
-
-    Object.keys(options).forEach(function (optionType) {
-      var optionsCamelCase = options[optionType];
-      optionsCamelCase.forEach(function (option) {
-        var optionKebab = kebabCase(option);
-        if (this$1.data.has(optionKebab)) {
-          this$1.config[option] = this$1[optionType](optionKebab);
-        }
-      });
-    });
-  };
-
-  Flatpickr.prototype.initializeDateFormats = function initializeDateFormats () {
-    if (this.data.has("date-format")) {
-      this.config.dateFormat = convertDateFormat(this.data.get("date-format"));
-    }
-    if (this.data.has("alt-format")) {
-      this.config.altFormat = convertDateFormat(this.data.get("alt-format"));
-    }
-    if (this.data.has("aria-date-format")) {
-      this.config.ariaDateFormat = convertDateFormat(
-        this.data.get("aria-date-format")
-      );
-    }
-  };
-
-  Flatpickr.prototype.initializeElements = function initializeElements () {
-    var this$1 = this;
-
-    elements.forEach(function (element) {
-      this$1[(element + "Target")] = this$1.fp[element];
-    });
-  };
-
-  prototypeAccessors.altInputTarget.get = function () {
-    if (this.element.querySelector(".flatpickr-input")) {
-      return this.element.querySelector(".flatpickr-input");
-    } else {
-      return this.element;
-    }
   };
 
   Flatpickr.prototype.change = function change () {};
@@ -229,27 +171,66 @@ var Flatpickr = (function (Controller) {
 
   Flatpickr.prototype.dayCreate = function dayCreate () {};
 
-  Flatpickr.prototype.string = function string (option) {
+  Flatpickr.prototype._initializeEvents = function _initializeEvents () {
+    var this$1 = this;
+
+    events.forEach(function (event) {
+      var hook = "on" + (capitalize(event));
+      this$1.config[hook] = this$1[event].bind(this$1);
+    });
+  };
+
+  Flatpickr.prototype._initializeOptions = function _initializeOptions () {
+    var this$1 = this;
+
+    Object.keys(options).forEach(function (optionType) {
+      var optionsCamelCase = options[optionType];
+      optionsCamelCase.forEach(function (option) {
+        var optionKebab = kebabCase(option);
+        if (this$1.data.has(optionKebab)) {
+          this$1.config[option] = this$1[("_" + optionType)](optionKebab);
+        }
+      });
+    });
+  };
+
+  Flatpickr.prototype._initializeDateFormats = function _initializeDateFormats () {
+    var this$1 = this;
+
+    dateFormats.forEach(function (dateFormat) {
+      if (this$1.data.has(dateFormat)) {
+        this$1.config[dateFormat] = convertDateFormat(this$1.data.get(dateFormat));
+      }
+    });
+  };
+
+  Flatpickr.prototype._initializeElements = function _initializeElements () {
+    var this$1 = this;
+
+    elements.forEach(function (element) {
+      this$1[(element + "Target")] = this$1.fp[element];
+    });
+  };
+
+  Flatpickr.prototype._string = function _string (option) {
     return this.data.get(option);
   };
 
-  Flatpickr.prototype.date = function date (option) {
+  Flatpickr.prototype._date = function _date (option) {
     return this.data.get(option);
   };
 
-  Flatpickr.prototype.boolean = function boolean (option) {
+  Flatpickr.prototype._boolean = function _boolean (option) {
     return this.data.get(option) === "true";
   };
 
-  Flatpickr.prototype.array = function array (option) {
+  Flatpickr.prototype._array = function _array (option) {
     return JSON.parse(this.data.get(option));
   };
 
-  Flatpickr.prototype.number = function number (option) {
+  Flatpickr.prototype._number = function _number (option) {
     return parseInt(this.data.get(option));
   };
-
-  Object.defineProperties( Flatpickr.prototype, prototypeAccessors );
 
   return Flatpickr;
 }(stimulus.Controller));
