@@ -3,7 +3,6 @@ import "flatpickr/dist/flatpickr.css";
 import {
   registerApplication,
   fixtureQuerySelector,
-  findFlatpickr,
   addFlatpickrOption,
   resetDataAttributes
 } from "./helpers";

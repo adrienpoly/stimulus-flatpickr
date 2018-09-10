@@ -1,7 +1,7 @@
 import { Controller } from "stimulus";
 import flatpickr from "flatpickr";
 import { kebabCase, capitalize } from "./utils";
-import { options } from "./config_options";
+import { options, dateFormats } from "./config_options";
 import { events } from "./events";
 import { elements } from "./elements";
 import { convertDateFormat } from "./strftime_mapping";
@@ -43,14 +43,6 @@ class Flatpickr extends Controller {
 
   dayCreate() {}
 
-  get altInputTarget() {
-    if (this.element.querySelector(".flatpickr-input")) {
-      return this.element.querySelector(".flatpickr-input");
-    } else {
-      return this.element;
-    }
-  }
-
   _initializeEvents() {
     events.forEach(event => {
       const hook = `on${capitalize(event)}`;
@@ -71,17 +63,11 @@ class Flatpickr extends Controller {
   }
 
   _initializeDateFormats() {
-    if (this.data.has("date-format")) {
-      this.config.dateFormat = convertDateFormat(this.data.get("date-format"));
-    }
-    if (this.data.has("alt-format")) {
-      this.config.altFormat = convertDateFormat(this.data.get("alt-format"));
-    }
-    if (this.data.has("aria-date-format")) {
-      this.config.ariaDateFormat = convertDateFormat(
-        this.data.get("aria-date-format")
-      );
-    }
+    dateFormats.forEach(dateFormat => {
+      if (this.data.has(dateFormat)) {
+        this.config.dateFormat = convertDateFormat(this.data.get(dateFormat));
+      }
+    });
   }
 
   _initializeElements() {

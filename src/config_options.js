@@ -17,11 +17,8 @@ const booleanOptions = [
 ];
 
 const stringOptions = [
-  "altFormat",
   "altInputClass",
-  "ariaDateFormat",
   "conjunction",
-  "dateFormat",
   "defaultDate",
   "mode",
   "nextArrow",
@@ -41,6 +38,8 @@ const numberOptions = [
 const arrayOptions = ["disable", "enable"];
 
 const dateOptions = ["maxDate", "minDate", "maxTime", "minTime", "now"];
+
+export const dateFormats = ["altFormat", "ariaDateFormat", "dateFormat"];
 
 export const options = {
   string: stringOptions,

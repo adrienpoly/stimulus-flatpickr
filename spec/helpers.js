@@ -10,7 +10,7 @@ async function registerApplication(id, controllerClass) {
   );
 }
 
-function findFlatpickr() {
+function flatpickrCalendar() {
   return document.querySelector(".flatpickr-calendar");
 }
 
@@ -23,8 +23,12 @@ function addFlatpickrOption(option, value, controller) {
   });
 }
 
-function fixtureQuerySelector(name) {
-  return fixture.el.querySelector(`${name}`);
+function fixtureQuerySelector(selector) {
+  return fixture.el.querySelector(`${selector}`);
+}
+
+function calendarQuerySelector(selector) {
+  return document.querySelector(`.flatpickr-calendar ${selector}`);
 }
 
 async function resetDataAttributes(controller) {
@@ -51,7 +55,8 @@ function beforeEachSuite(fn) {
 export {
   registerApplication,
   fixtureQuerySelector,
-  findFlatpickr,
+  calendarQuerySelector,
+  flatpickrCalendar,
   addFlatpickrOption,
   resetDataAttributes,
   beforeEachSuite

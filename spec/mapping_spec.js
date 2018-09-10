@@ -10,6 +10,35 @@ const testDateFormats = {
   "%e %B %Y": "j F Y"
 };
 
+const mapping = {
+  "%Y": "Y",
+  "%y": "y",
+  "%C": "Y",
+  "%m": "m",
+  "%-m": "n",
+  "%_m": "n",
+  "%B": "F",
+  "%^B": "F",
+  "%b": "M",
+  "%^b": "M",
+  "%h": "M",
+  "%^h": "M",
+  "%d": "d",
+  "%-d": "j",
+  "%e": "j",
+  "%H": "H",
+  "%k": "H",
+  "%I": "h",
+  "%l": "h",
+  "%P": "K",
+  "%p": "K",
+  "%M": "i",
+  "%S": "S",
+  "%A": "l",
+  "%a": "D",
+  "%w": "w"
+};
+
 describe("strftime date conversion to Flatpickr tokens", function() {
   describe("convertDateFormat", function() {
     it("random string without % should not be changed", function() {
@@ -20,6 +49,15 @@ describe("strftime date conversion to Flatpickr tokens", function() {
     Object.keys(testDateFormats).forEach(strftimeDateFormat => {
       const flatpickrDateFormat = testDateFormats[strftimeDateFormat];
       it(`strftime format ${strftimeDateFormat} to be converted to ${flatpickrDateFormat}`, function() {
+        expect(convertDateFormat(strftimeDateFormat)).to.equal(
+          flatpickrDateFormat
+        );
+      });
+    });
+
+    it(`strftime format to be converted to `, function() {
+      Object.keys(mapping).forEach(strftimeDateFormat => {
+        const flatpickrDateFormat = mapping[strftimeDateFormat];
         expect(convertDateFormat(strftimeDateFormat)).to.equal(
           flatpickrDateFormat
         );
