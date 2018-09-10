@@ -1,6 +1,4 @@
-const strftimeRegex = /\%[a-zA-Z]/;
-
-const mapping = {
+export const mapping = {
   "%Y": "Y",
   "%y": "y",
   "%C": "Y",
@@ -29,15 +27,15 @@ const mapping = {
   "%w": "w"
 };
 
+const strftimeRegex = new RegExp(
+  Object.keys(mapping)
+    .join("|")
+    .replace(new RegExp("\\^", "g"), "\\^"),
+  "g"
+);
+
 export const convertDateFormat = format => {
-  const isStrftime = strftimeRegex.test(format);
-  if (isStrftime) {
-    let newFormat = format;
-    Object.keys(mapping).forEach(token => {
-      newFormat = newFormat.replace(RegExp(token, "g"), mapping[token]);
-    });
-    return newFormat;
-  } else {
-    return format;
-  }
+  return format.replace(strftimeRegex, match => {
+    return mapping[match];
+  });
 };
