@@ -136,14 +136,18 @@ describe("Flatpickr Controller tests", function() {
     context("add AltFormat %Y-%m-%d option", function() {
       it("can see new input field", async function() {
         await addFlatpickrOption("AltFormat", "%B %d, %Y", controller);
-        controller.fp.setDate("2018-10-15", true, "Y-m-d");
+        controller.fp.setDate("2018-10-15");
         expect(
           calendarQuerySelector(".flatpickr-day.selected")
         ).to.have.attribute("aria-label", "October 15, 2018");
 
         expect(
           fixtureQuerySelector("input[type=hidden].flatpickr-input")
-        ).to.have.value("October 15, 2018");
+        ).to.have.value("2018-10-15");
+        expect(controller.fp.config.dateFormat).to.equal("Y-m-d");
+      });
+      it("base dateFormat remains the same", async function() {
+        expect(controller.fp.config.dateFormat).to.equal("Y-m-d");
       });
     });
 
