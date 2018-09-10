@@ -68,6 +68,7 @@ class Flatpickr extends Controller {
         this.config.dateFormat = convertDateFormat(this.data.get(dateFormat));
       }
     });
+  }
 
   _initializeElements() {
     elements.forEach(element => {
