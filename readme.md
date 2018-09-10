@@ -7,7 +7,7 @@
   <img src="https://circleci.com/gh/adrienpoly/stimulus-flatpickr.svg?style=svg" alt="CircleCi build status">
   </a>
   <a href="https://codecov.io/gh/adrienpoly/stimulus-flatpickr">
-    <img src="https://codecov.io/gh/adrienpoly/stimulus-flatpickr/branch/master/graph/badge.svg" />
+    <img src="https://codecov.io/gh/adrienpoly/stimulus-flatpickr/branch/master/graph/badge.svg" alt="Coverage"/>
   </a>
 </p>
 
@@ -24,11 +24,12 @@
 - **Turbolinks**: make all your datepickers compatible with Turbolinks by design
 - **Getters**: all Flatpickr elements are available as [targets](#elements)
 - **Events/hooks**: all flatpickr [events/hooks](#callbacks) are directly available in your stimulus Controller.
+- **Example**: [detailed example](#example) for adavanced usage of flatpickr
 - **MIT Licensed**: free for personal and commercial use
 
 ## A modest wrapper of Flatpickr for Stimulus
 
-This is a wrapper of [Flatpickr](http://flatpickr.js.org/) for [Stimulus](https://stimulusjs.org/). All configurations for the DateTime picker can be set directly from the `data-attributes` of the HTML. This makes it very handy to pass information from the backend to the datepicker.
+By using this wrapper of [Flatpickr](http://flatpickr.js.org/) for [Stimulus](https://stimulusjs.org/) you can make all configurations for the Datepicker directly with the `data-attributes` of the HTML. This makes it very handy to create datepickr with server generate html and pass information from the backend to the datepicker.
 
 Here is a simple example:
 
@@ -42,9 +43,12 @@ Here is a simple example:
 <% end %>
 ```
 
-👇👇👇👇👇👇
-
-![datetime picker result](./images/datetime-picker.png)
+<p align="center">
+  👇👇👇👇👇👇
+</p>
+<p align="center">
+  <img src="./images/datetime-picker.png" alt="datetime picker result">
+</p>
 
 ## Example
 
@@ -111,9 +115,12 @@ You can now create forms and input fields easily by adding a `data-controller="f
 <% end %>
 ```
 
-👇👇👇👇👇👇
-
-![datetime picker result](./images/datetime-picker.png)
+<p align="center">
+  👇👇👇👇👇👇
+</p>
+<p align="center">
+  <img src="./images/datetime-picker.png" alt="datetime picker result">
+</p>
 
 ### Options & conventions
 
@@ -218,9 +225,12 @@ Then in the same way as above you can now create forms and input fields easily b
 <% end %>
 ```
 
-👇👇👇👇👇👇
-
-![datetime picker result](./images/datetime-picker-black-fr.png)
+<p align="center">
+  👇👇👇👇👇👇
+</p>
+<p align="center">
+  <img src="./images/datetime-picker-black-fr.png" alt="datetime picker result">
+</p>
 
 ### Date and Time formats
 
@@ -242,9 +252,12 @@ With this solution, it becomes handy to localize your date formats.
 <% end %>
 ```
 
-👇👇👇👇👇👇
-
-![datetime picker result](./images/datetime-picker-formats.png)
+<p align="center">
+  👇👇👇👇👇👇
+</p>
+<p align="center">
+  <img src="./images/datetime-picker-formats.png" alt="datetime picker result">
+</p>
 
 ### Callbacks
 
