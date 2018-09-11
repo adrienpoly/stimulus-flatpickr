@@ -1,4 +1,4 @@
-<h1 align="center">Stimulus-Flatpickr Wrapper</h1>
+<h1 align="center">📆 Stimulus-Flatpickr Wrapper</h1>
 <p align="center">
   <a href="https://www.npmjs.com/package/stimulus-flatpickr" rel="nofollow">
     <img src="https://badge.fury.io/js/stimulus-flatpickr.svg" alt="npm version">
@@ -12,18 +12,18 @@
 </p>
 
 <p align="center">
-  <b>Modest yet powerful wrapper of Flatpickr for stimulus</b></br>
+  <b>Modest yet powerful wrapper of Flatpickr for Stimulus</b></br>
   <sub>Only ~1kb <sub>
 </p>
 
 <br />
 
 - **Simple**: create advanced datepickers with less code
-- **Backend Friendly**: easily pass backend information to the datepicker (locals, availabilities, date format etc)
+- **Backend Friendly**: easily pass backend information to the datepicker (locals, availabilities, date formats etc)
 - **strftime friendly**: [converts automatically strftime](#date-and-time-formats) formats to flatpickr formating tokens
 - **Turbolinks**: make all your datepickers compatible with Turbolinks by design
 - **Getters**: all Flatpickr elements are available as [targets](#elements)
-- **Events/hooks**: all flatpickr [events/hooks](#callbacks) are directly available in your stimulus Controller.
+- **Events/hooks**: all flatpickr [events/hooks](#callbacks) are directly available in your Stimulus Controller.
 - **Example**: [detailed example](#example) for adavanced usage of flatpickr
 - **MIT Licensed**: free for personal and commercial use
 
@@ -83,7 +83,7 @@ If you only need to convert an input field in a DateTime picker, you just need t
 
 ### Register a Flatpickr Controller
 
-manually register a new stimulus controller in your main js entry point.
+manually register a new Stimulus controller in your main JS entry point.
 
 ```js
 // ./packs/application.js
@@ -195,6 +195,7 @@ export default class extends Flatpickr {
 As we have seen just above you can easily from your rails `erb` code pass the flatpickr options. This is great for passing dynamic options that might change (ie enableDate, dateFormat etc).
 
 If all your datepickers share some global settings you can define them in your `initialize()` or `connect()` function.
+
 ```js
 initialize() {
    //global options
@@ -280,7 +281,7 @@ Just add the function to your Stimulus Controller in `camelCase` without `on`.
 
 ### Instance and its methods
 
-You can access the flatpickr instance from your stimulus controller by calling `this.fp`. Also, the instance methods are available through this instance call.
+You can access the flatpickr instance from your Stimulus controller by calling `this.fp`. Also, the instance methods are available through this instance call.
 
 ```javascript
 yourFunction () {
