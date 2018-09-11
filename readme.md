@@ -1,4 +1,4 @@
-<h1 align="center">Stimulus-Flatpickr wrapper</h1>
+<h1 align="center">Stimulus-Flatpickr Wrapper</h1>
 <p align="center">
   <a href="https://www.npmjs.com/package/stimulus-flatpickr" rel="nofollow">
     <img src="https://badge.fury.io/js/stimulus-flatpickr.svg" alt="npm version">
@@ -65,16 +65,16 @@ is available here : [Rails Stimulus Flatpickr](https://github.com/adrienpoly/rai
 
 This assumes that you have [Stimulus](https://stimulusjs.org/handbook/installing) already installed.
 
-In your project add the `stimulus-flatpickr` and `flatpickr` module.
+In your project just add the `stimulus-flatpickr` package.
 
 ```bash
-$ yarn add stimulus-flatpickr flatpickr
+$ yarn add stimulus-flatpickr
 ```
 
 or
 
 ```bash
-$ npm i stimulus-flatpickr flatpickr
+$ npm i stimulus-flatpickr
 ```
 
 ## Basic usage
@@ -194,7 +194,18 @@ export default class extends Flatpickr {
 
 As we have seen just above you can easily from your rails `erb` code pass the flatpickr options. This is great for passing dynamic options that might change (ie enableDate, dateFormat etc).
 
-If all your datepickers share some global settings you can define them in your `connect()` function.
+If all your datepickers share some global settings you can define them in your `initialize()` or `connect()` function.
+```js
+initialize() {
+   //global options
+    this.config = {
+      enableTime: true,
+      time_24hr: true
+    };
+  }
+```
+
+or with `connect()`
 
 ```js
 connect() {
@@ -238,7 +249,7 @@ Flatpickr has custom [formatting tokens](https://flatpickr.js.org/formatting/). 
 
 This package automatically converts `strftime` datetime formats to the nearest Flatpickr format.
 
-With this solution, it becomes handy to localize your date formats.
+With this solution, it becomes handy to localize your date formats. `t("date.formats.long")` outputs `"%B %d, %Y"`for the local `:en` and it outputs `"%e %B %Y"` for the locale `:fr`.
 
 ```erb
 <%= form_with model: appointment do |f| %>
@@ -317,20 +328,7 @@ connect(){
   super.connect();
 
   // ...
-  // Your code can access this.fp flatpick instance
-  // ...
-}
-```
-
-## Overiding connect & disconnect
-
-if you need to overide the connect function in the extended controller, you need to call `super`
-
-```js
-connect(){
-  super.connect();
-  // ...
-  // Your connect code
+  // Your code can access this.fp flatpickr instance
   // ...
 }
 ```
