@@ -1,6 +1,6 @@
 {
   "name": "stimulus-flatpickr",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0",
   "description": "A Stimulus Wrapper for Flatpickr library",
   "main": "dist/stimulus-flatpickr.js",
   "umd:main": "dist/stimulus-flatpickr.umd.js",
