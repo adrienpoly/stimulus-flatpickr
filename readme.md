@@ -297,23 +297,27 @@ yourFunction () {
 
 In your controller you can access the Flapickr [elements](https://flatpickr.js.org/instance-methods-properties-elements/#elements) using some Stimulus like targets.
 
-`this.inputTarget` : The text input element associated with flatpickr.
-
 `this.calendarContainerTarget` : Self-explanatory. This is the div.flatpickr-calendar element.
-
-`this.prevMonthNavTarget` : The “left arrow” element responsible for decrementing the current month.
-
-`this.nextMonthNavTarget` : The “right arrow” element responsible for incrementing the current month.
-
-`this.currentMonthElementTarget`: The span holding the current month’s name.
 
 `this.currentYearElementTarget`: The input holding the current year.
 
 `this.daysTarget` : The container for all the day elements.
 
-#### Properties
+`this.daysContainerTarget` : The container for all the day elements.
 
-Coming ....
+`this.inputTarget` : The text input element associated with flatpickr.
+
+`this.nextMonthNavTarget` : The “right arrow” element responsible for incrementing the current month.
+
+`this.monthNavTarget` : The container with the month navigation.
+
+`this.prevMonthNavTarget` : The “left arrow” element responsible for decrementing the current month.
+
+`this.selectedDateElem`: the selected date element.
+
+`todayDateElem`: today element.
+
+`weekdayContainer`: the container we all the days of the week.
 
 ## Overriding connect & disconnect
 
