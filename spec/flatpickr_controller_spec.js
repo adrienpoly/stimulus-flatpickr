@@ -20,11 +20,6 @@ describe("Flatpickr Controller tests", function() {
     controller = await registerApplication("flatpickr", Flatpickr);
   });
 
-  after("disconnect controller", function() {
-    resetDataAttributes(controller);
-    controller.disconnect();
-  });
-
   describe("Initial state", function() {
     it('can find an input with the class "flatpickr-input"', function() {
       expect(fixtureQuerySelector(".flatpickr-input")).to.exist;
@@ -166,7 +161,7 @@ describe("Flatpickr Controller tests", function() {
 
     context("set min date", function() {
       it("dates before min date are disabled", async function() {
-        await addFlatpickrOption("Now", "2018-10-15", controller);
+        controller.fp.setDate("2018-10-15");
         await addFlatpickrOption("MinDate", "2018-10-14", controller);
         expect(
           document.querySelector('span[aria-label="October 6, 2018"]')
