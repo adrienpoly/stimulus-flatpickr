@@ -1,12 +1,12 @@
 import { Application } from "stimulus";
 
-async function registerApplication(id, controllerClass) {
+async function registerApplication(element, controllerType) {
   const stimulusApp = Application.start();
-  stimulusApp.register(id, controllerClass);
+  stimulusApp.register(element, controllerType);
   return new Promise(resolve =>
     setTimeout(() => {
       resolve(stimulusApp.controllers[0]);
-    })
+    }, 1)
   );
 }
 
@@ -14,7 +14,7 @@ function flatpickrCalendar() {
   return document.querySelector(".flatpickr-calendar");
 }
 
-function addFlatpickrOption(option, value, controller) {
+async function addFlatpickrOption(option, value, controller) {
   return new Promise(resolve => {
     const flatpickr = fixture.el.querySelector("#datepicker");
     flatpickr.dataset[`flatpickr${option}`] =
@@ -23,8 +23,7 @@ function addFlatpickrOption(option, value, controller) {
 
     return setTimeout(() => {
       resolve(flatpickr);
-    }, 100);
-    resolve(flatpickr);
+    });
   });
 }
 

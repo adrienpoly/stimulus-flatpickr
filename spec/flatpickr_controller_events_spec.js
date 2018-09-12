@@ -30,12 +30,6 @@ describe("Flatpickr Controller EVENTS tests", function() {
     controller = await registerApplication("flatpickr", Flatpickr);
   });
 
-  after(async function() {
-    controller.disconnect();
-    this.sandbox.restore();
-    await Promise.resolve();
-  });
-
   describe("Initial state", function() {
     it("Stimulus Flatpickr controller READY function is called", function() {
       expect(controller.ready).has.been.calledOnce;
