@@ -338,6 +338,10 @@ connect(){
 }
 ```
 
+## Internationalization
+
+To handle multiple language to translate your datepicker and convert the date formats, you can have a look at the [example app](https://github.com/adrienpoly/rails_stimulus_flatpickr). `stimulus-flatpickr` makes it straight forward to handle locales.
+
 ## CSS
 
 This wrapper does not include any CSS. Flatpickr CSS should be loaded separately from the main Flatpickr package as you would normally do.
