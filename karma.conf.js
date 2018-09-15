@@ -53,7 +53,8 @@ module.exports = function(config) {
       captureConsole: true,
       chai: {
         includeStack: true
-      }
+      },
+      clearContext: false
     },
 
     // test results reporter to use
@@ -89,7 +90,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ["ChromeHeadless"],
+    browsers: ["Chrome"],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
@@ -97,6 +98,6 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
+    concurrency: 1
   });
 };

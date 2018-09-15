@@ -53,9 +53,10 @@ describe("Flatpickr Controller tests", function() {
   });
 
   describe("Flatpickr options with time enabled", function() {
-    after(function() {
-      resetDataAttributes(controller);
+    after(async function() {
+      await resetDataAttributes(controller);
     });
+
     context("set enableTime false option", function() {
       it("cannot set time", async function() {
         await addFlatpickrOption("EnableTime", "false", controller);
@@ -104,16 +105,13 @@ describe("Flatpickr Controller tests", function() {
   });
 
   describe("Flatpickr options with time Disabled", function() {
-    before(async function() {
-      await addFlatpickrOption("EnableTime", "false", controller);
-    });
-
     after(async function() {
-      await resetDataAttributes(controller);
+      // await resetDataAttributes(controller);
     });
 
     context("add multiMonth 2 option", function() {
       it("can see two months", async function() {
+        await addFlatpickrOption("EnableTime", "false", controller);
         await addFlatpickrOption("ShowMonths", 2, controller);
         expect(flatpickrCalendar()).to.have.class("multiMonth");
       });
@@ -155,14 +153,11 @@ describe("Flatpickr Controller tests", function() {
   });
 
   describe("Flatpickr dates options", function() {
-    before(async function() {
-      await addFlatpickrOption("DateFormat", "Y-m-d", controller);
-    });
-
     context("set min date", function() {
       it("dates before min date are disabled", async function() {
-        controller.fp.setDate("2018-10-15");
+        await addFlatpickrOption("DateFormat", "Y-m-d", controller);
         await addFlatpickrOption("MinDate", "2018-10-14", controller);
+        controller.fp.setDate("2018-10-15");
         expect(
           document.querySelector('span[aria-label="October 6, 2018"]')
         ).to.have.class("disabled");

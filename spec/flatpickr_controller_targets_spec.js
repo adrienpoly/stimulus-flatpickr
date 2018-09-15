@@ -31,6 +31,7 @@ describe("Flatpickr Controller Target tests", function() {
     fixture.load("index.html");
     controller = await registerApplication("flatpickr", Flatpickr);
     await addFlatpickrOption("DefaultDate", new Date(), controller);
+    await Promise.resolve();
   });
 
   Object.keys(elementsSelectors).forEach(element => {
