@@ -27,26 +27,12 @@ class Flatpickr extends Controller {
     this.fp.destroy();
   }
 
-  change() {}
-
-  open() {}
-
-  close() {}
-
-  monthChange() {}
-
-  yearChange() {}
-
-  ready() {}
-
-  valueUpdate() {}
-
-  dayCreate() {}
-
   _initializeEvents() {
     events.forEach(event => {
-      const hook = `on${capitalize(event)}`;
-      this.config[hook] = this[event].bind(this);
+      if (this[event]) {
+        const hook = `on${capitalize(event)}`;
+        this.config[hook] = this[event].bind(this);
+      }
     });
   }
 
