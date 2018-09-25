@@ -1,12 +1,13 @@
-import Flatpickr from "../src/stimulus-flatpickr";
+import Flatpickr from "./controllers/flatpickr_controller";
 import "flatpickr/dist/flatpickr.css";
 import {
-  registerApplication,
+  registerController,
   fixtureQuerySelector,
   calendarQuerySelector,
   flatpickrCalendar,
   addFlatpickrOption,
-  resetDataAttributes
+  resetDataAttributes,
+  beforeEachSuite
 } from "./helpers";
 import chai, { expect } from "chai";
 import chaiDom from "chai-dom";
@@ -15,9 +16,9 @@ var controller;
 chai.use(chaiDom);
 
 describe("Flatpickr Controller tests", function() {
-  before("initialize controller", async function() {
+  beforeEachSuite("initialize controller", async function() {
     fixture.load("index.html");
-    controller = await registerApplication("flatpickr", Flatpickr);
+    controller = await registerController("flatpickr", Flatpickr);
   });
 
   describe("Initial state", function() {
@@ -45,6 +46,7 @@ describe("Flatpickr Controller tests", function() {
 
   describe("When input focus out", function() {
     it("Flatpickr does not have open class", function() {
+      controller.fp.open();
       const otherInput = fixtureQuerySelector("#other-input");
       otherInput.dispatchEvent(new Event("focus"));
 
@@ -53,10 +55,6 @@ describe("Flatpickr Controller tests", function() {
   });
 
   describe("Flatpickr options with time enabled", function() {
-    after(async function() {
-      await resetDataAttributes(controller);
-    });
-
     context("set enableTime false option", function() {
       it("cannot set time", async function() {
         await addFlatpickrOption("EnableTime", "false", controller);
@@ -67,9 +65,6 @@ describe("Flatpickr Controller tests", function() {
     });
 
     context("set enableTime true option", function() {
-      after(async function() {
-        await resetDataAttributes(controller);
-      });
       it("can set time", async function() {
         await addFlatpickrOption("EnableTime", "true", controller);
         expect(flatpickrCalendar()).to.have.class("hasTime");
@@ -105,10 +100,6 @@ describe("Flatpickr Controller tests", function() {
   });
 
   describe("Flatpickr options with time Disabled", function() {
-    after(async function() {
-      // await resetDataAttributes(controller);
-    });
-
     context("add multiMonth 2 option", function() {
       it("can see two months", async function() {
         await addFlatpickrOption("EnableTime", "false", controller);
@@ -137,9 +128,9 @@ describe("Flatpickr Controller tests", function() {
         expect(
           fixtureQuerySelector("input[type=hidden].flatpickr-input")
         ).to.have.value("2018-10-15");
-        expect(controller.fp.config.dateFormat).to.equal("Y-m-d");
       });
-      it("base dateFormat remains the same", async function() {
+
+      it("base dateFormat remains the same", function() {
         expect(controller.fp.config.dateFormat).to.equal("Y-m-d");
       });
     });

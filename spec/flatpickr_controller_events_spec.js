@@ -1,7 +1,7 @@
-import Flatpickr from "../src/stimulus-flatpickr";
+import Flatpickr from "./controllers/flatpickr_hook_controller";
 import "flatpickr/dist/flatpickr.css";
 import {
-  registerApplication,
+  registerController,
   fixtureQuerySelector,
   addFlatpickrOption,
   resetDataAttributes
@@ -27,7 +27,7 @@ describe("Flatpickr Controller EVENTS tests", function() {
     this.spyDayCreate = this.sandbox.stub(Flatpickr.prototype, "dayCreate");
     this.spyValueUpdate = this.sandbox.stub(Flatpickr.prototype, "valueUpdate");
     this.spyChange = this.sandbox.stub(Flatpickr.prototype, "change");
-    controller = await registerApplication("flatpickr", Flatpickr);
+    controller = await registerController("flatpickr", Flatpickr);
   });
 
   describe("Initial state", function() {
