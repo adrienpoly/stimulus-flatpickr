@@ -51,7 +51,12 @@ var numberOptions = [
   "showMonths"
 ];
 
-var arrayOptions = ["disable", "enable"];
+var arrayOptions = [
+  "disable",
+  "enable",
+  "disableDaysOfWeek",
+  "enableDaysOfWeek"
+];
 
 var dateOptions = ["maxDate", "minDate", "maxTime", "minTime", "now"];
 
@@ -160,28 +165,14 @@ var Flatpickr = (function (Controller) {
     this.fp.destroy();
   };
 
-  Flatpickr.prototype.change = function change () {};
-
-  Flatpickr.prototype.open = function open () {};
-
-  Flatpickr.prototype.close = function close () {};
-
-  Flatpickr.prototype.monthChange = function monthChange () {};
-
-  Flatpickr.prototype.yearChange = function yearChange () {};
-
-  Flatpickr.prototype.ready = function ready () {};
-
-  Flatpickr.prototype.valueUpdate = function valueUpdate () {};
-
-  Flatpickr.prototype.dayCreate = function dayCreate () {};
-
   Flatpickr.prototype._initializeEvents = function _initializeEvents () {
     var this$1 = this;
 
     events.forEach(function (event) {
-      var hook = "on" + (capitalize(event));
-      this$1.config[hook] = this$1[event].bind(this$1);
+      if (this$1[event]) {
+        var hook = "on" + (capitalize(event));
+        this$1.config[hook] = this$1[event].bind(this$1);
+      }
     });
   };
 
@@ -197,6 +188,44 @@ var Flatpickr = (function (Controller) {
         }
       });
     });
+    this._handleDaysOfWeek();
+  };
+
+  Flatpickr.prototype._handleDaysOfWeek = function _handleDaysOfWeek () {
+    if (this.config.disableDaysOfWeek) {
+      this.config.disableDaysOfWeek = this._validateDaysOfWeek(
+        this.config.disableDaysOfWeek
+      );
+      this.config.disable = (this.config.disable || []).concat( [this._disable.bind(this)]
+      );
+    }
+
+    if (this.config.enableDaysOfWeek) {
+      this.config.enableDaysOfWeek = this._validateDaysOfWeek(
+        this.config.enableDaysOfWeek
+      );
+      this.config.enable = (this.config.enable || []).concat( [this._enable.bind(this)]
+      );
+    }
+  };
+
+  Flatpickr.prototype._validateDaysOfWeek = function _validateDaysOfWeek (days) {
+    if (Array.isArray(days)) {
+      return days.map(function (day) { return parseInt(day); });
+    } else {
+      console.error("days of week must be a valid array");
+      return [];
+    }
+  };
+
+  Flatpickr.prototype._disable = function _disable (date) {
+    var disabledDays = this.config.disableDaysOfWeek;
+    return disabledDays.includes(date.getDay());
+  };
+
+  Flatpickr.prototype._enable = function _enable (date) {
+    var enabledDays = this.config.enableDaysOfWeek;
+    return enabledDays.includes(date.getDay());
   };
 
   Flatpickr.prototype._initializeDateFormats = function _initializeDateFormats () {

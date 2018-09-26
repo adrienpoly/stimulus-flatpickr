@@ -147,16 +147,16 @@ describe("Flatpickr Controller tests", function() {
     context("set min date", function() {
       it("dates before min date are disabled", async function() {
         await addFlatpickrOption("DateFormat", "Y-m-d", controller);
-        await addFlatpickrOption("MinDate", "2018-10-14", controller);
+        await addFlatpickrOption("MinDate", "2018-10-03", controller);
         controller.fp.setDate("2018-10-15");
         expect(
-          document.querySelector('span[aria-label="October 6, 2018"]')
+          document.querySelector('span[aria-label="October 2, 2018"]')
         ).to.have.class("disabled");
       });
     });
 
     context("disable dates", function() {
-      it("disabled dates are disabled", async function() {
+      it("disabled individual dates are disabled", async function() {
         await addFlatpickrOption(
           "Disable",
           ["2018-10-14", "2018-10-17"],
@@ -166,6 +166,106 @@ describe("Flatpickr Controller tests", function() {
         expect(
           document.querySelector('span[aria-label="October 14, 2018"]')
         ).to.have.class("disabled");
+      });
+
+      it("add disable days of week all sundays are disabled", async function() {
+        await addFlatpickrOption("DisableDaysOfWeek", [6], controller);
+
+        expect(
+          document.querySelector('span[aria-label="October 6, 2018"]')
+        ).to.have.class("disabled");
+        expect(
+          document.querySelector('span[aria-label="October 13, 2018"]')
+        ).to.have.class("disabled");
+        expect(
+          document.querySelector('span[aria-label="October 14, 2018"]')
+        ).to.have.class("disabled");
+      });
+
+      it("enable individual dates are enabled", async function() {
+        await addFlatpickrOption(
+          "Enable",
+          ["2018-10-14", "2018-10-17"],
+          controller
+        );
+
+        expect(
+          document.querySelector('span[aria-label="October 14, 2018"]')
+        ).not.to.have.class("disabled");
+      });
+
+      it("add enable days of week only mondays are enabled", async function() {
+        await addFlatpickrOption("EnableDaysOfWeek", [1], controller);
+        expect(
+          document.querySelector('span[aria-label="October 8, 2018"]')
+        ).not.to.have.class("disabled");
+        expect(
+          document.querySelector('span[aria-label="October 15, 2018"]')
+        ).not.to.have.class("disabled");
+        expect(
+          document.querySelector('span[aria-label="October 14, 2018"]')
+        ).not.to.have.class("disabled");
+      });
+    });
+  });
+
+  describe("Flatpickr enable days of week only", function() {
+    it("add enable days of week", async function() {
+      await addFlatpickrOption("EnableDaysOfWeek", [1], controller);
+      const enabledDays = controller.daysTarget.querySelectorAll(
+        "span.flatpickr-day:not(.disabled)"
+      );
+      expect(enabledDays.length).to.be.within(4, 6);
+    });
+  });
+
+  describe("Flatpickr disable days of week only", function() {
+    it("add disable days of week", async function() {
+      await addFlatpickrOption("DisableDaysOfWeek", [1], controller);
+
+      const disabledDays = controller.daysTarget.querySelectorAll(
+        "span.flatpickr-day.disabled"
+      );
+      expect(disabledDays.length).to.be.within(4, 6);
+    });
+  });
+
+  describe("Flatpickr disable days test with invalid entries", function() {
+    context("don't provide an array", function() {
+      it("it still work and no days are disabled", async function() {
+        await addFlatpickrOption("DisableDaysOfWeek", 1, controller);
+
+        const disabledDays = controller.daysTarget.querySelectorAll(
+          "span.flatpickr-day.disabled"
+        );
+        expect(controller).to.exist;
+        expect(disabledDays.length).to.equal(0);
+      });
+    });
+
+    context("provide an array of string", function() {
+      it("it is the same as an array of integer", async function() {
+        await addFlatpickrOption("DisableDaysOfWeek", ["1"], controller);
+
+        const disabledDays = controller.daysTarget.querySelectorAll(
+          "span.flatpickr-day.disabled"
+        );
+        expect(controller).to.exist;
+        expect(disabledDays.length).to.be.within(4, 6);
+      });
+    });
+  });
+
+  describe("Flatpickr enable days test with invalid entries", function() {
+    context("don't provide an array", function() {
+      it("it still work and all days are disabled", async function() {
+        await addFlatpickrOption("EnableDaysOfWeek", 1, controller);
+
+        const disabledDays = controller.daysTarget.querySelectorAll(
+          "span.flatpickr-day.disabled"
+        );
+        expect(controller).to.exist;
+        expect(disabledDays.length).to.be.at.least(30);
       });
     });
   });

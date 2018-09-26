@@ -21,6 +21,7 @@
 - **Simple**: create advanced datepickers with less code
 - **Backend Friendly**: easily pass backend information to the datepicker (locals, availabilities, date formats etc)
 - **strftime friendly**: [converts automatically strftime](#date-and-time-formats) formats to flatpickr formating tokens
+- **Disable days of week**: easily disable days of week (ie: all sundays)
 - **Turbolinks**: make all your datepickers compatible with Turbolinks by design
 - **Getters**: all Flatpickr elements are available as [targets](#elements)
 - **Events/hooks**: all flatpickr [events/hooks](#callbacks) are directly available in your Stimulus Controller.
@@ -270,6 +271,43 @@ With this solution, it becomes handy to localize your date formats. `t("date.for
 <p align="center">
   <img src="./images/datetime-picker-formats.png" alt="datetime picker result">
 </p>
+
+### Enable/Disable days of week
+
+With Flatpickr to disable certain days of the week, you need to use the disable js function. Obviously passing a function through data-attributes is not easy 😄.
+
+The wrapper introduce two new configuration options:
+
+- `disableDaysOfWeek`: pass an array of days to disable (all others are enabled)
+- `enableDaysOfWeek`: pass an array of days to enable (all others are disabled)
+
+<table>
+<th>
+Code
+</th>
+<th>
+Result
+</th>
+<tr>
+<td>
+   <pre lang="erb">
+   <%= form_with model: Appointement.new, authenticity_token: true do |f| %>
+     <%= f.text_field :start_time,
+       data: {
+         controller: "flatpickr",
+         flatpickr_disable_days_of_week: [5,6], #disables saturdays and sundays
+         flatpickr_disable: ["2018-09-25", "2018-09-26"] #disables individual dates
+       } %>
+   <% end %>
+   </pre>
+</td>
+<td>
+  <p align="center">
+    <img src="./images/datetime-days-of-week.png" alt="datetime picker result days of week">
+  </p>
+</td>
+</tr>
+</table>
 
 ### Callbacks
 
