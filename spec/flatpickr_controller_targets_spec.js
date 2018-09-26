@@ -1,7 +1,7 @@
-import Flatpickr from "../src/stimulus-flatpickr";
+import Flatpickr from "./controllers/flatpickr_controller";
 import "flatpickr/dist/flatpickr.css";
 import {
-  registerApplication,
+  registerController,
   addFlatpickrOption,
   resetDataAttributes
 } from "./helpers";
@@ -29,7 +29,7 @@ chai.use(chaiDom);
 describe("Flatpickr Controller Target tests", function() {
   before("initialize controller", async function() {
     fixture.load("index.html");
-    controller = await registerApplication("flatpickr", Flatpickr);
+    controller = await registerController("flatpickr", Flatpickr);
     await addFlatpickrOption("DefaultDate", new Date(), controller);
     await Promise.resolve();
   });

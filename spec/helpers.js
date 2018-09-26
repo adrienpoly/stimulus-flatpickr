@@ -1,8 +1,9 @@
 import { Application } from "stimulus";
 
-async function registerApplication(element, controllerType) {
+async function registerController(element, controllerType) {
   const stimulusApp = Application.start();
   stimulusApp.register(element, controllerType);
+
   return new Promise(resolve =>
     setTimeout(() => {
       resolve(stimulusApp.controllers[0]);
@@ -28,7 +29,7 @@ async function addFlatpickrOption(option, value, controller) {
 }
 
 function fixtureQuerySelector(selector) {
-  return fixture.el.querySelector(`${selector}`);
+  return fixture.el.querySelector(selector);
 }
 
 function calendarQuerySelector(selector) {
@@ -45,8 +46,8 @@ async function resetDataAttributes(controller) {
   return Promise.resolve();
 }
 
-function beforeEachSuite(fn) {
-  before(function() {
+function beforeEachSuite(title, fn) {
+  before(title, function() {
     const suites = this.test.parent.suites || [];
     suites.forEach(s => {
       s.beforeAll(fn);
@@ -57,7 +58,7 @@ function beforeEachSuite(fn) {
 }
 
 export {
-  registerApplication,
+  registerController,
   fixtureQuerySelector,
   calendarQuerySelector,
   flatpickrCalendar,
