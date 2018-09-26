@@ -35,7 +35,12 @@ const numberOptions = [
   "showMonths"
 ];
 
-const arrayOptions = ["disable", "enable"];
+const arrayOptions = [
+  "disable",
+  "enable",
+  "disableDaysOfWeek",
+  "enableDaysOfWeek"
+];
 
 const dateOptions = ["maxDate", "minDate", "maxTime", "minTime", "now"];
 

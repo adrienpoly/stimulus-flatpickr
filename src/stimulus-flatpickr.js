@@ -46,6 +46,48 @@ class Flatpickr extends Controller {
         }
       });
     });
+    this._handleDaysOfWeek();
+  }
+
+  _handleDaysOfWeek() {
+    if (this.config.disableDaysOfWeek) {
+      this.config.disableDaysOfWeek = this._validateDaysOfWeek(
+        this.config.disableDaysOfWeek
+      );
+      this.config.disable = [
+        ...(this.config.disable || []),
+        this._disable.bind(this)
+      ];
+    }
+
+    if (this.config.enableDaysOfWeek) {
+      this.config.enableDaysOfWeek = this._validateDaysOfWeek(
+        this.config.enableDaysOfWeek
+      );
+      this.config.enable = [
+        ...(this.config.enable || []),
+        this._enable.bind(this)
+      ];
+    }
+  }
+
+  _validateDaysOfWeek(days) {
+    if (Array.isArray(days)) {
+      return days.map(day => parseInt(day));
+    } else {
+      console.error("days of week must be a valid array");
+      return [];
+    }
+  }
+
+  _disable(date) {
+    const disabledDays = this.config.disableDaysOfWeek;
+    return disabledDays.includes(date.getDay());
+  }
+
+  _enable(date) {
+    const enabledDays = this.config.enableDaysOfWeek;
+    return enabledDays.includes(date.getDay());
   }
 
   _initializeDateFormats() {
