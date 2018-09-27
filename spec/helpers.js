@@ -20,7 +20,11 @@ async function addFlatpickrOption(option, value, controller) {
   flatpickr.dataset[`flatpickr${option}`] =
     typeof value === "object" ? JSON.stringify(value) : value;
   controller.connect();
-  return Promise.resolve();
+  return new Promise(resolve =>
+    setTimeout(() => {
+      resolve(flatpickr);
+    })
+  );
 }
 
 function fixtureQuerySelector(selector) {
