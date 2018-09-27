@@ -351,11 +351,11 @@ In your controller you can access the Flapickr [elements](https://flatpickr.js.o
 
 `this.prevMonthNavTarget` : The “left arrow” element responsible for decrementing the current month.
 
-`this.selectedDateElem`: the selected date element.
+`this.selectedDateElemTarget`: the selected date element.
 
-`todayDateElem`: today element.
+`this.todayDateElemTarget`: today element.
 
-`weekdayContainer`: the container we all the days of the week.
+`this.weekdayContainerTarget`: the container we all the days of the week.
 
 ## Overriding connect & disconnect
 
