@@ -6,7 +6,6 @@ import {
   calendarQuerySelector,
   flatpickrCalendar,
   addFlatpickrOption,
-  resetDataAttributes,
   beforeEachSuite
 } from "./helpers";
 import chai, { expect } from "chai";
@@ -112,6 +111,7 @@ describe("Flatpickr Controller tests", function() {
       it("can see new input field", async function() {
         expect(fixture.el).not.to.contain("input[type=hidden].flatpickr-input");
         await addFlatpickrOption("AltInput", "true", controller);
+
         expect(fixture.el).to.contain("input[type=hidden].flatpickr-input");
         expect(fixture.el).to.contain("input[readonly].flatpickr-input");
       });
@@ -120,14 +120,14 @@ describe("Flatpickr Controller tests", function() {
     context("add AltFormat %Y-%m-%d option", function() {
       it("can see new input field", async function() {
         await addFlatpickrOption("AltFormat", "%B %d, %Y", controller);
+        await addFlatpickrOption("DefaultDate", "2018-10-15", controller);
         controller.fp.setDate("2018-10-15");
-        expect(
-          calendarQuerySelector(".flatpickr-day.selected")
-        ).to.have.attribute("aria-label", "October 15, 2018");
+        expect(controller.selectedDateElemTarget).to.have.attribute(
+          "aria-label",
+          "October 15, 2018"
+        );
 
-        expect(
-          fixtureQuerySelector("input[type=hidden].flatpickr-input")
-        ).to.have.value("2018-10-15");
+        expect(controller.inputTarget).to.have.value("2018-10-15");
       });
 
       it("base dateFormat remains the same", function() {

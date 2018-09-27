@@ -1,10 +1,6 @@
 import Flatpickr from "./controllers/flatpickr_controller";
 import "flatpickr/dist/flatpickr.css";
-import {
-  registerController,
-  addFlatpickrOption,
-  resetDataAttributes
-} from "./helpers";
+import { registerController, addFlatpickrOption } from "./helpers";
 import chai, { expect } from "chai";
 import chaiDom from "chai-dom";
 var controller;

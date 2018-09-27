@@ -3,8 +3,7 @@ import "flatpickr/dist/flatpickr.css";
 import {
   registerController,
   fixtureQuerySelector,
-  addFlatpickrOption,
-  resetDataAttributes
+  addFlatpickrOption
 } from "./helpers";
 import chai, { expect } from "chai";
 import chaiDom from "chai-dom";
