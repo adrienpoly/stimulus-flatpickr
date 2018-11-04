@@ -107,15 +107,15 @@ describe("Flatpickr Controller tests", function() {
       });
     });
 
-    // context("add AltInput true option", function() {
-    //   it("can see new input field", async function() {
-    //     expect(fixture.el).not.to.contain("input[type=hidden].flatpickr-input");
-    //     await addFlatpickrOption("AltInput", "true", controller);
+    context("add AltInput true option", function() {
+      it("can see new input field", async function() {
+        expect(fixture.el).not.to.contain("input[type=hidden].flatpickr-input");
+        await addFlatpickrOption("AltInput", "true", controller);
 
-    //     expect(fixture.el).to.contain("input[type=hidden].flatpickr-input");
-    //     expect(fixture.el).to.contain("input[readonly].flatpickr-input");
-    //   });
-    // });
+        expect(fixture.el).to.contain("input[type=hidden].flatpickr-input");
+        expect(fixture.el).to.contain("input[readonly].flatpickr-input");
+      });
+    });
 
     context("add AltFormat %Y-%m-%d option", function() {
       it("can see new input field", async function() {
