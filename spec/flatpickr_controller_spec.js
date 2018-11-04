@@ -121,7 +121,6 @@ describe("Flatpickr Controller tests", function() {
       it("can see new input field", async function() {
         await addFlatpickrOption("AltFormat", "%B %d, %Y", controller);
         await addFlatpickrOption("DefaultDate", "2018-10-15", controller);
-        controller.fp.setDate("2018-10-15");
         expect(controller.selectedDateElemTarget).to.have.attribute(
           "aria-label",
           "October 15, 2018"
@@ -143,12 +142,16 @@ describe("Flatpickr Controller tests", function() {
     });
   });
 
-  describe("Flatpickr dates options", function() {
+  describe("Flatpickr disable dates options", function() {
+    before(async function() {
+      controller.fp.setDate("2018-10-15");
+      await addFlatpickrOption("DateFormat", "Y-m-d", controller);
+      await addFlatpickrOption("DefaultDate", "2018-10-15", controller);
+    });
+
     context("set min date", function() {
       it("dates before min date are disabled", async function() {
-        await addFlatpickrOption("DateFormat", "Y-m-d", controller);
         await addFlatpickrOption("MinDate", "2018-10-03", controller);
-        controller.fp.setDate("2018-10-15");
         expect(
           document.querySelector('span[aria-label="October 2, 2018"]')
         ).to.have.class("disabled");
@@ -174,38 +177,48 @@ describe("Flatpickr Controller tests", function() {
         expect(
           document.querySelector('span[aria-label="October 6, 2018"]')
         ).to.have.class("disabled");
+
         expect(
           document.querySelector('span[aria-label="October 13, 2018"]')
         ).to.have.class("disabled");
-        expect(
-          document.querySelector('span[aria-label="October 14, 2018"]')
-        ).to.have.class("disabled");
       });
+    });
+  });
 
-      it("enable individual dates are enabled", async function() {
-        await addFlatpickrOption(
-          "Enable",
-          ["2018-10-14", "2018-10-17"],
-          controller
-        );
+  describe("Flatpickr enable dates options", function() {
+    before(async function() {
+      await addFlatpickrOption("DateFormat", "Y-m-d", controller);
+      controller.fp.setDate("2018-10-15");
+      await addFlatpickrOption("DefaultDate", "2018-10-15", controller);
+    });
 
-        expect(
-          document.querySelector('span[aria-label="October 14, 2018"]')
-        ).not.to.have.class("disabled");
-      });
+    it("enable individual dates are enabled", async function() {
+      await addFlatpickrOption(
+        "Enable",
+        ["2018-10-14", "2018-10-17"],
+        controller
+      );
+      await addFlatpickrOption("DefaultDate", "2018-10-14", controller);
 
-      it("add enable days of week only mondays are enabled", async function() {
-        await addFlatpickrOption("EnableDaysOfWeek", [1], controller);
-        expect(
-          document.querySelector('span[aria-label="October 8, 2018"]')
-        ).not.to.have.class("disabled");
-        expect(
-          document.querySelector('span[aria-label="October 15, 2018"]')
-        ).not.to.have.class("disabled");
-        expect(
-          document.querySelector('span[aria-label="October 14, 2018"]')
-        ).not.to.have.class("disabled");
-      });
+      expect(
+        document.querySelector('span[aria-label="October 14, 2018"]')
+      ).not.to.have.class("disabled");
+    });
+
+    it("add enable days of week only mondays are enabled", async function() {
+      await addFlatpickrOption("EnableDaysOfWeek", [1], controller);
+
+      expect(
+        document.querySelector('span[aria-label="October 8, 2018"]')
+      ).not.to.have.class("disabled");
+
+      expect(
+        document.querySelector('span[aria-label="October 15, 2018"]')
+      ).not.to.have.class("disabled");
+
+      expect(
+        document.querySelector('span[aria-label="October 14, 2018"]')
+      ).not.to.have.class("disabled");
     });
   });
 
