@@ -185,7 +185,7 @@ export default class extends Flatpickr {
 }
 ```
 
-### Using range pluggin
+### Using range plugin
 
 ```
 // ./controllers/flatpickr_controller.js
