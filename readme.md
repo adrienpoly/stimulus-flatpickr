@@ -185,6 +185,54 @@ export default class extends Flatpickr {
 }
 ```
 
+###
+
+```
+// index.html
+<div class="time" data-controller="flatpickr" data-locale="en" data-flatpickr-format="Y-m-d" data-flatpickr-enable-time="false">
+  <div class="form-group">
+    <label class="label-control" for="q_time_starts_at">Time starts at</label>
+    <input class="form-control datepicker flatpickr-input" data-locale="en" data-target="flatpickr.rangeStart" type="text" name="q[time_starts_at]" id="q_time_starts_at" readonly="readonly">
+  </div>
+  <div class="form-group">
+    <label class="label-control" for="q_time_ends_at">Time ends at</label>
+    <input class="form-control datepicker" data-locale="en" data-target="flatpickr.rangeEnd" type="text" name="q[time_ends_at]" id="q_time_ends_at" data-fp-omit="" readonly="readonly">
+  </div>
+</div>
+```
+
+// ./controllers/flatpickr_controller.js
+import Flatpickr from "stimulus-flatpickr";
+
+// create a new Stimulus controller by extending stimulus-flatpickr wrapper controller
+export default class extends Flatpickr {
+  static targets = [ "rangeStart", "rangeEnd" ]
+  static flatpickElement;
+
+  initialize () {
+    if(this.element.tagName === "INPUT") {
+      this.config = {}
+      this.flatpickElement = this.element;
+    } else {
+      this.flatpickElement = this.rangeStartTarget;
+      this.config = {
+        "plugins": [new rangePlugin({ input: this.rangeEndTarget })]
+      }
+    }
+  }
+
+  connect () {
+    this._initializeEvents();
+    this._initializeOptions();
+    this._initializeDateFormats();
+
+    this.fp = flatpickr(this.flatpickElement, Object.assign({}, this.config));
+
+    this._initializeElements();
+  };
+}
+```
+
 ### Global settings for all datepickers
 
 As we have seen just above you can easily from your rails `erb` code pass the flatpickr options. This is great for passing dynamic options that might change (ie enableDate, dateFormat etc).
