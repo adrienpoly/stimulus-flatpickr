@@ -185,22 +185,9 @@ export default class extends Flatpickr {
 }
 ```
 
-###
+### Using range pluggin
 
 ```
-// index.html
-<div class="time" data-controller="flatpickr" data-locale="en" data-flatpickr-format="Y-m-d" data-flatpickr-enable-time="false">
-  <div class="form-group">
-    <label class="label-control" for="q_time_starts_at">Time starts at</label>
-    <input class="form-control datepicker flatpickr-input" data-locale="en" data-target="flatpickr.rangeStart" type="text" name="q[time_starts_at]" id="q_time_starts_at" readonly="readonly">
-  </div>
-  <div class="form-group">
-    <label class="label-control" for="q_time_ends_at">Time ends at</label>
-    <input class="form-control datepicker" data-locale="en" data-target="flatpickr.rangeEnd" type="text" name="q[time_ends_at]" id="q_time_ends_at" data-fp-omit="" readonly="readonly">
-  </div>
-</div>
-```
-
 // ./controllers/flatpickr_controller.js
 import Flatpickr from "stimulus-flatpickr";
 
@@ -231,6 +218,22 @@ export default class extends Flatpickr {
     this._initializeElements();
   };
 }
+```
+
+Put the controller in a div that wraps the range start and the range end: 
+
+```
+// index.html
+<div class="time" data-controller="flatpickr" data-locale="en" data-flatpickr-format="Y-m-d" data-flatpickr-enable-time="false">
+  <div class="form-group">
+    <label class="label-control" for="q_time_starts_at">Time starts at</label>
+    <input class="form-control datepicker flatpickr-input" data-locale="en" data-target="flatpickr.rangeStart" type="text" name="q[time_starts_at]" id="q_time_starts_at" readonly="readonly">
+  </div>
+  <div class="form-group">
+    <label class="label-control" for="q_time_ends_at">Time ends at</label>
+    <input class="form-control datepicker" data-locale="en" data-target="flatpickr.rangeEnd" type="text" name="q[time_ends_at]" id="q_time_ends_at" data-fp-omit="" readonly="readonly">
+  </div>
+</div>
 ```
 
 ### Global settings for all datepickers
