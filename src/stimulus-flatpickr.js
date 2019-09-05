@@ -6,7 +6,7 @@ import { events } from "./events";
 import { elements } from "./elements";
 import { convertDateFormat } from "./strftime_mapping";
 
-class Flatpickr extends Controller {
+class StimulusFlatpickr extends Controller {
   initialize() {
     this.config = {};
   }
@@ -125,4 +125,4 @@ class Flatpickr extends Controller {
   }
 }
 
-export default Flatpickr;
+export default StimulusFlatpickr;

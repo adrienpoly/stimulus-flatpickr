@@ -1,27 +1,29 @@
-import buble from "rollup-plugin-buble";
 import filesize from "rollup-plugin-filesize";
 import resolve from "rollup-plugin-node-resolve";
+import babel from "rollup-plugin-babel";
+
+const pkg = require("./package.json");
+
+const name = pkg.name;
 
 export default {
   input: "src/stimulus-flatpickr.js",
   external: ["stimulus", "flatpickr"],
   output: [
     {
-      file: "dist/stimulus-flatpickr.js",
+      file: "dist/index.js",
       format: "cjs",
-      name: "StimulusFlatpickr",
       sourcemap: true
     },
     {
-      file: "dist/stimulus-flatpickr.m.js",
+      file: "dist/index.m.js",
       format: "es",
-      name: "StimulusFlatpickr",
       sourcemap: true
     },
     {
-      file: "dist/stimulus-flatpickr.umd.js",
+      file: "dist/index.umd.js",
       format: "umd",
-      name: "StimulusFlatpickr",
+      name,
       sourcemap: true,
       globals: {
         stimulus: "Stimulus",
@@ -31,11 +33,8 @@ export default {
   ],
   plugins: [
     resolve(),
-    buble({
-      transforms: {
-        classes: true
-      },
-      objectAssign: "Object.assign"
+    babel({
+      // exclude: "node_modules/**"
     }),
     filesize()
   ]
