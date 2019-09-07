@@ -1,128 +1,118 @@
-import { Controller } from "stimulus";
-import flatpickr from "flatpickr";
-import { kebabCase, capitalize } from "./utils";
-import { options, dateFormats } from "./config_options";
-import { events } from "./events";
-import { elements } from "./elements";
-import { convertDateFormat } from "./strftime_mapping";
+import { Controller } from 'stimulus'
+import flatpickr from 'flatpickr'
+import { kebabCase, capitalize } from './utils'
+import { options, dateFormats } from './config_options'
+import { events } from './events'
+import { elements } from './elements'
+import { convertDateFormat } from './strftime_mapping'
 
 class StimulusFlatpickr extends Controller {
   initialize() {
-    this.config = {};
+    this.config = {}
   }
 
   connect() {
-    this._initializeEvents();
-    this._initializeOptions();
-    this._initializeDateFormats();
+    this._initializeEvents()
+    this._initializeOptions()
+    this._initializeDateFormats()
 
     this.fp = flatpickr(this.element, {
       ...this.config
-    });
+    })
 
-    this._initializeElements();
+    this._initializeElements()
   }
 
   disconnect() {
-    this.fp.destroy();
+    this.fp.destroy()
   }
 
   _initializeEvents() {
-    events.forEach(event => {
+    events.forEach((event) => {
       if (this[event]) {
-        const hook = `on${capitalize(event)}`;
-        this.config[hook] = this[event].bind(this);
+        const hook = `on${capitalize(event)}`
+        this.config[hook] = this[event].bind(this)
       }
-    });
+    })
   }
 
   _initializeOptions() {
-    Object.keys(options).forEach(optionType => {
-      const optionsCamelCase = options[optionType];
-      optionsCamelCase.forEach(option => {
-        const optionKebab = kebabCase(option);
+    Object.keys(options).forEach((optionType) => {
+      const optionsCamelCase = options[optionType]
+      optionsCamelCase.forEach((option) => {
+        const optionKebab = kebabCase(option)
         if (this.data.has(optionKebab)) {
-          this.config[option] = this[`_${optionType}`](optionKebab);
+          this.config[option] = this[`_${optionType}`](optionKebab)
         }
-      });
-    });
-    this._handleDaysOfWeek();
+      })
+    })
+    this._handleDaysOfWeek()
   }
 
   _handleDaysOfWeek() {
     if (this.config.disableDaysOfWeek) {
-      this.config.disableDaysOfWeek = this._validateDaysOfWeek(
-        this.config.disableDaysOfWeek
-      );
-      this.config.disable = [
-        ...(this.config.disable || []),
-        this._disable.bind(this)
-      ];
+      this.config.disableDaysOfWeek = this._validateDaysOfWeek(this.config.disableDaysOfWeek)
+      this.config.disable = [...(this.config.disable || []), this._disable.bind(this)]
     }
 
     if (this.config.enableDaysOfWeek) {
-      this.config.enableDaysOfWeek = this._validateDaysOfWeek(
-        this.config.enableDaysOfWeek
-      );
-      this.config.enable = [
-        ...(this.config.enable || []),
-        this._enable.bind(this)
-      ];
+      this.config.enableDaysOfWeek = this._validateDaysOfWeek(this.config.enableDaysOfWeek)
+      this.config.enable = [...(this.config.enable || []), this._enable.bind(this)]
     }
   }
 
   _validateDaysOfWeek(days) {
     if (Array.isArray(days)) {
-      return days.map(day => parseInt(day));
+      return days.map((day) => parseInt(day))
     } else {
-      console.error("days of week must be a valid array");
-      return [];
+      console.error('days of week must be a valid array')
+      return []
     }
   }
 
   _disable(date) {
-    const disabledDays = this.config.disableDaysOfWeek;
-    return disabledDays.includes(date.getDay());
+    const disabledDays = this.config.disableDaysOfWeek
+    return disabledDays.includes(date.getDay())
   }
 
   _enable(date) {
-    const enabledDays = this.config.enableDaysOfWeek;
-    return enabledDays.includes(date.getDay());
+    const enabledDays = this.config.enableDaysOfWeek
+    return enabledDays.includes(date.getDay())
   }
 
   _initializeDateFormats() {
-    dateFormats.forEach(dateFormat => {
+    dateFormats.forEach((dateFormat) => {
       if (this.data.has(dateFormat)) {
-        this.config[dateFormat] = convertDateFormat(this.data.get(dateFormat));
+        this.config[dateFormat] = convertDateFormat(this.data.get(dateFormat))
       }
-    });
+    })
   }
 
   _initializeElements() {
-    elements.forEach(element => {
-      this[`${element}Target`] = this.fp[element];
-    });
+    elements.forEach((element) => {
+      this[`${element}Target`] = this.fp[element]
+    })
   }
 
   _string(option) {
-    return this.data.get(option);
+    return this.data.get(option)
   }
 
   _date(option) {
-    return this.data.get(option);
+    return this.data.get(option)
   }
 
   _boolean(option) {
-    return this.data.get(option) === "true";
+    return this.data.get(option) === 'true'
   }
 
   _array(option) {
-    return JSON.parse(this.data.get(option));
+    return JSON.parse(this.data.get(option))
   }
 
   _number(option) {
-    return parseInt(this.data.get(option));
+    return parseInt(this.data.get(option))
   }
 }
 
-export default StimulusFlatpickr;
+export default StimulusFlatpickr

@@ -1,10 +1,1 @@
-export const events = [
-  "change",
-  "open",
-  "close",
-  "monthChange",
-  "yearChange",
-  "ready",
-  "valueUpdate",
-  "dayCreate"
-];
+export const events = ['change', 'open', 'close', 'monthChange', 'yearChange', 'ready', 'valueUpdate', 'dayCreate']
