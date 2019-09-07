@@ -1,41 +1,41 @@
-import filesize from "rollup-plugin-filesize";
-import resolve from "rollup-plugin-node-resolve";
-import babel from "rollup-plugin-babel";
+import filesize from 'rollup-plugin-filesize'
+import resolve from 'rollup-plugin-node-resolve'
+import babel from 'rollup-plugin-babel'
 
-const pkg = require("./package.json");
+const pkg = require('./package.json')
 
-const name = pkg.name;
+const name = pkg.name
 
 export default {
-  input: "src/stimulus-flatpickr.js",
-  external: ["stimulus", "flatpickr"],
+  input: 'src/stimulus-flatpickr.js',
+  external: ['stimulus', 'flatpickr'],
   output: [
     {
-      file: "dist/index.js",
-      format: "cjs",
-      sourcemap: true
+      file: 'dist/index.js',
+      format: 'cjs',
+      sourcemap: true,
     },
     {
-      file: "dist/index.m.js",
-      format: "es",
-      sourcemap: true
+      file: 'dist/index.m.js',
+      format: 'es',
+      sourcemap: true,
     },
     {
-      file: "dist/index.umd.js",
-      format: "umd",
+      file: 'dist/index.umd.js',
+      format: 'umd',
       name,
       sourcemap: true,
       globals: {
-        stimulus: "Stimulus",
-        flatpickr: "Flatpickr"
-      }
-    }
+        stimulus: 'Stimulus',
+        flatpickr: 'Flatpickr',
+      },
+    },
   ],
   plugins: [
     resolve(),
     babel({
-      // exclude: "node_modules/**"
+      exclude: 'node_modules/**',
     }),
-    filesize()
-  ]
-};
+    filesize(),
+  ],
+}
