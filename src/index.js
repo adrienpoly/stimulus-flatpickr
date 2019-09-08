@@ -103,7 +103,7 @@ class StimulusFlatpickr extends Controller {
   }
 
   _boolean(option) {
-    return this.data.get(option) === 'true'
+    return !(this.data.get(option) == '0' || this.data.get(option) == 'false')
   }
 
   _array(option) {
