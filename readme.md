@@ -4,7 +4,7 @@
     <img src="https://badge.fury.io/js/stimulus-flatpickr.svg" alt="npm version">
   </a>
   <a href="https://circleci.com/gh/adrienpoly/stimulus-flatpickr" rel="nofollow">	
-    <img src="https://circleci.com/gh/adrienpoly/stimulus-flatpickr.svg?style=svg" alt="CircleCi build status">	
+    <img src="https://circleci.com/gh/adrienpoly/stimulus-flatpickr/tree/master.svg?style=svg" alt="CircleCi build status">	
   </a>	
   <a href="https://codecov.io/gh/adrienpoly/stimulus-flatpickr">	
     <img src="https://codecov.io/gh/adrienpoly/stimulus-flatpickr/branch/master/graph/badge.svg" alt="Coverage"/>	
