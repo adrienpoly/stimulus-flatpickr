@@ -1,50 +1,37 @@
 const booleanOptions = [
-  "allowInput",
-  "altInput",
-  "animate",
-  "clickOpens",
-  "closeOnSelect",
-  "disableMobile",
-  "enableSeconds",
-  "enableTime",
-  "inline",
-  "noCalendar",
-  "shorthandCurrentMonth",
-  "static",
-  "time_24hr",
-  "weekNumbers",
-  "wrap"
-];
+  'allowInput',
+  'altInput',
+  'animate',
+  'clickOpens',
+  'closeOnSelect',
+  'disableMobile',
+  'enableSeconds',
+  'enableTime',
+  'inline',
+  'noCalendar',
+  'shorthandCurrentMonth',
+  'static',
+  'time_24hr',
+  'weekNumbers',
+  'wrap'
+]
 
-const stringOptions = [
-  "altInputClass",
-  "conjunction",
-  "defaultDate",
-  "mode",
-  "nextArrow",
-  "position",
-  "prevArrow"
-];
+const stringOptions = ['altInputClass', 'conjunction', 'defaultDate', 'mode', 'nextArrow', 'position', 'prevArrow']
 
 const numberOptions = [
-  "defaultHour",
-  "defaultMinute",
-  "defaultSeconds",
-  "hourIncrement",
-  "minuteIncrement",
-  "showMonths"
-];
+  'defaultHour',
+  'defaultMinute',
+  'defaultSeconds',
+  'hourIncrement',
+  'minuteIncrement',
+  'showMonths'
+]
 
-const arrayOptions = [
-  "disable",
-  "enable",
-  "disableDaysOfWeek",
-  "enableDaysOfWeek"
-];
+const arrayOptions = ['disable', 'enable', 'disableDaysOfWeek', 'enableDaysOfWeek']
 
-const dateOptions = ["maxDate", "minDate", "maxTime", "minTime", "now"];
+const dateOptions = ['maxDate', 'minDate', 'maxTime', 'minTime', 'now']
 
-export const dateFormats = ["altFormat", "ariaDateFormat", "dateFormat"];
+export const dateFormats = ['altFormat', 'ariaDateFormat', 'dateFormat']
 
 export const options = {
   string: stringOptions,
@@ -52,4 +39,4 @@ export const options = {
   date: dateOptions,
   array: arrayOptions,
   number: numberOptions
-};
+}
