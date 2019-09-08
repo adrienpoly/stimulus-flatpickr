@@ -227,8 +227,9 @@ describe('Flatpickr Controller tests', function() {
 
   describe('Flatpickr disable days test with invalid entries', function() {
     context("don't provide an array", function() {
-      it('it still work and no days are disabled', function() {
+      it('it still work and no days are disabled', async function() {
         addFlatpickrOption('DisableDaysOfWeek', 1, controller)
+        await nextFrame()
 
         const disabledDays = controller.daysTarget.querySelectorAll('span.flatpickr-day.flatpickr-disabled')
         expect(controller).to.exist
@@ -237,8 +238,9 @@ describe('Flatpickr Controller tests', function() {
     })
 
     context('provide an array of string', function() {
-      it('it is the same as an array of integer', function() {
+      it('it is the same as an array of integer', async function() {
         addFlatpickrOption('DisableDaysOfWeek', ['1'], controller)
+        await nextFrame()
 
         const disabledDays = controller.daysTarget.querySelectorAll('span.flatpickr-day.flatpickr-disabled')
         expect(controller).to.exist
@@ -249,13 +251,44 @@ describe('Flatpickr Controller tests', function() {
 
   describe('Flatpickr enable days test with invalid entries', function() {
     context("don't provide an array", function() {
-      it('it still work and all days are disabled', function() {
+      it('it still work and all days are disabled', async function() {
         addFlatpickrOption('EnableDaysOfWeek', 1, controller)
+        await nextFrame()
 
         const disabledDays = controller.daysTarget.querySelectorAll('span.flatpickr-day.flatpickr-disabled')
         expect(controller).to.exist
         expect(disabledDays.length).to.be.at.least(30)
       })
+    })
+  })
+
+  describe('Boolean options can be true/false or 1/0', function() {
+    it('accpet 1 as a true value', async function() {
+      addFlatpickrOption('EnableTime', 1, controller)
+      await nextFrame()
+
+      expect(controller._boolean('enable-time')).to.be.true
+    })
+
+    it('accept "true" as a true value', async function() {
+      addFlatpickrOption('EnableTime', 'true', controller)
+      await nextFrame()
+
+      expect(controller._boolean('enable-time')).to.be.true
+    })
+
+    it('accept 0 as a false value', async function() {
+      addFlatpickrOption('EnableTime', 0, controller)
+      await nextFrame()
+
+      expect(controller._boolean('enable-time')).to.be.false
+    })
+
+    it('accept "false" as a false value', async function() {
+      addFlatpickrOption('EnableTime', 'false', controller)
+      await nextFrame()
+
+      expect(controller._boolean('enable-time')).to.be.false
     })
   })
 })
