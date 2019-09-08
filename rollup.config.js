@@ -7,18 +7,18 @@ const pkg = require('./package.json')
 const name = pkg.name
 
 export default {
-  input: 'src/stimulus-flatpickr.js',
+  input: 'src/index.js',
   external: ['stimulus', 'flatpickr'],
   output: [
     {
       file: 'dist/index.js',
       format: 'cjs',
-      sourcemap: true,
+      sourcemap: true
     },
     {
       file: 'dist/index.m.js',
       format: 'es',
-      sourcemap: true,
+      sourcemap: true
     },
     {
       file: 'dist/index.umd.js',
@@ -27,15 +27,15 @@ export default {
       sourcemap: true,
       globals: {
         stimulus: 'Stimulus',
-        flatpickr: 'Flatpickr',
-      },
-    },
+        flatpickr: 'Flatpickr'
+      }
+    }
   ],
   plugins: [
     resolve(),
     babel({
-      exclude: 'node_modules/**',
+      exclude: 'node_modules/**'
     }),
-    filesize(),
-  ],
+    filesize()
+  ]
 }

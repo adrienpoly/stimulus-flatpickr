@@ -17,6 +17,8 @@ module.exports = {
   rules: {
     'space-before-function-paren': 'off',
     'no-unused-expressions': 'off',
-    'mocha/no-setup-in-describe': 'off'
+    'mocha/no-setup-in-describe': 'off',
+    'mocha/no-top-level-hooks': 'off',
+    'mocha/no-hooks-for-single-case': 'off'
   }
 }

@@ -79,12 +79,12 @@ const capitalize = string => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-const booleanOptions = ["allowInput", "altInput", "animate", "clickOpens", "closeOnSelect", "disableMobile", "enableSeconds", "enableTime", "inline", "noCalendar", "shorthandCurrentMonth", "static", "time_24hr", "weekNumbers", "wrap"];
-const stringOptions = ["altInputClass", "conjunction", "defaultDate", "mode", "nextArrow", "position", "prevArrow"];
-const numberOptions = ["defaultHour", "defaultMinute", "defaultSeconds", "hourIncrement", "minuteIncrement", "showMonths"];
-const arrayOptions = ["disable", "enable", "disableDaysOfWeek", "enableDaysOfWeek"];
-const dateOptions = ["maxDate", "minDate", "maxTime", "minTime", "now"];
-const dateFormats = ["altFormat", "ariaDateFormat", "dateFormat"];
+const booleanOptions = ['allowInput', 'altInput', 'animate', 'clickOpens', 'closeOnSelect', 'disableMobile', 'enableSeconds', 'enableTime', 'inline', 'noCalendar', 'shorthandCurrentMonth', 'static', 'time_24hr', 'weekNumbers', 'wrap'];
+const stringOptions = ['altInputClass', 'conjunction', 'defaultDate', 'mode', 'nextArrow', 'position', 'prevArrow'];
+const numberOptions = ['defaultHour', 'defaultMinute', 'defaultSeconds', 'hourIncrement', 'minuteIncrement', 'showMonths'];
+const arrayOptions = ['disable', 'enable', 'disableDaysOfWeek', 'enableDaysOfWeek'];
+const dateOptions = ['maxDate', 'minDate', 'maxTime', 'minTime', 'now'];
+const dateFormats = ['altFormat', 'ariaDateFormat', 'dateFormat'];
 const options = {
   string: stringOptions,
   boolean: booleanOptions,
@@ -93,39 +93,39 @@ const options = {
   number: numberOptions
 };
 
-const events = ["change", "open", "close", "monthChange", "yearChange", "ready", "valueUpdate", "dayCreate"];
+const events = ['change', 'open', 'close', 'monthChange', 'yearChange', 'ready', 'valueUpdate', 'dayCreate'];
 
-const elements = ["calendarContainer", "currentYearElement", "days", "daysContainer", "input", "nextMonthNav", "monthNav", "prevMonthNav", "rContainer", "selectedDateElem", "todayDateElem", "weekdayContainer"];
+const elements = ['calendarContainer', 'currentYearElement', 'days', 'daysContainer', 'input', 'nextMonthNav', 'monthNav', 'prevMonthNav', 'rContainer', 'selectedDateElem', 'todayDateElem', 'weekdayContainer'];
 
 const mapping = {
-  "%Y": "Y",
-  "%y": "y",
-  "%C": "Y",
-  "%m": "m",
-  "%-m": "n",
-  "%_m": "n",
-  "%B": "F",
-  "%^B": "F",
-  "%b": "M",
-  "%^b": "M",
-  "%h": "M",
-  "%^h": "M",
-  "%d": "d",
-  "%-d": "j",
-  "%e": "j",
-  "%H": "H",
-  "%k": "H",
-  "%I": "h",
-  "%l": "h",
-  "%P": "K",
-  "%p": "K",
-  "%M": "i",
-  "%S": "S",
-  "%A": "l",
-  "%a": "D",
-  "%w": "w"
+  '%Y': 'Y',
+  '%y': 'y',
+  '%C': 'Y',
+  '%m': 'm',
+  '%-m': 'n',
+  '%_m': 'n',
+  '%B': 'F',
+  '%^B': 'F',
+  '%b': 'M',
+  '%^b': 'M',
+  '%h': 'M',
+  '%^h': 'M',
+  '%d': 'd',
+  '%-d': 'j',
+  '%e': 'j',
+  '%H': 'H',
+  '%k': 'H',
+  '%I': 'h',
+  '%l': 'h',
+  '%P': 'K',
+  '%p': 'K',
+  '%M': 'i',
+  '%S': 'S',
+  '%A': 'l',
+  '%a': 'D',
+  '%w': 'w'
 };
-const strftimeRegex = new RegExp(Object.keys(mapping).join("|").replace(new RegExp("\\^", "g"), "\\^"), "g");
+const strftimeRegex = new RegExp(Object.keys(mapping).join('|').replace(new RegExp('\\^', 'g'), '\\^'), 'g');
 const convertDateFormat = format => {
   return format.replace(strftimeRegex, match => {
     return mapping[match];
@@ -212,7 +212,7 @@ function (_Controller) {
       if (Array.isArray(days)) {
         return days.map(day => parseInt(day));
       } else {
-        console.error("days of week must be a valid array");
+        console.error('days of week must be a valid array');
         return [];
       }
     }
@@ -257,7 +257,7 @@ function (_Controller) {
   }, {
     key: "_boolean",
     value: function _boolean(option) {
-      return this.data.get(option) === "true";
+      return this.data.get(option) === 'true';
     }
   }, {
     key: "_array",

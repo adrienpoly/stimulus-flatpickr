@@ -1,3 +1,3 @@
-import Flatpickr from "../../src/stimulus-flatpickr";
+import Flatpickr from '../../src/index'
 
 export default class extends Flatpickr {}

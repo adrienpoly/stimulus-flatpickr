@@ -19,11 +19,11 @@ function flatpickrCalendar() {
   return document.querySelector('.flatpickr-calendar')
 }
 
-async function addFlatpickrOption(option, value, controller) {
+function addFlatpickrOption(option, value, controller) {
   const flatpickr = fixture.el.querySelector('#datepicker')
   flatpickr.dataset[`datepicker${option}`] = typeof value === 'object' ? JSON.stringify(value) : value
   controller.connect()
-  nextFrame()
+  // await nextFrame()
 }
 
 function fixtureQuerySelector(selector) {
