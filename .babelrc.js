@@ -3,9 +3,9 @@ module.exports = {
     test: {
       plugins: [
         [
-          "istanbul",
+          'istanbul',
           {
-            exclude: ["spec/**/*.js"]
+            exclude: ['spec/**/*.js']
           }
         ]
       ]
@@ -13,16 +13,14 @@ module.exports = {
   },
   presets: [
     [
-      "@babel/preset-env",
+      '@babel/preset-env',
       {
         targets: {
-          node: "current"
+          chrome: '58',
+          ie: '11'
         }
       }
     ]
   ],
-  plugins: [
-    "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-transform-classes"
-  ]
-};
+  plugins: ['@babel/plugin-proposal-class-properties', '@babel/plugin-transform-classes']
+}

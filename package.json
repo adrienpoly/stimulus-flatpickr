@@ -68,6 +68,7 @@
     "webpack-dev-middleware": "^3.6.1",
     "webpack-dev-server": "^3.2.1"
   },
+  "browserslist": "> 0.25%, not dead",
   "repository": {
     "type": "git",
     "url": "https://github.com/adrienpoly/stimulus-flatpickr.git"

@@ -28,6 +28,55 @@
     return Constructor;
   }
 
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+
+      if (i % 2) {
+        ownKeys(source, true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(source).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+
+    return target;
+  }
+
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
@@ -75,18 +124,40 @@
     return _assertThisInitialized(self);
   }
 
-  const kebabCase = string => string.replace(/([a-z])([A-Z])/g, "$1-$2").replace(/[\s_]+/g, "-").toLowerCase();
-  const capitalize = string => {
+  function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+  }
+
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+      return arr2;
+    }
+  }
+
+  function _iterableToArray(iter) {
+    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  }
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance");
+  }
+
+  var kebabCase = function kebabCase(string) {
+    return string.replace(/([a-z])([A-Z])/g, "$1-$2").replace(/[\s_]+/g, "-").toLowerCase();
+  };
+  var capitalize = function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  const booleanOptions = ['allowInput', 'altInput', 'animate', 'clickOpens', 'closeOnSelect', 'disableMobile', 'enableSeconds', 'enableTime', 'inline', 'noCalendar', 'shorthandCurrentMonth', 'static', 'time_24hr', 'weekNumbers', 'wrap'];
-  const stringOptions = ['altInputClass', 'conjunction', 'defaultDate', 'mode', 'nextArrow', 'position', 'prevArrow'];
-  const numberOptions = ['defaultHour', 'defaultMinute', 'defaultSeconds', 'hourIncrement', 'minuteIncrement', 'showMonths'];
-  const arrayOptions = ['disable', 'enable', 'disableDaysOfWeek', 'enableDaysOfWeek'];
-  const dateOptions = ['maxDate', 'minDate', 'maxTime', 'minTime', 'now'];
-  const dateFormats = ['altFormat', 'ariaDateFormat', 'dateFormat'];
-  const options = {
+  var booleanOptions = ['allowInput', 'altInput', 'animate', 'clickOpens', 'closeOnSelect', 'disableMobile', 'enableSeconds', 'enableTime', 'inline', 'noCalendar', 'shorthandCurrentMonth', 'static', 'time_24hr', 'weekNumbers', 'wrap'];
+  var stringOptions = ['altInputClass', 'conjunction', 'defaultDate', 'mode', 'nextArrow', 'position', 'prevArrow'];
+  var numberOptions = ['defaultHour', 'defaultMinute', 'defaultSeconds', 'hourIncrement', 'minuteIncrement', 'showMonths'];
+  var arrayOptions = ['disable', 'enable', 'disableDaysOfWeek', 'enableDaysOfWeek'];
+  var dateOptions = ['maxDate', 'minDate', 'maxTime', 'minTime', 'now'];
+  var dateFormats = ['altFormat', 'ariaDateFormat', 'dateFormat'];
+  var options = {
     string: stringOptions,
     boolean: booleanOptions,
     date: dateOptions,
@@ -94,11 +165,11 @@
     number: numberOptions
   };
 
-  const events = ['change', 'open', 'close', 'monthChange', 'yearChange', 'ready', 'valueUpdate', 'dayCreate'];
+  var events = ['change', 'open', 'close', 'monthChange', 'yearChange', 'ready', 'valueUpdate', 'dayCreate'];
 
-  const elements = ['calendarContainer', 'currentYearElement', 'days', 'daysContainer', 'input', 'nextMonthNav', 'monthNav', 'prevMonthNav', 'rContainer', 'selectedDateElem', 'todayDateElem', 'weekdayContainer'];
+  var elements = ['calendarContainer', 'currentYearElement', 'days', 'daysContainer', 'input', 'nextMonthNav', 'monthNav', 'prevMonthNav', 'rContainer', 'selectedDateElem', 'todayDateElem', 'weekdayContainer'];
 
-  const mapping = {
+  var mapping = {
     '%Y': 'Y',
     '%y': 'y',
     '%C': 'Y',
@@ -126,14 +197,14 @@
     '%a': 'D',
     '%w': 'w'
   };
-  const strftimeRegex = new RegExp(Object.keys(mapping).join('|').replace(new RegExp('\\^', 'g'), '\\^'), 'g');
-  const convertDateFormat = format => {
-    return format.replace(strftimeRegex, match => {
+  var strftimeRegex = new RegExp(Object.keys(mapping).join('|').replace(new RegExp('\\^', 'g'), '\\^'), 'g');
+  var convertDateFormat = function convertDateFormat(format) {
+    return format.replace(strftimeRegex, function (match) {
       return mapping[match];
     });
   };
 
-  let StimulusFlatpickr =
+  var StimulusFlatpickr =
   /*#__PURE__*/
   function (_Controller) {
     _inherits(StimulusFlatpickr, _Controller);
@@ -158,8 +229,7 @@
 
         this._initializeDateFormats();
 
-        this.fp = flatpickr(this.element, { ...this.config
-        });
+        this.fp = flatpickr(this.element, _objectSpread2({}, this.config));
 
         this._initializeElements();
       }
@@ -171,23 +241,27 @@
     }, {
       key: "_initializeEvents",
       value: function _initializeEvents() {
-        events.forEach(event => {
-          if (this[event]) {
-            const hook = `on${capitalize(event)}`;
-            this.config[hook] = this[event].bind(this);
+        var _this = this;
+
+        events.forEach(function (event) {
+          if (_this[event]) {
+            var hook = "on".concat(capitalize(event));
+            _this.config[hook] = _this[event].bind(_this);
           }
         });
       }
     }, {
       key: "_initializeOptions",
       value: function _initializeOptions() {
-        Object.keys(options).forEach(optionType => {
-          const optionsCamelCase = options[optionType];
-          optionsCamelCase.forEach(option => {
-            const optionKebab = kebabCase(option);
+        var _this2 = this;
 
-            if (this.data.has(optionKebab)) {
-              this.config[option] = this[`_${optionType}`](optionKebab);
+        Object.keys(options).forEach(function (optionType) {
+          var optionsCamelCase = options[optionType];
+          optionsCamelCase.forEach(function (option) {
+            var optionKebab = kebabCase(option);
+
+            if (_this2.data.has(optionKebab)) {
+              _this2.config[option] = _this2["_".concat(optionType)](optionKebab);
             }
           });
         });
@@ -199,19 +273,21 @@
       value: function _handleDaysOfWeek() {
         if (this.config.disableDaysOfWeek) {
           this.config.disableDaysOfWeek = this._validateDaysOfWeek(this.config.disableDaysOfWeek);
-          this.config.disable = [...(this.config.disable || []), this._disable.bind(this)];
+          this.config.disable = [].concat(_toConsumableArray(this.config.disable || []), [this._disable.bind(this)]);
         }
 
         if (this.config.enableDaysOfWeek) {
           this.config.enableDaysOfWeek = this._validateDaysOfWeek(this.config.enableDaysOfWeek);
-          this.config.enable = [...(this.config.enable || []), this._enable.bind(this)];
+          this.config.enable = [].concat(_toConsumableArray(this.config.enable || []), [this._enable.bind(this)]);
         }
       }
     }, {
       key: "_validateDaysOfWeek",
       value: function _validateDaysOfWeek(days) {
         if (Array.isArray(days)) {
-          return days.map(day => parseInt(day));
+          return days.map(function (day) {
+            return parseInt(day);
+          });
         } else {
           console.error('days of week must be a valid array');
           return [];
@@ -220,29 +296,33 @@
     }, {
       key: "_disable",
       value: function _disable(date) {
-        const disabledDays = this.config.disableDaysOfWeek;
+        var disabledDays = this.config.disableDaysOfWeek;
         return disabledDays.includes(date.getDay());
       }
     }, {
       key: "_enable",
       value: function _enable(date) {
-        const enabledDays = this.config.enableDaysOfWeek;
+        var enabledDays = this.config.enableDaysOfWeek;
         return enabledDays.includes(date.getDay());
       }
     }, {
       key: "_initializeDateFormats",
       value: function _initializeDateFormats() {
-        dateFormats.forEach(dateFormat => {
-          if (this.data.has(dateFormat)) {
-            this.config[dateFormat] = convertDateFormat(this.data.get(dateFormat));
+        var _this3 = this;
+
+        dateFormats.forEach(function (dateFormat) {
+          if (_this3.data.has(dateFormat)) {
+            _this3.config[dateFormat] = convertDateFormat(_this3.data.get(dateFormat));
           }
         });
       }
     }, {
       key: "_initializeElements",
       value: function _initializeElements() {
-        elements.forEach(element => {
-          this[`${element}Target`] = this.fp[element];
+        var _this4 = this;
+
+        elements.forEach(function (element) {
+          _this4["".concat(element, "Target")] = _this4.fp[element];
         });
       }
     }, {
@@ -258,7 +338,7 @@
     }, {
       key: "_boolean",
       value: function _boolean(option) {
-        return this.data.get(option) === 'true';
+        return !(this.data.get(option) == '0' || this.data.get(option) == 'false');
       }
     }, {
       key: "_array",
