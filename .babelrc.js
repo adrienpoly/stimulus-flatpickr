@@ -16,11 +16,14 @@ module.exports = {
       '@babel/preset-env',
       {
         targets: {
-          chrome: '58',
-          ie: '11'
+          node: 'current'
         }
       }
     ]
   ],
-  plugins: ['@babel/plugin-proposal-class-properties', '@babel/plugin-transform-classes']
+  plugins: [
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-transform-classes',
+    '@babel/plugin-proposal-object-rest-spread'
+  ]
 }

@@ -31,11 +31,5 @@ export default {
       }
     }
   ],
-  plugins: [
-    resolve(),
-    babel({
-      exclude: 'node_modules/**'
-    }),
-    filesize()
-  ]
+  plugins: [resolve(), babel(), filesize()]
 }

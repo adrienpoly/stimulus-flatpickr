@@ -124,40 +124,18 @@
     return _assertThisInitialized(self);
   }
 
-  function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-  }
-
-  function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) {
-      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-      return arr2;
-    }
-  }
-
-  function _iterableToArray(iter) {
-    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-  }
-
-  function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance");
-  }
-
-  var kebabCase = function kebabCase(string) {
-    return string.replace(/([a-z])([A-Z])/g, "$1-$2").replace(/[\s_]+/g, "-").toLowerCase();
-  };
-  var capitalize = function capitalize(string) {
+  const kebabCase = string => string.replace(/([a-z])([A-Z])/g, "$1-$2").replace(/[\s_]+/g, "-").toLowerCase();
+  const capitalize = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  var booleanOptions = ['allowInput', 'altInput', 'animate', 'clickOpens', 'closeOnSelect', 'disableMobile', 'enableSeconds', 'enableTime', 'inline', 'noCalendar', 'shorthandCurrentMonth', 'static', 'time_24hr', 'weekNumbers', 'wrap'];
-  var stringOptions = ['altInputClass', 'conjunction', 'defaultDate', 'mode', 'nextArrow', 'position', 'prevArrow'];
-  var numberOptions = ['defaultHour', 'defaultMinute', 'defaultSeconds', 'hourIncrement', 'minuteIncrement', 'showMonths'];
-  var arrayOptions = ['disable', 'enable', 'disableDaysOfWeek', 'enableDaysOfWeek'];
-  var dateOptions = ['maxDate', 'minDate', 'maxTime', 'minTime', 'now'];
-  var dateFormats = ['altFormat', 'ariaDateFormat', 'dateFormat'];
-  var options = {
+  const booleanOptions = ['allowInput', 'altInput', 'animate', 'clickOpens', 'closeOnSelect', 'disableMobile', 'enableSeconds', 'enableTime', 'inline', 'noCalendar', 'shorthandCurrentMonth', 'static', 'time_24hr', 'weekNumbers', 'wrap'];
+  const stringOptions = ['altInputClass', 'conjunction', 'defaultDate', 'mode', 'nextArrow', 'position', 'prevArrow'];
+  const numberOptions = ['defaultHour', 'defaultMinute', 'defaultSeconds', 'hourIncrement', 'minuteIncrement', 'showMonths'];
+  const arrayOptions = ['disable', 'enable', 'disableDaysOfWeek', 'enableDaysOfWeek'];
+  const dateOptions = ['maxDate', 'minDate', 'maxTime', 'minTime', 'now'];
+  const dateFormats = ['altFormat', 'ariaDateFormat', 'dateFormat'];
+  const options = {
     string: stringOptions,
     boolean: booleanOptions,
     date: dateOptions,
@@ -165,11 +143,11 @@
     number: numberOptions
   };
 
-  var events = ['change', 'open', 'close', 'monthChange', 'yearChange', 'ready', 'valueUpdate', 'dayCreate'];
+  const events = ['change', 'open', 'close', 'monthChange', 'yearChange', 'ready', 'valueUpdate', 'dayCreate'];
 
-  var elements = ['calendarContainer', 'currentYearElement', 'days', 'daysContainer', 'input', 'nextMonthNav', 'monthNav', 'prevMonthNav', 'rContainer', 'selectedDateElem', 'todayDateElem', 'weekdayContainer'];
+  const elements = ['calendarContainer', 'currentYearElement', 'days', 'daysContainer', 'input', 'nextMonthNav', 'monthNav', 'prevMonthNav', 'rContainer', 'selectedDateElem', 'todayDateElem', 'weekdayContainer'];
 
-  var mapping = {
+  const mapping = {
     '%Y': 'Y',
     '%y': 'y',
     '%C': 'Y',
@@ -197,14 +175,14 @@
     '%a': 'D',
     '%w': 'w'
   };
-  var strftimeRegex = new RegExp(Object.keys(mapping).join('|').replace(new RegExp('\\^', 'g'), '\\^'), 'g');
-  var convertDateFormat = function convertDateFormat(format) {
-    return format.replace(strftimeRegex, function (match) {
+  const strftimeRegex = new RegExp(Object.keys(mapping).join('|').replace(new RegExp('\\^', 'g'), '\\^'), 'g');
+  const convertDateFormat = format => {
+    return format.replace(strftimeRegex, match => {
       return mapping[match];
     });
   };
 
-  var StimulusFlatpickr =
+  let StimulusFlatpickr =
   /*#__PURE__*/
   function (_Controller) {
     _inherits(StimulusFlatpickr, _Controller);
@@ -241,27 +219,23 @@
     }, {
       key: "_initializeEvents",
       value: function _initializeEvents() {
-        var _this = this;
-
-        events.forEach(function (event) {
-          if (_this[event]) {
-            var hook = "on".concat(capitalize(event));
-            _this.config[hook] = _this[event].bind(_this);
+        events.forEach(event => {
+          if (this[event]) {
+            const hook = `on${capitalize(event)}`;
+            this.config[hook] = this[event].bind(this);
           }
         });
       }
     }, {
       key: "_initializeOptions",
       value: function _initializeOptions() {
-        var _this2 = this;
+        Object.keys(options).forEach(optionType => {
+          const optionsCamelCase = options[optionType];
+          optionsCamelCase.forEach(option => {
+            const optionKebab = kebabCase(option);
 
-        Object.keys(options).forEach(function (optionType) {
-          var optionsCamelCase = options[optionType];
-          optionsCamelCase.forEach(function (option) {
-            var optionKebab = kebabCase(option);
-
-            if (_this2.data.has(optionKebab)) {
-              _this2.config[option] = _this2["_".concat(optionType)](optionKebab);
+            if (this.data.has(optionKebab)) {
+              this.config[option] = this[`_${optionType}`](optionKebab);
             }
           });
         });
@@ -273,21 +247,19 @@
       value: function _handleDaysOfWeek() {
         if (this.config.disableDaysOfWeek) {
           this.config.disableDaysOfWeek = this._validateDaysOfWeek(this.config.disableDaysOfWeek);
-          this.config.disable = [].concat(_toConsumableArray(this.config.disable || []), [this._disable.bind(this)]);
+          this.config.disable = [...(this.config.disable || []), this._disable.bind(this)];
         }
 
         if (this.config.enableDaysOfWeek) {
           this.config.enableDaysOfWeek = this._validateDaysOfWeek(this.config.enableDaysOfWeek);
-          this.config.enable = [].concat(_toConsumableArray(this.config.enable || []), [this._enable.bind(this)]);
+          this.config.enable = [...(this.config.enable || []), this._enable.bind(this)];
         }
       }
     }, {
       key: "_validateDaysOfWeek",
       value: function _validateDaysOfWeek(days) {
         if (Array.isArray(days)) {
-          return days.map(function (day) {
-            return parseInt(day);
-          });
+          return days.map(day => parseInt(day));
         } else {
           console.error('days of week must be a valid array');
           return [];
@@ -296,33 +268,29 @@
     }, {
       key: "_disable",
       value: function _disable(date) {
-        var disabledDays = this.config.disableDaysOfWeek;
+        const disabledDays = this.config.disableDaysOfWeek;
         return disabledDays.includes(date.getDay());
       }
     }, {
       key: "_enable",
       value: function _enable(date) {
-        var enabledDays = this.config.enableDaysOfWeek;
+        const enabledDays = this.config.enableDaysOfWeek;
         return enabledDays.includes(date.getDay());
       }
     }, {
       key: "_initializeDateFormats",
       value: function _initializeDateFormats() {
-        var _this3 = this;
-
-        dateFormats.forEach(function (dateFormat) {
-          if (_this3.data.has(dateFormat)) {
-            _this3.config[dateFormat] = convertDateFormat(_this3.data.get(dateFormat));
+        dateFormats.forEach(dateFormat => {
+          if (this.data.has(dateFormat)) {
+            this.config[dateFormat] = convertDateFormat(this.data.get(dateFormat));
           }
         });
       }
     }, {
       key: "_initializeElements",
       value: function _initializeElements() {
-        var _this4 = this;
-
-        elements.forEach(function (element) {
-          _this4["".concat(element, "Target")] = _this4.fp[element];
+        elements.forEach(element => {
+          this[`${element}Target`] = this.fp[element];
         });
       }
     }, {

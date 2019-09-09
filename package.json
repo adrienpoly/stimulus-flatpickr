@@ -2,6 +2,11 @@
   "name": "stimulus-flatpickr",
   "version": "1.1.1",
   "description": "A Stimulus Wrapper for Flatpickr library",
+  "keywords": [
+    "stimulus",
+    "stimulusjs",
+    "flatpickr"
+  ],
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
   "module": "dist/index.m.js",
@@ -25,7 +30,9 @@
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
     "@babel/plugin-transform-classes": "^7.3.4",
+    "@babel/plugin-transform-spread": "^7.2.2",
     "@babel/preset-env": "^7.6.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-istanbul": "^5.1.1",
@@ -68,7 +75,6 @@
     "webpack-dev-middleware": "^3.6.1",
     "webpack-dev-server": "^3.2.1"
   },
-  "browserslist": "> 0.25%, not dead",
   "repository": {
     "type": "git",
     "url": "https://github.com/adrienpoly/stimulus-flatpickr.git"
