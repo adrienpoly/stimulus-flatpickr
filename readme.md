@@ -110,7 +110,7 @@ You can now create forms and input fields easily by adding a `data-controller="f
   <%= f.text_field :start_time,
     data: {
       controller: "flatpickr",
-      flatpickr_format: "Y-m-d",
+      flatpickr_date_format: "Y-m-d",
       flatpickr_min_date: Time.zone.now
     } %>
 <% end %>
@@ -232,7 +232,7 @@ Then in the same way as above you can now create forms and input fields easily b
   <%= f.text_field :start_time,
     data: {
       controller: "flatpickr",
-      flatpickr_format: "Y-m-d",
+      flatpickr_date_format: "Y-m-d",
       flatpickr_min_date: Time.zone.now
     } %>
 <% end %>
