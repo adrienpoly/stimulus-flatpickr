@@ -7,6 +7,8 @@ import { elements } from './elements'
 import { convertDateFormat } from './strftime_mapping'
 
 class StimulusFlatpickr extends Controller {
+  static targets = ['instance']
+
   initialize() {
     this.config = {}
   }
@@ -16,7 +18,7 @@ class StimulusFlatpickr extends Controller {
     this._initializeOptions()
     this._initializeDateFormats()
 
-    this.fp = flatpickr(this.element, {
+    this.fp = flatpickr(this.flatpickrElement, {
       ...this.config
     })
 
@@ -112,6 +114,10 @@ class StimulusFlatpickr extends Controller {
 
   _number(option) {
     return parseInt(this.data.get(option))
+  }
+
+  get flatpickrElement() {
+    return (this.hasInstanceTarget && this.instanceTarget) || this.element
   }
 }
 
