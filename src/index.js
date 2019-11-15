@@ -116,6 +116,15 @@ class StimulusFlatpickr extends Controller {
     return parseInt(this.data.get(option))
   }
 
+  _arrayOrString(option) {
+    const val = this.data.get(option)
+    try {
+      return JSON.parse(val)
+    } catch {
+      return val
+    }
+  }
+
   get flatpickrElement() {
     return (this.hasInstanceTarget && this.instanceTarget) || this.element
   }

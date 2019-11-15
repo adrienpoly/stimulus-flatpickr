@@ -141,6 +141,13 @@ describe('Flatpickr Controller tests', function() {
         addFlatpickrOption('Mode', 'range', controller)
         expect(flatpickrCalendar()).to.have.class('rangeMode')
       })
+
+      it('can set preloaded range dates', function() {
+        addFlatpickrOption('Mode', 'range', controller)
+        addFlatpickrOption('DefaultDate', ['2018-10-15', '2018-10-20'], controller)
+
+        expect(controller.inputTarget).to.have.value('2018-10-15 to 2018-10-20')
+      })
     })
   })
 
