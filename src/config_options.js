@@ -16,7 +16,7 @@ const booleanOptions = [
   'wrap'
 ]
 
-const stringOptions = ['altInputClass', 'conjunction', 'defaultDate', 'mode', 'nextArrow', 'position', 'prevArrow']
+const stringOptions = ['altInputClass', 'conjunction', 'mode', 'nextArrow', 'position', 'prevArrow']
 
 const numberOptions = [
   'defaultHour',
@@ -29,6 +29,8 @@ const numberOptions = [
 
 const arrayOptions = ['disable', 'enable', 'disableDaysOfWeek', 'enableDaysOfWeek']
 
+const arrayOrStringOptions = ['defaultDate']
+
 const dateOptions = ['maxDate', 'minDate', 'maxTime', 'minTime', 'now']
 
 export const dateFormats = ['altFormat', 'ariaDateFormat', 'dateFormat']
@@ -38,5 +40,6 @@ export const options = {
   boolean: booleanOptions,
   date: dateOptions,
   array: arrayOptions,
-  number: numberOptions
+  number: numberOptions,
+  arrayOrString: arrayOrStringOptions
 }
