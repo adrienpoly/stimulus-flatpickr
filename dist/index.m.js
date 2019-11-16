@@ -125,9 +125,10 @@ const capitalize = string => {
 };
 
 const booleanOptions = ['allowInput', 'altInput', 'animate', 'clickOpens', 'closeOnSelect', 'disableMobile', 'enableSeconds', 'enableTime', 'inline', 'noCalendar', 'shorthandCurrentMonth', 'static', 'time_24hr', 'weekNumbers', 'wrap'];
-const stringOptions = ['altInputClass', 'conjunction', 'defaultDate', 'mode', 'nextArrow', 'position', 'prevArrow'];
+const stringOptions = ['altInputClass', 'conjunction', 'mode', 'nextArrow', 'position', 'prevArrow'];
 const numberOptions = ['defaultHour', 'defaultMinute', 'defaultSeconds', 'hourIncrement', 'minuteIncrement', 'showMonths'];
 const arrayOptions = ['disable', 'enable', 'disableDaysOfWeek', 'enableDaysOfWeek'];
+const arrayOrStringOptions = ['defaultDate'];
 const dateOptions = ['maxDate', 'minDate', 'maxTime', 'minTime', 'now'];
 const dateFormats = ['altFormat', 'ariaDateFormat', 'dateFormat'];
 const options = {
@@ -135,7 +136,8 @@ const options = {
   boolean: booleanOptions,
   date: dateOptions,
   array: arrayOptions,
-  number: numberOptions
+  number: numberOptions,
+  arrayOrString: arrayOrStringOptions
 };
 
 const events = ['change', 'open', 'close', 'monthChange', 'yearChange', 'ready', 'valueUpdate', 'dayCreate'];
@@ -202,7 +204,7 @@ function (_Controller) {
 
       this._initializeDateFormats();
 
-      this.fp = flatpickr(this.element, _objectSpread2({}, this.config));
+      this.fp = flatpickr(this.flatpickrElement, _objectSpread2({}, this.config));
 
       this._initializeElements();
     }
@@ -313,10 +315,28 @@ function (_Controller) {
     value: function _number(option) {
       return parseInt(this.data.get(option));
     }
+  }, {
+    key: "_arrayOrString",
+    value: function _arrayOrString(option) {
+      const val = this.data.get(option);
+
+      try {
+        return JSON.parse(val);
+      } catch {
+        return val;
+      }
+    }
+  }, {
+    key: "flatpickrElement",
+    get: function () {
+      return this.hasInstanceTarget && this.instanceTarget || this.element;
+    }
   }]);
 
   return StimulusFlatpickr;
 }(Controller);
+
+_defineProperty(StimulusFlatpickr, "targets", ['instance']);
 
 export default StimulusFlatpickr;
 //# sourceMappingURL=index.m.js.map
