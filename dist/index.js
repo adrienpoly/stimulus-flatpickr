@@ -215,7 +215,9 @@ function (_Controller) {
   }, {
     key: "disconnect",
     value: function disconnect() {
+      const value = this.inputTarget.value;
       this.fp.destroy();
+      this.inputTarget.value = value;
     }
   }, {
     key: "_initializeEvents",
@@ -326,7 +328,7 @@ function (_Controller) {
 
       try {
         return JSON.parse(val);
-      } catch {
+      } catch (e) {
         return val;
       }
     }

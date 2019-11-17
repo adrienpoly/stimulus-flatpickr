@@ -26,7 +26,9 @@ class StimulusFlatpickr extends Controller {
   }
 
   disconnect() {
+    const value = this.inputTarget.value
     this.fp.destroy()
+    this.inputTarget.value = value
   }
 
   _initializeEvents() {
@@ -120,7 +122,7 @@ class StimulusFlatpickr extends Controller {
     const val = this.data.get(option)
     try {
       return JSON.parse(val)
-    } catch {
+    } catch (e) {
       return val
     }
   }
