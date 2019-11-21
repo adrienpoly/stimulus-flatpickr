@@ -34,9 +34,9 @@ By using this wrapper of [Flatpickr](http://flatpickr.js.org/) for [Stimulus](ht
 
 Here is a simple example:
 
-```html+erb
-<%= form_with model: Appointement.new, authenticity_token: true do |f| %>
-  <%= f.text_field :start_time,
+```erb
+<%= form_with model: Appointement.new, authenticity_token: true do |f| %>	<%= form_with model: Appointement.new, authenticity_token: true do |f| %> <%= f.text_field :start_time, data: {
+  <%= f.text_field :start_time,	controller: "flatpickr", flatpickr_min_date: Time.zone.now #disables past dates } %> <% end %>
     data: {
       controller: "flatpickr",
       flatpickr_min_date: Time.zone.now #disables past dates
@@ -88,26 +88,26 @@ manually register a new Stimulus controller in your main JS entry point.
 
 ```js
 // ./packs/application.js
-import { Application } from "stimulus";
+import { Application } from 'stimulus'
 // import Flatpickr
-import Flatpickr from "stimulus-flatpickr";
+import Flatpickr from 'stimulus-flatpickr'
 
-import { definitionsFromContext } from "stimulus/webpack-helpers";
-const application = Application.start();
-const context = require.context("../controllers", true, /\.js$/);
-application.load(definitionsFromContext(context));
+import { definitionsFromContext } from 'stimulus/webpack-helpers'
+const application = Application.start()
+const context = require.context('../controllers', true, /\.js$/)
+application.load(definitionsFromContext(context))
 
 // Manually register Flatpickr as a stimulus controller
-application.register("flatpickr", Flatpickr);
+application.register('flatpickr', Flatpickr)
 ```
 
 ### Using it with Rails
 
 You can now create forms and input fields easily by adding a `data-controller="flatpickr"` attribute to the input fields and pass [options](https://flatpickr.js.org/options/) with the Stimulus Controller states : `data-flatpickr-the-option`.
 
-```html+erb
-<%= form_with model: Appointement.new, authenticity_token: true do |f| %>
-  <%= f.text_field :start_time,
+```erb
+<%= form_with model: Appointement.new, authenticity_token: true do |f| %>	<%= form_with model: Appointement.new, authenticity_token: true do |f| %> <%= f.text_field :start_time, data: {
+  <%= f.text_field :start_time,	controller: "flatpickr", flatpickr_date_format: "Y-m-d", flatpickr_min_date: Time.zone.now } %> <% end %>
     data: {
       controller: "flatpickr",
       flatpickr_date_format: "Y-m-d",
@@ -141,7 +141,7 @@ All options are in `camelCase` (JS) and must be converted to `lower_snake_case` 
 will output this HTML:
 
 ```html
-<input data-controller="flatpickr" data-flatpickr-enable-time="true" type="text" name="appointement[start_time]" >
+<input data-controller="flatpickr" data-flatpickr-enable-time="true" type="text" name="appointement[start_time]" />
 ```
 
 ### HTML markup
@@ -165,13 +165,13 @@ create a new Stimulus controller that will inherit from `stimulus-flatpickr`
 ```js
 // ./controllers/flatpickr_controller.js
 // import stimulus-flatpickr wrapper controller to extend it
-import Flatpickr from "stimulus-flatpickr";
+import Flatpickr from 'stimulus-flatpickr'
 
 // you can also import a translation file
-import { French } from "flatpickr/dist/l10n/fr.js";
+import { French } from 'flatpickr/dist/l10n/fr.js'
 
 // import a theme (could be in your main CSS entry too...)
-import "flatpickr/dist/themes/dark.css";
+import 'flatpickr/dist/themes/dark.css'
 
 // create a new Stimulus controller by extending stimulus-flatpickr wrapper controller
 export default class extends Flatpickr {
@@ -179,14 +179,14 @@ export default class extends Flatpickr {
     // sets your language (you can also set some global setting for all time pickers)
     this.config = {
       locale: French
-    };
+    }
   }
 
   // all flatpickr hooks are available as callbacks in your Stimulus controller
   change(selectedDates, dateStr, instance) {
-    console.log("the callback returns the selected dates", selectedDates);
-    console.log("but returns it also as a string", dateStr);
-    console.log("and the flatpickr instance", instance);
+    console.log('the callback returns the selected dates', selectedDates)
+    console.log('but returns it also as a string', dateStr)
+    console.log('and the flatpickr instance', instance)
   }
 }
 ```
@@ -227,15 +227,15 @@ connect() {
 
 Then in the same way as above you can now create forms and input fields easily by adding a `data-controller="flatpickr"` attribute to the input fields and pass [options](https://flatpickr.js.org/options/) with the Stimulus Controller states : `data-flatpick-the-option`.
 
-```html+erb
+```erb
 <%= form_with model: Appointement.new, authenticity_token: true do |f| %>
   <%= f.text_field :start_time,
-    data: {
-      controller: "flatpickr",
-      flatpickr_date_format: "Y-m-d",
-      flatpickr_min_date: Time.zone.now
-    } %>
-<% end %>
+                    data: {
+                      controller: "flatpickr",
+                      flatpickr_date_format: "Y-m-d",
+                      flatpickr_min_date: Time.zone.now }
+  %>
+  <% end %>
 ```
 
 <p align="center">
@@ -404,7 +404,9 @@ Running one-off test runs can be done with:
 
 `$ yarn test`
 
-You can test locally also the results with the playground project [./playground](./playground/readme.md)
+You can test locally also the results with the playground project [./playground](./playground)
+
+`$ yarn start:playground`
 
 **Then :**
 
