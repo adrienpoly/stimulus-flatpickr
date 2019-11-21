@@ -15,7 +15,7 @@
   "license": "MIT",
   "external": "stimulus, flatpickr",
   "scripts": {
-    "start:playground": "webpack-dev-server --mode development --open --config playground/webpack.config.js",
+    "start:playground": "webpack-dev-server --mode development --open --config playground/webpack.config.js --hot",
     "build": "rollup -c && yarn test",
     "dev": "rollup -wc",
     "test": "NODE_ENV=test karma start",

@@ -12,7 +12,8 @@ module.exports = {
   },
 
   devServer: {
-    contentBase: './playground/public'
+    contentBase: './playground/public',
+    watchContentBase: true
   },
 
   devtool: 'source-map',
