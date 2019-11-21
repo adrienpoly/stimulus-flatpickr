@@ -329,6 +329,18 @@ yourFunction () {
 }
 ```
 
+### Custom elements
+
+If you need to wrap the Flatpickr controller arround custom elements you can use the predefined target `instance` to specify the input element to attach the date picker to.
+
+Example:
+
+```html
+<div data-controller="flatpickr">
+  <input type="text" placeholder="Select Date.." data-target="flatpickr.instance" />
+</div>
+```
+
 ### Getters
 
 #### Elements
