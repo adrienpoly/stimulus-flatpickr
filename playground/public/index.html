@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Stimulus Flatpickr package Playground</title>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css" /> -->
+    <link href="https://fonts.googleapis.com/css?family=roboto&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="bundle.js" async></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Stimulus Flatpickr Playground</h1>
+
+      <h3>Most basic datepickr</h3>
+      <div>
+        <input
+          type="text"
+          placeholder="Select a date"
+          data-controller="flatpickr"
+          data-flatpickr-min-date="2018-10-7"
+          data-flatpickr-now="2018-10-15"
+        />
+      </div>
+    </div>
+  </body>
+</html>
