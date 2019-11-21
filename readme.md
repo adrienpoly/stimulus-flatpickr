@@ -34,9 +34,14 @@ By using this wrapper of [Flatpickr](http://flatpickr.js.org/) for [Stimulus](ht
 
 Here is a simple example:
 
-```html+erb
-<%= form_with model: Appointement.new, authenticity_token: true do |f| %> <%= f.text_field :start_time, data: {
-controller: "flatpickr", flatpickr_min_date: Time.zone.now #disables past dates } %> <% end %>
+```erb
+<%= form_with model: Appointement.new, authenticity_token: true do |f| %>	<%= form_with model: Appointement.new, authenticity_token: true do |f| %> <%= f.text_field :start_time, data: {
+  <%= f.text_field :start_time,	controller: "flatpickr", flatpickr_min_date: Time.zone.now #disables past dates } %> <% end %>
+    data: {
+      controller: "flatpickr",
+      flatpickr_min_date: Time.zone.now #disables past dates
+    } %>
+<% end %>
 ```
 
 <p align="center">
@@ -100,9 +105,15 @@ application.register('flatpickr', Flatpickr)
 
 You can now create forms and input fields easily by adding a `data-controller="flatpickr"` attribute to the input fields and pass [options](https://flatpickr.js.org/options/) with the Stimulus Controller states : `data-flatpickr-the-option`.
 
-```html+erb
-<%= form_with model: Appointement.new, authenticity_token: true do |f| %> <%= f.text_field :start_time, data: {
-controller: "flatpickr", flatpickr_date_format: "Y-m-d", flatpickr_min_date: Time.zone.now } %> <% end %>
+```erb
+<%= form_with model: Appointement.new, authenticity_token: true do |f| %>	<%= form_with model: Appointement.new, authenticity_token: true do |f| %> <%= f.text_field :start_time, data: {
+  <%= f.text_field :start_time,	controller: "flatpickr", flatpickr_date_format: "Y-m-d", flatpickr_min_date: Time.zone.now } %> <% end %>
+    data: {
+      controller: "flatpickr",
+      flatpickr_date_format: "Y-m-d",
+      flatpickr_min_date: Time.zone.now
+    } %>
+<% end %>
 ```
 
 <p align="center">
@@ -216,9 +227,15 @@ connect() {
 
 Then in the same way as above you can now create forms and input fields easily by adding a `data-controller="flatpickr"` attribute to the input fields and pass [options](https://flatpickr.js.org/options/) with the Stimulus Controller states : `data-flatpick-the-option`.
 
-```html+erb
-<%= form_with model: Appointement.new, authenticity_token: true do |f| %> <%= f.text_field :start_time, data: {
-controller: "flatpickr", flatpickr_date_format: "Y-m-d", flatpickr_min_date: Time.zone.now } %> <% end %>
+```erb
+<%= form_with model: Appointement.new, authenticity_token: true do |f| %>
+  <%= f.text_field :start_time,
+                    data: {
+                      controller: "flatpickr",
+                      flatpickr_date_format: "Y-m-d",
+                      flatpickr_min_date: Time.zone.now }
+  %>
+  <% end %>
 ```
 
 <p align="center">
