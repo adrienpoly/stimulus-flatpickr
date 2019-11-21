@@ -13,16 +13,84 @@
     <div class="container">
       <h1>Stimulus Flatpickr Playground</h1>
 
-      <h3>Most basic datepickr</h3>
+      <h3>Basic</h3>
+      <div>
+        <input type="text" placeholder="Select Date.." data-controller="flatpickr" />
+      </div>
+      <h3>Date time</h3>
       <div>
         <input
           type="text"
-          placeholder="Select a date"
+          placeholder="Select Date.."
           data-controller="flatpickr"
-          data-flatpickr-min-date="2018-10-7"
-          data-flatpickr-now="2018-10-15"
+          data-flatpickr-date-format="Y-m-d H:i"
+          data-flatpickr-enable-time="true"
         />
       </div>
+
+      <h3>Human-friendly Dates</h3>
+      <div>
+        <input
+          type="text"
+          placeholder="Select Date.."
+          data-controller="flatpickr"
+          data-flatpickr-date-format="Y-m-d"
+          data-flatpickr-alt-format="F j, Y"
+          data-flatpickr-alt-input="true"
+        />
+      </div>
+
+      <pre>
+        <span style="color: #007700">&lt;input</span>
+          <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span>
+          <span style="color: #0000CC">placeholder=</span><span style="background-color: #fff0f0">&quot;Select Date..&quot;</span>
+          <span style="color: #0000CC">data-controller=</span><span style="background-color: #fff0f0">&quot;flatpickr&quot;</span>
+          <span style="color: #0000CC">data-flatpickr-date-format=</span><span style="background-color: #fff0f0">&quot;Y-m-d&quot;</span>
+          <span style="color: #0000CC">data-flatpickr-alt-format=</span><span style="background-color: #fff0f0">&quot;F j, Y&quot;</span>
+          <span style="color: #0000CC">data-flatpickr-alt-input=</span><span style="background-color: #fff0f0">&quot;true&quot;</span>
+        <span style="color: #007700">/&gt;</span>
+      </pre>
+
+      <h3>minDate and maxDate</h3>
+      <div>
+        <input type="text" placeholder="Select Date.." data-controller="flatpickr" data-flatpickr-min-date="2020-01" />
+      </div>
+      <pre>
+        <span style="color: #007700">&lt;input</span> 
+          <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> 
+          <span style="color: #0000CC">placeholder=</span><span style="background-color: #fff0f0">&quot;Select Date..&quot;</span> 
+          <span style="color: #0000CC">data-controller=</span><span style="background-color: #fff0f0">&quot;flatpickr&quot;</span> 
+          <span style="color: #0000CC">data-flatpickr-min-date=</span><span style="background-color: #fff0f0">&quot;2020-01&quot;</span> 
+        <span style="color: #007700">/&gt;</span>
+      </pre>
+
+      <h3>Flatpickr + external elements</h3>
+      <p>if you need to wrap custom elements inside the controller you can use two solutions:</p>
+      <h5>1) Wrap: true option</h5>
+      <div data-controller="flatpickr" data-flatpickr-wrap="true">
+        <input type="text" placeholder="Select Date.." data-input />
+        <button title="toggle" data-toggle>open</button>
+        <button title="clear" data-clear>clear</button>
+      </div>
+
+      <pre>
+        <span style="color: #333333">&lt;</span>div data<span style="color: #333333">-</span>controller<span style="color: #333333">=</span><span style="background-color: #fff0f0">&quot;flatpickr&quot;</span> data<span style="color: #333333">-</span>flatpickr<span style="color: #333333">-</span>wrap<span style="color: #333333">=</span><span style="background-color: #fff0f0">&quot;true&quot;</span><span style="color: #333333">&gt;</span>
+          <span style="color: #333333">&lt;</span><span style="color: #007020">input</span> <span style="color: #007020">type</span><span style="color: #333333">=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> placeholder<span style="color: #333333">=</span><span style="background-color: #fff0f0">&quot;Select Date..&quot;</span> data<span style="color: #333333">-</span><span style="color: #007020">input</span> <span style="color: #333333">/&gt;</span>
+          <span style="color: #333333">&lt;</span>button title<span style="color: #333333">=</span><span style="background-color: #fff0f0">&quot;toggle&quot;</span> data<span style="color: #333333">-</span>toggle<span style="color: #333333">&gt;</span><span style="color: #007020">open</span><span style="color: #333333">&lt;/</span>button<span style="color: #333333">&gt;</span>
+          <span style="color: #333333">&lt;</span>button title<span style="color: #333333">=</span><span style="background-color: #fff0f0">&quot;clear&quot;</span> data<span style="color: #333333">-</span>clear<span style="color: #333333">&gt;</span>clear<span style="color: #333333">&lt;/</span>button<span style="color: #333333">&gt;</span>
+        <span style="color: #333333">&lt;/</span>div<span style="color: #333333">&gt;</span>
+      </pre>
+
+      <h5>2) Instance target</h5>
+      <div data-controller="flatpickr">
+        <input type="text" placeholder="Select Date.." data-target="flatpickr.instance" />
+      </div>
+
+      <pre>
+        <span style="color: #007020">&lt;div</span> data<span style="color: #333333">-</span>controller<span style="color: #333333">=</span><span style="background-color: #fff0f0">&quot;flatpickr&quot;</span><span style="color: #333333">&gt;</span>
+          <span style="color: #333333">&lt;</span><span style="color: #007020">input</span> <span style="color: #333333">type</span><span style="color: #333333">=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> placeholder<span style="color: #333333">=</span><span style="background-color: #fff0f0">&quot;Select Date..&quot;</span> data<span style="color: #333333">-</span>target<span style="color: #333333">=</span><span style="background-color: #fff0f0">&quot;flatpickr.instance&quot;</span> <span style="color: #333333">/&gt;</span>
+        <span style="color: #007020">&lt;/div</span><span style="color: #007020">&gt;</span>
+      </pre>
     </div>
   </body>
 </html>
