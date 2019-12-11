@@ -5,3 +5,9 @@
 /.git
 /node_modules
 /playground
+/coverage
+/.circleci
+/images
+/spec
+karma.conf.js
+rollup.config.js
