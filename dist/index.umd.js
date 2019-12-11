@@ -2,7 +2,7 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('stimulus'), require('flatpickr')) :
   typeof define === 'function' && define.amd ? define(['stimulus', 'flatpickr'], factory) :
   (global = global || self, global['stimulus-flatpickr'] = factory(global.Stimulus, global.Flatpickr));
-}(this, function (stimulus, flatpickr) { 'use strict';
+}(this, (function (stimulus, flatpickr) { 'use strict';
 
   flatpickr = flatpickr && flatpickr.hasOwnProperty('default') ? flatpickr['default'] : flatpickr;
 
@@ -62,13 +62,13 @@
       var source = arguments[i] != null ? arguments[i] : {};
 
       if (i % 2) {
-        ownKeys(source, true).forEach(function (key) {
+        ownKeys(Object(source), true).forEach(function (key) {
           _defineProperty(target, key, source[key]);
         });
       } else if (Object.getOwnPropertyDescriptors) {
         Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
       } else {
-        ownKeys(source).forEach(function (key) {
+        ownKeys(Object(source)).forEach(function (key) {
           Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
         });
       }
@@ -347,5 +347,5 @@
 
   return StimulusFlatpickr;
 
-}));
+})));
 //# sourceMappingURL=index.umd.js.map
