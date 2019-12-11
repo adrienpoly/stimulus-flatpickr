@@ -11,3 +11,7 @@
 /spec
 karma.conf.js
 rollup.config.js
+.babelrc.js
+.eslintrc.js
+.prettierrc.json
+/.vscode
