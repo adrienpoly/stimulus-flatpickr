@@ -24,8 +24,8 @@
     "codecov": "codecov",
     "release": "np"
   },
-  "dependencies": {
-    "flatpickr": ">=4.6.0",
+  "peerDependencies": {
+    "flatpickr": ">=4.6.2",
     "stimulus": ">=1.1.1"
   },
   "devDependencies": {
@@ -48,6 +48,7 @@
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "flatpickr": "^4.6.3",
     "karma": "^4.0.1",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.2.0",
@@ -71,6 +72,7 @@
     "sinon": "^6.1.4",
     "sinon-chai": "^3.2.0",
     "size-plugin": "^1.0.1",
+    "stimulus": "^1.1.1",
     "style-loader": "^0.23.0",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.2.3",
