@@ -16,7 +16,15 @@ const booleanOptions = [
   'wrap'
 ]
 
-const stringOptions = ['altInputClass', 'conjunction', 'mode', 'nextArrow', 'position', 'prevArrow']
+const stringOptions = [
+  'altInputClass',
+  'conjunction',
+  'mode',
+  'nextArrow',
+  'position',
+  'prevArrow',
+  'monthSelectorType'
+]
 
 const numberOptions = [
   'defaultHour',
