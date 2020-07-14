@@ -64,19 +64,21 @@ is available here : [Rails Stimulus Flatpickr](https://github.com/adrienpoly/rai
 
 ## Install
 
-This assumes that you have [Stimulus](https://stimulusjs.org/handbook/installing) already installed.
+This assumes that you have [Stimulus](https://stimulusjs.org/handbook/installing) already installed. For Rails(5.1+) app please refer this doc (https://github.com/rails/webpacker/blob/master/docs/integrations.md#stimulus) to get started with Stimulus.
 
-In your project just add the `stimulus-flatpickr` package.
+In your project just add the `flatpickr` and `stimulus-flatpickr` package.
 
 ```bash
+$ yarn add flatpickr
 $ yarn add stimulus-flatpickr
 ```
-
 or
 
 ```bash
-$ npm i stimulus-flatpickr
+$ npm i flatpickr
+$ npm i stimulus-flatpickr 
 ```
+Note: Do not use both `yarn` and `npm` to install packages, this might lead to an error: `...It is advised not to mix package managers in order to avoid resolution inconsistencies caused by unsynchronized lock files`
 
 ## Basic usage
 
@@ -89,17 +91,25 @@ manually register a new Stimulus controller in your main JS entry point.
 ```js
 // ./packs/application.js
 import { Application } from 'stimulus'
-// import Flatpickr
-import Flatpickr from 'stimulus-flatpickr'
-
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
+
 const application = Application.start()
 const context = require.context('../controllers', true, /\.js$/)
 application.load(definitionsFromContext(context))
 
+// import Flatpickr
+import Flatpickr from 'stimulus-flatpickr'
+
+// Import style for flatpickr
+require("flatpickr/dist/flatpickr.css")
+
 // Manually register Flatpickr as a stimulus controller
 application.register('flatpickr', Flatpickr)
 ```
+Note: 
+* By Manually registering Flatpickr controller, you don't need to create a `flatpickr_controller.js` file. However, To add custom behavior you will have to create the `flatpickr_controller.js` file. Read more details about it below.
+* You can always choose different theme for calender by requiring different `.css` file. You can find them inside your app's root directory `node_modules/flatpickr/dist/themes`
+
 
 ### Using it with Rails
 
