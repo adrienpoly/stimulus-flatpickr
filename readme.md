@@ -163,7 +163,7 @@ If you are not using Rails or simply wants to markup your HTML directly, simply 
 If you need more than just displaying the standard DateTime picker, then you can extend the `stimulus-flatpickr` wrapper controller. This is necessary when you need to:
 
 - set a custom language
-- create customs callbacks
+- create custom callbacks
 - perform JS business logic
 
 **Skip basics installation steps from above!**
