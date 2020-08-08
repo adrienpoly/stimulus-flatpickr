@@ -107,8 +107,9 @@ require("flatpickr/dist/flatpickr.css")
 application.register('flatpickr', Flatpickr)
 ```
 Note: 
-* By Manually registering Flatpickr controller, you don't need to create a `flatpickr_controller.js` file. However, To add custom behavior you will have to create the `flatpickr_controller.js` file. Read more details about it below.
-* You can always choose different theme for calender by requiring different `.css` file. You can find them inside your app's root directory `node_modules/flatpickr/dist/themes`
+* **Setup**: By Manually registering Flatpickr controller, you don't need to create a `flatpickr_controller.js` file. However, To add custom behavior you will have to create the `flatpickr_controller.js` file. Read more details about it below.
+* **Style**: You can always choose different theme for calender by requiring different `.css` file. You can find them inside your app's root directory `node_modules/flatpickr/dist/themes`
+* **Deployment**: In Production environment, include `<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>` in your `application.html.erb` file in order to load the calender style.
 
 
 ### Using it with Rails
