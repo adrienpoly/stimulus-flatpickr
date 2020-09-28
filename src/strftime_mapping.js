@@ -18,6 +18,7 @@ export const mapping = {
   '%k': 'H',
   '%I': 'h',
   '%l': 'h',
+  '%-l': 'h',
   '%P': 'K',
   '%p': 'K',
   '%M': 'i',
