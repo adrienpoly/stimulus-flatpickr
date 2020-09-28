@@ -103,6 +103,19 @@ function _setPrototypeOf(o, p) {
   return _setPrototypeOf(o, p);
 }
 
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 function _assertThisInitialized(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -119,13 +132,30 @@ function _possibleConstructorReturn(self, call) {
   return _assertThisInitialized(self);
 }
 
+function _createSuper(Derived) {
+  return function () {
+    var Super = _getPrototypeOf(Derived),
+        result;
+
+    if (_isNativeReflectConstruct()) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
 const kebabCase = string => string.replace(/([a-z])([A-Z])/g, "$1-$2").replace(/[\s_]+/g, "-").toLowerCase();
 const capitalize = string => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
 const booleanOptions = ['allowInput', 'altInput', 'animate', 'clickOpens', 'closeOnSelect', 'disableMobile', 'enableSeconds', 'enableTime', 'inline', 'noCalendar', 'shorthandCurrentMonth', 'static', 'time_24hr', 'weekNumbers', 'wrap'];
-const stringOptions = ['altInputClass', 'conjunction', 'mode', 'nextArrow', 'position', 'prevArrow'];
+const stringOptions = ['altInputClass', 'conjunction', 'mode', 'nextArrow', 'position', 'prevArrow', 'monthSelectorType'];
 const numberOptions = ['defaultHour', 'defaultMinute', 'defaultSeconds', 'hourIncrement', 'minuteIncrement', 'showMonths'];
 const arrayOptions = ['disable', 'enable', 'disableDaysOfWeek', 'enableDaysOfWeek'];
 const arrayOrStringOptions = ['defaultDate'];
@@ -179,15 +209,15 @@ const convertDateFormat = format => {
   });
 };
 
-let StimulusFlatpickr =
-/*#__PURE__*/
-function (_Controller) {
+let StimulusFlatpickr = /*#__PURE__*/function (_Controller) {
   _inherits(StimulusFlatpickr, _Controller);
+
+  var _super = _createSuper(StimulusFlatpickr);
 
   function StimulusFlatpickr() {
     _classCallCheck(this, StimulusFlatpickr);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(StimulusFlatpickr).apply(this, arguments));
+    return _super.apply(this, arguments);
   }
 
   _createClass(StimulusFlatpickr, [{
