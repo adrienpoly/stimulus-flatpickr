@@ -11,7 +11,7 @@
   "umd:main": "dist/index.umd.js",
   "module": "dist/index.m.js",
   "source": "src/index.js",
-  "amdName": "StimulusFlatpikcr",
+  "amdName": "StimulusFlatpickr",
   "author": "@adrienpoly",
   "license": "MIT",
   "external": "stimulus, flatpickr",
