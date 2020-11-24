@@ -4,8 +4,6 @@ import babel from 'rollup-plugin-babel'
 
 const pkg = require('./package.json')
 
-const name = pkg.name
-
 export default {
   input: 'src/index.js',
   external: ['stimulus', 'flatpickr'],
@@ -23,7 +21,7 @@ export default {
     {
       file: 'dist/index.umd.js',
       format: 'umd',
-      name,
+      name: pkg.amdName,
       sourcemap: true,
       globals: {
         stimulus: 'Stimulus',
