@@ -3,11 +3,11 @@
   <a href="https://www.npmjs.com/package/stimulus-flatpickr" rel="nofollow">
     <img src="https://badge.fury.io/js/stimulus-flatpickr.svg" alt="npm version">
   </a>
-  <a href="https://circleci.com/gh/adrienpoly/stimulus-flatpickr" rel="nofollow">	
-    <img src="https://circleci.com/gh/adrienpoly/stimulus-flatpickr/tree/master.svg?style=svg" alt="CircleCi build status">	
-  </a>	
-  <a href="https://codecov.io/gh/adrienpoly/stimulus-flatpickr">	
-    <img src="https://codecov.io/gh/adrienpoly/stimulus-flatpickr/branch/master/graph/badge.svg" alt="Coverage"/>	
+  <a href="https://circleci.com/gh/adrienpoly/stimulus-flatpickr" rel="nofollow">
+    <img src="https://circleci.com/gh/adrienpoly/stimulus-flatpickr/tree/master.svg?style=svg" alt="CircleCi build status">
+  </a>
+  <a href="https://codecov.io/gh/adrienpoly/stimulus-flatpickr">
+    <img src="https://codecov.io/gh/adrienpoly/stimulus-flatpickr/branch/master/graph/badge.svg" alt="Coverage"/>
   </a>
 </p>
 
@@ -76,7 +76,7 @@ or
 
 ```bash
 $ npm i flatpickr
-$ npm i stimulus-flatpickr 
+$ npm i stimulus-flatpickr
 ```
 Note: Do not use both `yarn` and `npm` to install packages, this might lead to an error: `...It is advised not to mix package managers in order to avoid resolution inconsistencies caused by unsynchronized lock files`
 
@@ -106,7 +106,7 @@ require("flatpickr/dist/flatpickr.css")
 // Manually register Flatpickr as a stimulus controller
 application.register('flatpickr', Flatpickr)
 ```
-Note: 
+Note:
 * **Setup**: By Manually registering Flatpickr controller, you don't need to create a `flatpickr_controller.js` file. However, To add custom behavior you will have to create the `flatpickr_controller.js` file. Read more details about it below.
 * **Style**: You can always choose different theme for calender by requiring different `.css` file. You can find them inside your app's root directory `node_modules/flatpickr/dist/themes`
 * **Deployment**: In Production environment, include `<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>` in your `application.html.erb` file in order to load the calendar style.
@@ -342,14 +342,27 @@ yourFunction () {
 
 ### Custom elements
 
-If you need to wrap the Flatpickr controller arround custom elements you can use the predefined target `instance` to specify the input element to attach the date picker to.
+If you want to display additional information on the calendar, you can wrap the Flatpickr controller arround custom elements. You can use the predefined target `instance` to attach the input element to the date picker.
 
 Example:
 
 ```html
 <div data-controller="flatpickr">
-  <input type="text" placeholder="Select Date.." data-target="flatpickr.instance" />
+  <!-- the flatpicker instance -->
+  <input type="text" placeholder="Select Date.." data-flatpickr-target="instance" />
+  <!-- the custom element -->
+  <input type="text" data-flatpickr-target="custom" />
 </div>
+```
+
+In the stimulus controller, add the target:
+```js
+static targets = ['custom']
+
+yourFunction () {
+  //...
+  this.customTarget
+}
 ```
 
 ### Getters
