@@ -1,5 +1,5 @@
 import StimulusFlatpickr from './controllers/flatpickr_controller'
-import { Application } from 'stimulus'
+import { Application } from '@hotwired/stimulus'
 import 'flatpickr/dist/flatpickr.css'
 import { nextFrame } from './helpers'
 import chai, { expect } from 'chai'
@@ -23,8 +23,8 @@ const elementsSelectors = {
 
 chai.use(chaiDom)
 
-describe('Flatpickr Controller Target tests', function() {
-  before('initialize controller', async function() {
+describe('Flatpickr Controller Target tests', function () {
+  before('initialize controller', async function () {
     fixture.load('index.html')
     application.register('datepicker', StimulusFlatpickr)
     await nextFrame()
@@ -36,7 +36,7 @@ describe('Flatpickr Controller Target tests', function() {
 
   Object.keys(elementsSelectors).forEach((element) => {
     const selector = elementsSelectors[element]
-    it(`${element}Target`, async function() {
+    it(`${element}Target`, async function () {
       expect(controller[`${element}Target`]).to.match(selector)
       expect(controller[`${element}Target`]).to.exist
     })

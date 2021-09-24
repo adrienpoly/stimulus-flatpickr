@@ -1,4 +1,4 @@
-import { Application } from 'stimulus'
+import { Application } from '@hotwired/stimulus'
 
 const nextFrame = async () => {
   return new Promise((resolve) => requestAnimationFrame(resolve))
@@ -44,7 +44,7 @@ function resetDataAttributes(controller) {
 }
 
 function beforeEachSuite(title, fn) {
-  before(title, function() {
+  before(title, function () {
     const suites = this.test.parent.suites || []
     suites.forEach((s) => {
       s.beforeAll(fn)

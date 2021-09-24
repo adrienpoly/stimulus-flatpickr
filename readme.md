@@ -72,12 +72,14 @@ In your project just add the `flatpickr` and `stimulus-flatpickr` package.
 $ yarn add flatpickr
 $ yarn add stimulus-flatpickr
 ```
+
 or
 
 ```bash
 $ npm i flatpickr
 $ npm i stimulus-flatpickr
 ```
+
 Note: Do not use both `yarn` and `npm` to install packages, this might lead to an error: `...It is advised not to mix package managers in order to avoid resolution inconsistencies caused by unsynchronized lock files`
 
 ## Basic usage
@@ -90,8 +92,8 @@ manually register a new Stimulus controller in your main JS entry point.
 
 ```js
 // ./packs/application.js
-import { Application } from 'stimulus'
-import { definitionsFromContext } from 'stimulus/webpack-helpers'
+import { Application } from '@hotwired/stimulus'
+import { definitionsFromContext } from '@hotwired/stimulus-webpack-helpers'
 
 const application = Application.start()
 const context = require.context('../controllers', true, /\.js$/)
@@ -101,16 +103,17 @@ application.load(definitionsFromContext(context))
 import Flatpickr from 'stimulus-flatpickr'
 
 // Import style for flatpickr
-require("flatpickr/dist/flatpickr.css")
+require('flatpickr/dist/flatpickr.css')
 
 // Manually register Flatpickr as a stimulus controller
 application.register('flatpickr', Flatpickr)
 ```
-Note:
-* **Setup**: By Manually registering Flatpickr controller, you don't need to create a `flatpickr_controller.js` file. However, To add custom behavior you will have to create the `flatpickr_controller.js` file. Read more details about it below.
-* **Style**: You can always choose different theme for calender by requiring different `.css` file. You can find them inside your app's root directory `node_modules/flatpickr/dist/themes`
-* **Deployment**: In Production environment, include `<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>` in your `application.html.erb` file in order to load the calendar style.
 
+Note:
+
+- **Setup**: By Manually registering Flatpickr controller, you don't need to create a `flatpickr_controller.js` file. However, To add custom behavior you will have to create the `flatpickr_controller.js` file. Read more details about it below.
+- **Style**: You can always choose different theme for calender by requiring different `.css` file. You can find them inside your app's root directory `node_modules/flatpickr/dist/themes`
+- **Deployment**: In Production environment, include `<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>` in your `application.html.erb` file in order to load the calendar style.
 
 ### Using it with Rails
 
@@ -356,6 +359,7 @@ Example:
 ```
 
 In the stimulus controller, add the target:
+
 ```js
 static targets = ['custom']
 
