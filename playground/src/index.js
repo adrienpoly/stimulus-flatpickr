@@ -1,4 +1,4 @@
-import { Application } from 'stimulus'
+import { Application } from '@hotwired/stimulus'
 import FlatpickrController from './controllers/flatpickr_controller'
 
 const application = Application.start()

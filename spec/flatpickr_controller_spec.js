@@ -1,4 +1,4 @@
-import { Application } from 'stimulus'
+import { Application } from '@hotwired/stimulus'
 import chai, { expect } from 'chai'
 import chaiDom from 'chai-dom'
 

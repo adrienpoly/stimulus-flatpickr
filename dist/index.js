@@ -2,7 +2,7 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var stimulus = require('stimulus');
+var stimulus = require('@hotwired/stimulus');
 var flatpickr = _interopDefault(require('flatpickr'));
 
 function _classCallCheck(instance, Constructor) {

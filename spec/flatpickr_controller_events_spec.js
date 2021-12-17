@@ -1,5 +1,5 @@
 // import Flatpickr from './controllers/flatpickr_hook_controller'
-import { Application } from 'stimulus'
+import { Application } from '@hotwired/stimulus'
 import StimulusFlatpickr from './controllers/flatpickr_hook_controller'
 import 'flatpickr/dist/flatpickr.css'
 import { registerController, nextFrame, fixtureQuerySelector, addFlatpickrOption } from './helpers'

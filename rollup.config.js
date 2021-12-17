@@ -6,7 +6,7 @@ const pkg = require('./package.json')
 
 export default {
   input: 'src/index.js',
-  external: ['stimulus', 'flatpickr'],
+  external: ['@hotwired/stimulus', 'flatpickr'],
   output: [
     {
       file: 'dist/index.js',

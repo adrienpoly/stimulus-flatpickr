@@ -14,7 +14,7 @@
   "amdName": "StimulusFlatpickr",
   "author": "@adrienpoly",
   "license": "MIT",
-  "external": "stimulus, flatpickr",
+  "external": "@hotwired/stimulus, flatpickr",
   "scripts": {
     "start:playground": "webpack-dev-server --mode development --open --config playground/webpack.config.js --hot",
     "build": "rollup -c && yarn test",
@@ -27,7 +27,7 @@
   },
   "peerDependencies": {
     "flatpickr": ">=4.6.2",
-    "stimulus": ">=1.1.1"
+    "@hotwired/stimulus": ">=3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
@@ -73,7 +73,7 @@
     "sinon": "^6.1.4",
     "sinon-chai": "^3.2.0",
     "size-plugin": "^1.0.1",
-    "stimulus": "^1.1.1",
+    "@hotwired/stimulus": "^3.0.1",
     "style-loader": "^0.23.0",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.2.3",

@@ -1,4 +1,4 @@
-import { Application } from 'stimulus'
+import { Application } from '@hotwired/stimulus'
 
 const nextFrame = async () => {
   return new Promise((resolve) => requestAnimationFrame(resolve))
