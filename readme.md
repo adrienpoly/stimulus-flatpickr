@@ -69,14 +69,14 @@ This assumes that you have [Stimulus](https://stimulusjs.org/handbook/installing
 In your project just add the `flatpickr` and `stimulus-flatpickr` package.
 
 ```bash
-$ yarn add flatpickr
-$ yarn add stimulus-flatpickr
+yarn add flatpickr
+yarn add stimulus-flatpickr
 ```
 or
 
 ```bash
-$ npm i flatpickr
-$ npm i stimulus-flatpickr
+npm i flatpickr
+npm i stimulus-flatpickr
 ```
 Note: Do not use both `yarn` and `npm` to install packages, this might lead to an error: `...It is advised not to mix package managers in order to avoid resolution inconsistencies caused by unsynchronized lock files`
 
