@@ -1,7 +1,7 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('stimulus'), require('flatpickr')) :
-  typeof define === 'function' && define.amd ? define(['stimulus', 'flatpickr'], factory) :
-  (global = global || self, global.StimulusFlatpikcr = factory(global.Stimulus, global.Flatpickr));
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@hotwired/stimulus'), require('flatpickr')) :
+  typeof define === 'function' && define.amd ? define(['@hotwired/stimulus', 'flatpickr'], factory) :
+  (global = global || self, global.StimulusFlatpickr = factory(global.Stimulus, global.Flatpickr));
 }(this, (function (stimulus, flatpickr) { 'use strict';
 
   flatpickr = flatpickr && Object.prototype.hasOwnProperty.call(flatpickr, 'default') ? flatpickr['default'] : flatpickr;

@@ -1,4 +1,4 @@
-import { Controller } from 'stimulus';
+import { Controller } from '@hotwired/stimulus';
 import flatpickr from 'flatpickr';
 
 function _classCallCheck(instance, Constructor) {
