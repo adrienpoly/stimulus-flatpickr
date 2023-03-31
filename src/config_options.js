@@ -1,5 +1,6 @@
 const booleanOptions = [
   'allowInput',
+  'allowInvalidPreload',
   'altInput',
   'animate',
   'clickOpens',
