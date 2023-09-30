@@ -83,7 +83,7 @@ Note: Do not use both `yarn` and `npm` to install packages, this might lead to a
 ### Using importmap
 
 ```bash
-./bin/importmap pin flatpickr stimulus-flatpickr
+./bin/importmap pin flatpickr stimulus-flatpickr@beta
 ```
 
 ## Basic usage
