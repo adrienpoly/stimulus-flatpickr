@@ -80,6 +80,12 @@ npm i stimulus-flatpickr
 ```
 Note: Do not use both `yarn` and `npm` to install packages, this might lead to an error: `...It is advised not to mix package managers in order to avoid resolution inconsistencies caused by unsynchronized lock files`
 
+### Using importmap
+
+```bash
+./bin/importmap pin flatpickr stimulus-flatpickr
+```
+
 ## Basic usage
 
 If you only need to convert an input field in a DateTime picker, you just need to register a standard Stimulus controller and add some markup to your input field.
