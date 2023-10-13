@@ -1,5 +1,5 @@
 import StimulusFlatpickr from './controllers/flatpickr_controller'
-import { Application } from 'stimulus'
+import { Application } from '@hotwired/stimulus'
 import 'flatpickr/dist/flatpickr.css'
 import { nextFrame } from './helpers'
 import chai, { expect } from 'chai'
